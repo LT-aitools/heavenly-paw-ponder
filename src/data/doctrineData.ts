@@ -1,4 +1,3 @@
-
 export interface EdgeCase {
   id: string;
   label: string;
@@ -16,9 +15,11 @@ export interface Doctrine {
   edgeCases: Record<string, boolean>;
   supportsPurgatory: boolean;
   includesAnimals: boolean;
+  humanLifespanMultiplier: number;
+  dogLifespanMultiplier: number;
+  percentageInsideDoctrine: number;
 }
 
-// Edge cases that can be toggled
 export const edgeCases: EdgeCase[] = [
   {
     id: 'unbaptizedInfants',
@@ -57,7 +58,6 @@ export const edgeCases: EdgeCase[] = [
   }
 ];
 
-// Doctrine configurations
 export const doctrines: Doctrine[] = [
   {
     id: 'catholic',
@@ -74,6 +74,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: true,
     includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 25
   },
   {
     id: 'evangelical',
@@ -82,7 +85,7 @@ export const doctrines: Doctrine[] = [
     defaultInsideSavedPercentage: 80,
     defaultOutsideSavedPercentage: 5,
     edgeCases: {
-      unbaptizedInfants: true, // Hidden in UI but used in calculation
+      unbaptizedInfants: true,
       neverHeard: false,
       otherMonotheists: false,
       atheistsPolytheists: false,
@@ -90,6 +93,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 15
   },
   {
     id: 'mainlineProtestant',
@@ -98,7 +104,7 @@ export const doctrines: Doctrine[] = [
     defaultInsideSavedPercentage: 85,
     defaultOutsideSavedPercentage: 60,
     edgeCases: {
-      unbaptizedInfants: true, // Hidden in UI but used in calculation
+      unbaptizedInfants: true,
       neverHeard: true,
       otherMonotheists: true,
       atheistsPolytheists: true,
@@ -106,6 +112,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 10
   },
   {
     id: 'orthodoxChristian',
@@ -114,7 +123,7 @@ export const doctrines: Doctrine[] = [
     defaultInsideSavedPercentage: 80,
     defaultOutsideSavedPercentage: 40,
     edgeCases: {
-      unbaptizedInfants: true, // Hidden in UI but used in calculation
+      unbaptizedInfants: true,
       neverHeard: false,
       otherMonotheists: false,
       atheistsPolytheists: false,
@@ -122,6 +131,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 10
   },
   {
     id: 'muslim',
@@ -130,7 +142,7 @@ export const doctrines: Doctrine[] = [
     defaultInsideSavedPercentage: 85,
     defaultOutsideSavedPercentage: 20,
     edgeCases: {
-      unbaptizedInfants: true, // Hidden in UI but used in calculation
+      unbaptizedInfants: true,
       neverHeard: true,
       otherMonotheists: false,
       atheistsPolytheists: false,
@@ -138,6 +150,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 20
   },
   {
     id: 'judaismOrthodox',
@@ -146,7 +161,7 @@ export const doctrines: Doctrine[] = [
     defaultInsideSavedPercentage: 90,
     defaultOutsideSavedPercentage: 40,
     edgeCases: {
-      unbaptizedInfants: true, // Hidden in UI but used in calculation
+      unbaptizedInfants: true,
       neverHeard: true,
       otherMonotheists: false,
       atheistsPolytheists: false,
@@ -154,6 +169,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 0.2
   },
   {
     id: 'judaismReform',
@@ -162,7 +180,7 @@ export const doctrines: Doctrine[] = [
     defaultInsideSavedPercentage: 95,
     defaultOutsideSavedPercentage: 80,
     edgeCases: {
-      unbaptizedInfants: true, // Hidden in UI but used in calculation
+      unbaptizedInfants: true,
       neverHeard: true,
       otherMonotheists: true,
       atheistsPolytheists: true,
@@ -170,6 +188,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 0.1
   },
   {
     id: 'universalist',
@@ -178,7 +199,7 @@ export const doctrines: Doctrine[] = [
     defaultInsideSavedPercentage: 100,
     defaultOutsideSavedPercentage: 100,
     edgeCases: {
-      unbaptizedInfants: true, // Hidden in UI but used in calculation
+      unbaptizedInfants: true,
       neverHeard: true,
       otherMonotheists: true,
       atheistsPolytheists: true,
@@ -186,6 +207,9 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: true,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 1
   },
   {
     id: 'atheism',
@@ -202,13 +226,15 @@ export const doctrines: Doctrine[] = [
     },
     supportsPurgatory: false,
     includesAnimals: false,
+    humanLifespanMultiplier: 0,
+    dogLifespanMultiplier: 0,
+    percentageInsideDoctrine: 10
   }
 ];
 
 export const historicalData = {
-  totalHumanDeaths: 109_000_000_000, // 109 billion humans have ever lived and died
-  estimatedDogDeaths: 90_000_000_000, // 90 billion dogs estimate
-  // Population by religious affiliation (rough estimates)
+  totalHumanDeaths: 109_000_000_000,
+  estimatedDogDeaths: 90_000_000_000,
   populationByReligion: {
     christianCatholic: 18_000_000_000,
     christianEvangelical: 10_000_000_000,
@@ -216,14 +242,13 @@ export const historicalData = {
     christianOrthodox: 5_000_000_000,
     muslim: 20_000_000_000,
     judaism: 1_000_000_000,
-    other: 46_000_000_000, // including atheists, polytheists, etc.
+    other: 46_000_000_000,
   },
   infantMortality: {
-    percentage: 0.4, // 40% of all humans died in infancy historically
+    percentage: 0.4,
   },
   awarenessPercentages: {
-    // % of people who had no knowledge of each religion
-    catholic: 0.7, // 70% of humans never heard of Catholicism
+    catholic: 0.7,
     evangelical: 0.8,
     mainlineProtestant: 0.8,
     orthodoxChristian: 0.85,
@@ -233,7 +258,6 @@ export const historicalData = {
   }
 };
 
-// Dogtrine options
 export const dogtrines = [
   {
     id: 'allDogsGood',

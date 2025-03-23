@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { doctrines, dogtrines, Doctrine } from "@/data/doctrineData";
 import { Church, Heart } from "lucide-react";
 
@@ -33,38 +34,24 @@ const DoctrineSelector = ({
         
         <Card className="glass-card overflow-hidden">
           <CardContent className="p-4">
-            <RadioGroup 
+            <Select 
               value={selectedDoctrine.id}
               onValueChange={(value) => {
                 const newDoctrine = doctrines.find(d => d.id === value);
                 if (newDoctrine) setSelectedDoctrine(newDoctrine);
               }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
-              {doctrines.map((doctrine) => (
-                <div key={doctrine.id} className="relative">
-                  <RadioGroupItem
-                    value={doctrine.id}
-                    id={`doctrine-${doctrine.id}`}
-                    className="peer sr-only"
-                  />
-                  <Label
-                    htmlFor={`doctrine-${doctrine.id}`}
-                    className="flex flex-col justify-between h-full p-4 rounded-md border-2 border-border bg-background hover:bg-accent hover:text-accent-foreground cursor-pointer 
-                      transition-all duration-200 ease-in-out
-                      peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-foreground 
-                      peer-data-[state=checked]:bg-primary/5"
-                  >
-                    <div className="font-medium text-left">
-                      {doctrine.name}
-                    </div>
-                    <p className="text-sm text-muted-foreground mt-2 text-left">
-                      {doctrine.description}
-                    </p>
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a doctrine" />
+              </SelectTrigger>
+              <SelectContent>
+                {doctrines.map((doctrine) => (
+                  <SelectItem key={doctrine.id} value={doctrine.id}>
+                    {doctrine.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </CardContent>
         </Card>
       </section>

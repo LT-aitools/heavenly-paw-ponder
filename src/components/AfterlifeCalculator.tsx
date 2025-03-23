@@ -4,7 +4,6 @@ import { doctrines, Doctrine } from '@/data/doctrineData';
 import DoctrineSelector from './DoctrineSelector';
 import EdgeCasesSection from './EdgeCasesSection';
 import GoodnessSliders from './GoodnessSliders';
-import MethodologySection from './MethodologySection';
 import { calculateHeavenPopulation, CalculationResult } from '@/utils/calculationLogic';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -110,13 +109,6 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
-        
-        <MethodologySection
-          results={results}
-          selectedDoctrine={selectedDoctrine}
-          allDogsGoToHeaven={allDogsGoToHeaven}
-          dogGoodnessPercentage={dogGoodnessPercentage}
-        />
       </div>
     </div>
   );
