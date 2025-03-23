@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { doctrines, dogtrines, Doctrine } from "@/data/doctrineData";
-import { Church, Paw } from "lucide-react";
+import { Church, Heart } from "lucide-react";
 
 interface DoctrineSelectorProps {
   selectedDoctrine: Doctrine;
@@ -77,7 +77,7 @@ const DoctrineSelector = ({
 
       <section>
         <div className="mb-4 flex items-center">
-          <Paw className="mr-2 h-5 w-5 text-primary" />
+          <Heart className="mr-2 h-5 w-5 text-primary" />
           <h2 className="text-xl font-medium">Choose Your Dogtrine</h2>
         </div>
         

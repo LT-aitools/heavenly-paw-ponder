@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CalculationResult, formatNumber } from "@/utils/calculationLogic";
-import { Sparkles, Users, Paw } from "lucide-react";
+import { Sparkles, Users, Heart } from "lucide-react";
 
 interface ResultsDisplayProps {
   results: CalculationResult;
@@ -66,7 +66,7 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
-                <Paw className="h-6 w-6 text-heaven-contrast mr-2" />
+                <Heart className="h-6 w-6 text-heaven-contrast mr-2" />
                 <h3 className="text-xl font-medium">Dog Souls</h3>
               </div>
             </div>
