@@ -30,10 +30,10 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
           }`}
         >
           {moreDogsOrHumans === 'equal' 
-            ? 'Equal Numbers' 
+            ? '👥 = 🐶 Equal Numbers' 
             : moreDogsOrHumans === 'dogs' 
-              ? 'Dogs' 
-              : 'Humans'}
+              ? '🐶 Dogs' 
+              : '👥 Humans'}
         </div>
       </div>
 
@@ -47,7 +47,7 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
               </div>
             </div>
             <div className={`text-4xl font-bold ${moreDogsOrHumans === 'humans' ? 'text-primary' : 'text-foreground'}`}>
-              {formatNumber(humanSouls)}
+              {formatNumberToReadable(humanSouls)}
             </div>
           </CardContent>
         </Card>
@@ -61,13 +61,26 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
               </div>
             </div>
             <div className={`text-4xl font-bold ${moreDogsOrHumans === 'dogs' ? 'text-heaven-contrast' : 'text-foreground'}`}>
-              {formatNumber(dogSouls)}
+              {formatNumberToReadable(dogSouls)}
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
   );
+};
+
+// Function to format numbers into readable format (millions, billions)
+const formatNumberToReadable = (num: number): string => {
+  if (num >= 1000000000) {
+    return `${(num / 1000000000).toFixed(1)} billion`;
+  } else if (num >= 1000000) {
+    return `${(num / 1000000).toFixed(1)} million`;
+  } else if (num >= 1000) {
+    return `${(num / 1000).toFixed(1)} thousand`;
+  } else {
+    return num.toString();
+  }
 };
 
 export default ResultsDisplay;

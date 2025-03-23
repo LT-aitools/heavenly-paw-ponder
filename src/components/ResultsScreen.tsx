@@ -7,6 +7,7 @@ import ShareButton from './ShareButton';
 import { CalculationResult } from '@/utils/calculationLogic';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 
 interface ResultsScreenProps {
   results: CalculationResult;
@@ -37,36 +38,47 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
       <div className={`w-full max-w-4xl mx-auto space-y-10 transition-opacity duration-500 ${animationComplete ? 'opacity-100' : 'opacity-0'}`}>
         <ResultsDisplay results={results} />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Separator after results display */}
+        <div className="pt-4">
+          <Separator className="bg-heaven-mediumBlue opacity-50" />
+        </div>
+        
+        <div className="grid grid-cols-1 gap-6 pt-4">
           {/* Population Chart - V1 Feature */}
-          <div className="col-span-2">
-            <PopulationChart 
-              humanSouls={results.humanSouls} 
-              dogSouls={results.dogSouls} 
-            />
+          <PopulationChart 
+            humanSouls={results.humanSouls} 
+            dogSouls={results.dogSouls} 
+          />
+          
+          {/* Try Again and Share buttons below the chart */}
+          <div className="flex justify-center gap-4 flex-wrap pt-8">
+            <Button 
+              onClick={onTryAgain} 
+              className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-primary text-white hover:bg-primary/90 transition-all"
+            >
+              <ArrowLeft className="mr-2 h-5 w-5" />
+              <span>Try Again</span>
+            </Button>
+            
+            {/* Share Button - V1 Feature */}
+            <ShareButton results={results} />
           </div>
         </div>
         
-        <div className="flex justify-center gap-4 flex-wrap pt-6">
-          <Button 
-            onClick={onTryAgain} 
-            className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-primary text-white hover:bg-primary/90 transition-all"
-          >
-            <ArrowLeft className="mr-2 h-5 w-5" />
-            <span>Try Again</span>
-          </Button>
-          
-          {/* Share Button - V1 Feature */}
-          <ShareButton results={results} />
+        {/* Separator before methodology section */}
+        <div className="pt-6">
+          <Separator className="bg-heaven-mediumBlue opacity-50" />
         </div>
         
         {/* Methodology section moved to results page */}
-        <MethodologySection
-          results={results}
-          selectedDoctrine={results.doctrine!}
-          allDogsGoToHeaven={results.allDogsGoToHeaven!}
-          dogGoodnessPercentage={results.dogGoodnessPercentage!}
-        />
+        <div className="pt-4">
+          <MethodologySection
+            results={results}
+            selectedDoctrine={results.doctrine!}
+            allDogsGoToHeaven={results.allDogsGoToHeaven!}
+            dogGoodnessPercentage={results.dogGoodnessPercentage!}
+          />
+        </div>
       </div>
     </div>
   );

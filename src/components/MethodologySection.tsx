@@ -30,12 +30,12 @@ const MethodologySection = ({
   return (
     <section className="animate-fade-in">
       <Button
-        variant="ghost"
-        className="flex w-full items-center justify-between p-4 text-left font-medium"
+        variant="outline"
+        className="flex w-full items-center justify-between p-4 text-left font-medium border-heaven-lightBlue border-2 rounded-md bg-white hover:bg-heaven-blue/20 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center">
-          <BookOpen className="mr-2 h-5 w-5" />
+          <BookOpen className="mr-2 h-5 w-5 text-primary" />
           <span>Peek behind the theological curtain</span>
         </div>
         {isOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
