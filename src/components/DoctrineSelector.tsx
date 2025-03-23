@@ -23,8 +23,6 @@ const DoctrineSelector = ({
   dogGoodnessPercentage,
   setDogGoodnessPercentage
 }: DoctrineSelectorProps) => {
-  const [hoverDoctrine, setHoverDoctrine] = useState<string | null>(null);
-
   return (
     <div className="space-y-8 animate-fade-in">
       <section>
@@ -56,17 +54,13 @@ const DoctrineSelector = ({
                       transition-all duration-200 ease-in-out
                       peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-foreground 
                       peer-data-[state=checked]:bg-primary/5"
-                    onMouseEnter={() => setHoverDoctrine(doctrine.id)}
-                    onMouseLeave={() => setHoverDoctrine(null)}
                   >
                     <div className="font-medium text-left">
                       {doctrine.name}
                     </div>
-                    {(doctrine.id === selectedDoctrine.id || hoverDoctrine === doctrine.id) && (
-                      <p className="text-sm text-muted-foreground mt-2 text-left animate-fade-in">
-                        {doctrine.description}
-                      </p>
-                    )}
+                    <p className="text-sm text-muted-foreground mt-2 text-left">
+                      {doctrine.description}
+                    </p>
                   </Label>
                 </div>
               ))}

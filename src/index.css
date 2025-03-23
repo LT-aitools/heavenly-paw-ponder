@@ -68,6 +68,102 @@
     background: linear-gradient(135deg, #E3F2FD, #BBDEFB, #90CAF9);
   }
 
+  /* Cloud styles for header */
+  .clouds-container {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .cloud {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 24' fill='%23FFFFFF'%3E%3Cpath d='M54,15 C54,8.373 48.627,3 42,3 C37.229,3 33.158,5.677 31.19,9.61 C29.892,8.61 28.271,8 26.5,8 C24.729,8 23.108,8.61 21.81,9.61 C19.842,5.677 15.771,3 11,3 C4.373,3 -1,8.373 -1,15 C-1,17.837 0.037,20.437 1.78,22.433 C3.39,24.273 5.628,25.3 8,25.3 L50,25.3 C52.372,25.3 54.61,24.273 56.22,22.433 C57.963,20.437 59,17.837 59,15 L54,15 Z'/%3E%3C/svg%3E%0A");
+    width: 200px;
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    opacity: 0.8;
+  }
+
+  .cloud-1 {
+    top: 10%;
+    left: 5%;
+    transform: scale(0.8);
+    animation: cloud-float 20s linear infinite;
+  }
+
+  .cloud-2 {
+    top: 30%;
+    right: 10%;
+    transform: scale(1.2);
+    animation: cloud-float 18s linear infinite reverse;
+  }
+
+  .cloud-3 {
+    top: 60%;
+    left: 20%;
+    transform: scale(1);
+    animation: cloud-float 25s linear infinite;
+  }
+
+  .cloud-4 {
+    top: 75%;
+    right: 15%;
+    transform: scale(0.9);
+    animation: cloud-float 22s linear infinite reverse;
+  }
+
+  @keyframes cloud-float {
+    0% {
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translateX(100px) scale(1.05);
+    }
+    100% {
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  /* Cloud reveal animation */
+  .cloud-reveal-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .cloud-left, .cloud-right {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    background-color: #BBDEFB;
+    transition: transform 2s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  .cloud-left {
+    left: 0;
+    background: linear-gradient(to right, #BBDEFB, #E3F2FD);
+  }
+
+  .cloud-right {
+    right: 0;
+    background: linear-gradient(to left, #BBDEFB, #E3F2FD);
+  }
+
+  .cloud-reveal-animation.complete .cloud-left {
+    transform: translateX(-100%);
+  }
+
+  .cloud-reveal-animation.complete .cloud-right {
+    transform: translateX(100%);
+  }
+
   /* Transition classes */
   .page-transition-enter {
     opacity: 0;

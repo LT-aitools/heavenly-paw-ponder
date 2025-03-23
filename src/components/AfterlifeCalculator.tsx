@@ -4,11 +4,16 @@ import { doctrines, Doctrine } from '@/data/doctrineData';
 import DoctrineSelector from './DoctrineSelector';
 import EdgeCasesSection from './EdgeCasesSection';
 import GoodnessSliders from './GoodnessSliders';
-import ResultsDisplay from './ResultsDisplay';
 import MethodologySection from './MethodologySection';
 import { calculateHeavenPopulation, CalculationResult } from '@/utils/calculationLogic';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
-const AfterlifeCalculator = () => {
+interface AfterlifeCalculatorProps {
+  onRunCensus: (results: CalculationResult) => void;
+}
+
+const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
   // State for doctrine selection
   const [selectedDoctrine, setSelectedDoctrine] = useState<Doctrine>(doctrines[0]);
   
@@ -44,7 +49,7 @@ const AfterlifeCalculator = () => {
     setOutsideSavedPercentage(selectedDoctrine.defaultOutsideSavedPercentage);
   }, [selectedDoctrine]);
 
-  // Calculate results when any input changes
+  // Calculate results when inputs change
   useEffect(() => {
     const newResults = calculateHeavenPopulation({
       doctrine: selectedDoctrine,
@@ -64,6 +69,10 @@ const AfterlifeCalculator = () => {
     outsideSavedPercentage,
     edgeCaseValues
   ]);
+
+  const handleRunCensus = () => {
+    onRunCensus(results);
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-10">
@@ -92,7 +101,15 @@ const AfterlifeCalculator = () => {
           edgeCaseValues={edgeCaseValues}
         />
         
-        <ResultsDisplay results={results} />
+        <div className="flex justify-center pt-6">
+          <Button 
+            onClick={handleRunCensus} 
+            className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
+          >
+            <span>Run My Heaven Census</span>
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
         
         <MethodologySection
           results={results}

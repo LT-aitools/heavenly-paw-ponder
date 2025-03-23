@@ -1,6 +1,5 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { CalculationResult, formatNumber } from "@/utils/calculationLogic";
 import { Sparkles, Users, Heart } from "lucide-react";
 
@@ -10,15 +9,6 @@ interface ResultsDisplayProps {
 
 const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
   const { humanSouls, dogSouls, moreDogsOrHumans } = results;
-
-  // No results yet
-  if (humanSouls === 0 && dogSouls === 0 && moreDogsOrHumans === 'equal') {
-    return (
-      <div className="text-center py-8 text-muted-foreground animate-pulse-gentle">
-        <p>Adjust settings to see results</p>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-8 animate-scale-in">
