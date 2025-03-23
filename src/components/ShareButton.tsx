@@ -61,9 +61,9 @@ const ShareButton = ({ results }: ShareButtonProps) => {
     <Button
       onClick={handleShare}
       disabled={isSharing}
-      className="px-5 py-2 rounded-full shadow-sm bg-white text-primary border border-primary hover:bg-primary/5 transition-all"
+      className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-white text-primary border border-primary hover:bg-primary/5 transition-all"
     >
-      <Share className="mr-2 h-4 w-4" />
+      <Share className="mr-2 h-5 w-5" />
       <span>Share My Heaven Census</span>
     </Button>
   );

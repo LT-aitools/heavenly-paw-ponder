@@ -49,20 +49,6 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
             humanSouls={results.humanSouls} 
             dogSouls={results.dogSouls} 
           />
-          
-          {/* Try Again and Share buttons below the chart */}
-          <div className="flex justify-center gap-4 flex-wrap pt-8">
-            <Button 
-              onClick={onTryAgain} 
-              className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-primary text-white hover:bg-primary/90 transition-all"
-            >
-              <ArrowLeft className="mr-2 h-5 w-5" />
-              <span>Try Again</span>
-            </Button>
-            
-            {/* Share Button - V1 Feature */}
-            <ShareButton results={results} />
-          </div>
         </div>
         
         {/* Separator before methodology section */}
@@ -78,6 +64,20 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
             allDogsGoToHeaven={results.allDogsGoToHeaven!}
             dogGoodnessPercentage={results.dogGoodnessPercentage!}
           />
+        </div>
+        
+        {/* Try Again and Share buttons MOVED BELOW the methodology section */}
+        <div className="flex justify-center gap-4 flex-wrap pt-8">
+          <Button 
+            onClick={onTryAgain} 
+            className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-primary text-white hover:bg-primary/90 transition-all"
+          >
+            <ArrowLeft className="mr-2 h-5 w-5" />
+            <span>Try Again</span>
+          </Button>
+          
+          {/* Share Button - V1 Feature - now using the same styling as Try Again */}
+          <ShareButton results={results} />
         </div>
       </div>
     </div>
