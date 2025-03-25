@@ -46,35 +46,45 @@ const Index = () => {
                 The Population of Heaven
               </h1>
               <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto animate-slide-up">
-                Ever wondered if there are more dogs or humans in the afterlife? Now you can find out. 
-                Welcome to the most serious, silly, and spiritually speculative population model ever made.
-                Using real demographic data, historical mortality estimates, and theological reasoning from a few major religions, this tool lets you calculate the current population of heaven — and whether it's mostly humans... or dogs.
+                Ever wondered if there are more dogs or humans in the afterlife? Now you can find out.
               </p>
+            </div>
+          </div>
 
-              {/* New section about what users will enter */}
-              <div className="mt-12 text-left max-w-2xl mx-auto animate-slide-up">
-                <h2 className="text-2xl font-bold mb-6">You'll enter:</h2>
-                <ul className="space-y-4 text-lg">
-                  <li className="flex items-start">
-                    <span className="mr-2">•</span>
-                    <span>Which religion defines the afterlife</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2">•</span>
-                    <span>What happens to babies, nonbelievers, and the unreached</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2">•</span>
-                    <span>Whether dogs get judged — or just welcomed in</span>
-                  </li>
-                </ul>
-                <p className="mt-6 text-lg">
-                  Behind the scenes, we crunch the numbers to show you the afterlife breakdown.
+          {/* Description Section */}
+          <div className="py-12 md:py-16 px-4 md:px-6 bg-white">
+            <div className="max-w-3xl mx-auto">
+              <div className="prose prose-lg">
+                <p className="text-lg md:text-xl text-gray-800 mb-8">
+                  Welcome to the most serious, silly, and spiritually speculative population model ever made.
+                  Using real demographic data, historical mortality estimates, and theological reasoning from a few major religions, 
+                  this tool lets you calculate the current population of heaven — and whether it's mostly humans... or dogs.
                 </p>
+
+                <div className="space-y-6">
+                  <h2 className="text-2xl font-bold">You'll enter:</h2>
+                  <ul className="space-y-4 text-lg">
+                    <li className="flex items-start">
+                      <span className="mr-2">•</span>
+                      <span>Which religion defines the afterlife</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2">•</span>
+                      <span>What happens to babies, nonbelievers, and the unreached</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="mr-2">•</span>
+                      <span>Whether dogs get judged — or just welcomed in</span>
+                    </li>
+                  </ul>
+                  <p className="text-lg">
+                    Behind the scenes, we crunch the numbers to show you the afterlife breakdown.
+                  </p>
+                </div>
               </div>
 
               {/* Scroll button */}
-              <div className="mt-12 animate-bounce">
+              <div className="mt-12 text-center animate-bounce">
                 <Button 
                   onClick={() => {
                     document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
