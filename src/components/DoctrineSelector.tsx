@@ -7,8 +7,8 @@ import { doctrines, dogtrines, Doctrine } from "@/data/doctrineData";
 import { Church, Heart } from "lucide-react";
 
 interface DoctrineSelectorProps {
-  selectedDoctrine: Doctrine;
-  setSelectedDoctrine: (doctrine: Doctrine) => void;
+  selectedDoctrine: Doctrine | null;
+  setSelectedDoctrine: (doctrine: Doctrine | null) => void;
   allDogsGoToHeaven: boolean;
   setAllDogsGoToHeaven: (value: boolean) => void;
   dogGoodnessPercentage: number;
@@ -37,10 +37,14 @@ const DoctrineSelector = ({
         <Card className="glass-card overflow-hidden">
           <CardContent className="p-4">
             <Select 
-              value={selectedDoctrine.id}
+              value={selectedDoctrine?.id || ""}
               onValueChange={(value) => {
-                const newDoctrine = doctrines.find(d => d.id === value);
-                if (newDoctrine) setSelectedDoctrine(newDoctrine);
+                if (!value) {
+                  setSelectedDoctrine(null);
+                } else {
+                  const newDoctrine = doctrines.find(d => d.id === value);
+                  if (newDoctrine) setSelectedDoctrine(newDoctrine);
+                }
               }}
             >
               <SelectTrigger className="w-full">
