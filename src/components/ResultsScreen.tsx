@@ -54,8 +54,8 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
         
         {/* No separator here as requested - removed */}
         
-        {/* Methodology section with lower z-index */}
-        <div className="pt-16 relative z-0">
+        {/* Methodology section with lower z-index and more padding */}
+        <div className="pt-24 relative z-0">
           <MethodologySection
             results={results}
             selectedDoctrine={results.doctrine!}

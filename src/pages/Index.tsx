@@ -45,7 +45,7 @@ const Index = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in">
                 The Population of Heaven
               </h1>
-              <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto animate-slide-up inline-block px-4 py-2 rounded-full bg-white/30 backdrop-blur-[2px]">
+              <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto animate-slide-up [text-shadow:_0_0_8px_rgba(255,255,255,0.3)]">
                 Ever wondered if there are more dogs or humans in the afterlife? Now you can find out.
               </p>
             </div>
@@ -55,7 +55,7 @@ const Index = () => {
           <div className="py-12 md:py-16 px-4 md:px-6 bg-white">
             <div className="max-w-3xl mx-auto">
               <div className="prose prose-lg">
-                <p className="text-lg md:text-xl text-gray-800 mb-12 leading-loose">
+                <p className="text-lg md:text-xl text-gray-800 mb-12 leading-[1.7]">
                   Welcome to the most serious, silly, and spiritually speculative population model ever made.
                   Using real demographic data, historical mortality estimates, and theological reasoning from a few major religions, 
                   this tool lets you calculate the current population of heaven — and whether it's mostly humans... or dogs.

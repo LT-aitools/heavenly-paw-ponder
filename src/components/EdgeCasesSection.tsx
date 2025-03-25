@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Sparkles, Info } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Sparkles } from "lucide-react";
 import { Doctrine, edgeCases as allEdgeCases } from "@/data/doctrineData";
 
 interface EdgeCasesSectionProps {
@@ -53,21 +52,9 @@ const EdgeCasesSection = ({
               
               {applicableEdgeCases.map((edgeCase) => (
                 <div key={edgeCase.id} className="flex justify-between items-center">
-                  <div className="flex items-center space-x-2">
-                    <Label htmlFor={`edge-case-${edgeCase.id}`} className="cursor-pointer">
-                      {edgeCase.label}
-                    </Label>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                        </TooltipTrigger>
-                        <TooltipContent side="right" className="max-w-sm">
-                          <p>{edgeCase.description}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
+                  <Label htmlFor={`edge-case-${edgeCase.id}`} className="cursor-pointer">
+                    {edgeCase.label}
+                  </Label>
                   <Switch
                     id={`edge-case-${edgeCase.id}`}
                     checked={edgeCaseValues[edgeCase.id] || false}
@@ -86,21 +73,9 @@ const EdgeCasesSection = ({
           <CardContent className="p-4">
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-2">
-                  <Label htmlFor={`edge-case-${purgatoryCase.id}`} className="cursor-pointer">
-                    Should we count those still in purgatory as 'in heaven'?
-                  </Label>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                      </TooltipTrigger>
-                      <TooltipContent side="right" className="max-w-sm">
-                        <p>{purgatoryCase.description}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
+                <Label htmlFor={`edge-case-${purgatoryCase.id}`} className="cursor-pointer">
+                  Should we count those still in purgatory as 'in heaven'?
+                </Label>
                 <Switch
                   id={`edge-case-${purgatoryCase.id}`}
                   checked={edgeCaseValues[purgatoryCase.id] || false}

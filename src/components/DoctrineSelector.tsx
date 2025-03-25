@@ -24,7 +24,7 @@ const DoctrineSelector = ({
   setDogGoodnessPercentage
 }: DoctrineSelectorProps) => {
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-12 animate-fade-in">
       <section>
         <div className="mb-4 flex items-center">
           <Church className="mr-2 h-5 w-5 text-primary" />
