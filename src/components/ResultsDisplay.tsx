@@ -14,7 +14,7 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
       <div className="text-center">
         <div className="inline-flex items-center px-4 py-2 rounded-full bg-heaven-blue text-primary font-medium mb-8">
           <Sparkles className="mr-2 h-4 w-4" />
-          <span>Results</span>
+          <span>One hell (ahem, heaven) of a result:</span>
         </div>
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
           In Heaven, There Are More...
@@ -42,7 +42,7 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <Users className="h-6 w-6 text-primary mr-2" />
-                <h3 className="text-xl font-medium">Human Souls</h3>
+                <h3 className="text-xl font-medium">Human souls in heaven</h3>
               </div>
             </div>
             <div className={`text-4xl font-bold ${moreDogsOrHumans === 'humans' ? 'text-primary' : 'text-foreground'}`}>
@@ -56,7 +56,7 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <Heart className="h-6 w-6 text-heaven-contrast mr-2" />
-                <h3 className="text-xl font-medium">Dog Souls</h3>
+                <h3 className="text-xl font-medium">Dog souls in heaven</h3>
               </div>
             </div>
             <div className={`text-4xl font-bold ${moreDogsOrHumans === 'dogs' ? 'text-heaven-contrast' : 'text-foreground'}`}>

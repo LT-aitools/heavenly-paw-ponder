@@ -1,6 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent } from "@/components/ui/card";
-import { formatNumber } from '@/utils/calculationLogic';
+import { formatNumber, formatNumberToReadable } from '@/utils/calculationLogic';
 import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 
 // Historical dates for the chart
@@ -35,7 +35,7 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
   return (
     <Card className="glass-card">
       <CardContent className="p-4">
-        <h3 className="text-lg font-medium mb-4">Heaven Population Over Time</h3>
+        <h3 className="text-lg font-medium mb-4">The Heaven Population Over Time</h3>
         <div className="h-80">
           <ChartContainer
             config={{
@@ -55,7 +55,32 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
                 if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
                 return value;
               }} />
-              <Tooltip content={<ChartTooltipContent formatter={(value) => formatNumber(value as number)} />} />
+              <Tooltip 
+                content={({ active, payload, label }) => {
+                  if (active && payload && payload.length) {
+                    const humans = payload[0].value;
+                    const dogs = payload[1].value;
+                    const total = humans + dogs;
+                    const dogPercentage = Math.round((dogs / total) * 100);
+                    const humanPercentage = 100 - dogPercentage;
+                    const isMostlyDogs = dogs > humans;
+                    
+                    return (
+                      <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
+                        <div className="font-medium mb-2">{label} Afterlife Audit</div>
+                        <div className="space-y-1">
+                          <div>👤 Humans in heaven: {formatNumberToReadable(humans)}</div>
+                          <div>🐶 Dogs in heaven: {formatNumberToReadable(dogs)}</div>
+                        </div>
+                        <div className="mt-2 text-sm text-gray-600">
+                          So heaven was mostly ({isMostlyDogs ? dogPercentage : humanPercentage}%) {isMostlyDogs ? 'canine' : 'human'}.
+                        </div>
+                      </div>
+                    );
+                  }
+                  return null;
+                }}
+              />
               <Legend />
               <Bar dataKey="🧑 Humans" stackId="a" fill="#3b82f6" />
               <Bar dataKey="🐶 Dogs" stackId="a" fill="#eab308" />

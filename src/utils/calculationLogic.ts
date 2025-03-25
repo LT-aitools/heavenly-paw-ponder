@@ -105,3 +105,15 @@ export function calculateHeavenPopulation(params: CalculationParams): Calculatio
 export const formatNumber = (number: number): string => {
   return new Intl.NumberFormat().format(Math.round(number));
 };
+
+export const formatNumberToReadable = (num: number): string => {
+  if (num >= 1000000000) {
+    return `${(num / 1000000000).toFixed(1)} billion`;
+  } else if (num >= 1000000) {
+    return `${(num / 1000000).toFixed(1)} million`;
+  } else if (num >= 1000) {
+    return `${(num / 1000).toFixed(1)} thousand`;
+  } else {
+    return num.toString();
+  }
+};
