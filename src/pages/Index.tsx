@@ -38,14 +38,14 @@ const Index = () => {
             </div>
             
             <div className="max-w-4xl mx-auto relative z-10">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/70 backdrop-blur-xs shadow-sm text-primary font-medium mb-6">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/70 backdrop-blur-xs shadow-sm text-primary font-medium mb-8">
                 <Sparkles className="mr-2 h-4 w-4" />
                 <span>Who's in Heaven? A Spiritual Census</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in">
                 The Population of Heaven
               </h1>
-              <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto animate-slide-up inline-block px-6 py-3 rounded-full bg-white/70 backdrop-blur-xs shadow-sm">
+              <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto animate-slide-up inline-block px-4 py-2 rounded-full bg-white/30 backdrop-blur-[2px]">
                 Ever wondered if there are more dogs or humans in the afterlife? Now you can find out.
               </p>
             </div>
@@ -55,7 +55,7 @@ const Index = () => {
           <div className="py-12 md:py-16 px-4 md:px-6 bg-white">
             <div className="max-w-3xl mx-auto">
               <div className="prose prose-lg">
-                <p className="text-lg md:text-xl text-gray-800 mb-12 leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-800 mb-12 leading-loose">
                   Welcome to the most serious, silly, and spiritually speculative population model ever made.
                   Using real demographic data, historical mortality estimates, and theological reasoning from a few major religions, 
                   this tool lets you calculate the current population of heaven — and whether it's mostly humans... or dogs.
@@ -87,19 +87,13 @@ const Index = () => {
               <div className="mt-12 text-center animate-bounce cursor-pointer" onClick={() => {
                 document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
               }}>
-                <ChevronDown className="h-8 w-8 text-gray-400 hover:text-gray-600 transition-colors" />
+                <ChevronDown className="h-8 w-8 text-primary hover:text-primary/90 transition-colors mx-auto" />
               </div>
             </div>
           </div>
 
           {/* Main Content - Inputs */}
           <div id="calculator-section" className="flex-grow py-12 md:py-20 px-4 md:px-6 bg-gray-50">
-            <div className="text-center">
-              <h2 className="text-2xl font-medium mb-2">...And your Dogtrine</h2>
-              <p className="text-muted-foreground">
-                Select a religious doctrine to calculate its heaven's population
-              </p>
-            </div>
             <AfterlifeCalculator onRunCensus={handleRunCensus} />
           </div>
         </>

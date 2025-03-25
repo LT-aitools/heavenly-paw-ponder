@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { doctrines, Doctrine } from '@/data/doctrineData';
 import DoctrineSelector from './DoctrineSelector';
@@ -74,8 +73,8 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-10">
-      <div className="grid grid-cols-1 gap-10">
+    <div className="w-full max-w-4xl mx-auto space-y-12">
+      <div className="grid grid-cols-1 gap-12">
         <DoctrineSelector
           selectedDoctrine={selectedDoctrine}
           setSelectedDoctrine={setSelectedDoctrine}

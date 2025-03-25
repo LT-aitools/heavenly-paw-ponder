@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -31,6 +30,9 @@ const DoctrineSelector = ({
           <Church className="mr-2 h-5 w-5 text-primary" />
           <h2 className="text-xl font-medium">Choose Your Afterlife Doctrine</h2>
         </div>
+        <p className="text-muted-foreground mb-4">
+          Select a religious doctrine to calculate its heaven's population
+        </p>
         
         <Card className="glass-card overflow-hidden">
           <CardContent className="p-4">
@@ -59,7 +61,7 @@ const DoctrineSelector = ({
       <section>
         <div className="mb-4 flex items-center">
           <Heart className="mr-2 h-5 w-5 text-primary" />
-          <h2 className="text-xl font-medium">Choose Your Dogtrine</h2>
+          <h2 className="text-xl font-medium">...And your Dogtrine</h2>
         </div>
         
         <Card className="glass-card overflow-hidden">
