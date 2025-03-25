@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import ResultsDisplay from './ResultsDisplay';
 import MethodologySection from './MethodologySection';
@@ -45,16 +44,18 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
         
         <div className="grid grid-cols-1 gap-6 pt-4">
           {/* Population Chart - V1 Feature */}
-          <PopulationChart 
-            humanSouls={results.humanSouls} 
-            dogSouls={results.dogSouls} 
-          />
+          <div className="relative z-10">
+            <PopulationChart 
+              humanSouls={results.humanSouls} 
+              dogSouls={results.dogSouls} 
+            />
+          </div>
         </div>
         
         {/* No separator here as requested - removed */}
         
-        {/* Increased padding/margin before methodology section */}
-        <div className="pt-16">
+        {/* Methodology section with lower z-index */}
+        <div className="pt-16 relative z-0">
           <MethodologySection
             results={results}
             selectedDoctrine={results.doctrine!}
@@ -67,7 +68,7 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
         <div className="flex justify-center gap-4 flex-wrap pt-8">
           <Button 
             onClick={onTryAgain} 
-            className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-primary text-white hover:bg-primary/90 transition-all"
+            className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
           >
             <ArrowLeft className="mr-2 h-5 w-5" />
             <span>Try Again</span>

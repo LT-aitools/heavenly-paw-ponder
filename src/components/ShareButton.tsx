@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Share } from 'lucide-react';
@@ -61,7 +60,7 @@ const ShareButton = ({ results }: ShareButtonProps) => {
     <Button
       onClick={handleShare}
       disabled={isSharing}
-      className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-white text-primary border border-primary hover:bg-primary/5 transition-all"
+      className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-white text-heaven-contrast border border-heaven-contrast hover:bg-heaven-contrast/5 transition-all"
     >
       <Share className="mr-2 h-5 w-5" />
       <span>Share My Heaven Census</span>

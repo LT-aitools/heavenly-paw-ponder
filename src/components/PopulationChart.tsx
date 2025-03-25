@@ -1,4 +1,3 @@
-
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent } from "@/components/ui/card";
 import { formatNumber } from '@/utils/calculationLogic';
@@ -25,8 +24,8 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
       
       return {
         year,
-        Humans: Math.round(humanSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
-        Dogs: Math.round(dogSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
+        '🧑 Humans': Math.round(humanSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
+        '🐶 Dogs': Math.round(dogSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
       };
     });
   };
@@ -40,8 +39,8 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
         <div className="h-80">
           <ChartContainer
             config={{
-              Humans: { color: "hsl(var(--primary))" },
-              Dogs: { color: "hsl(var(--heaven-contrast))" }
+              '🧑 Humans': { color: "#3b82f6" }, // Blue color
+              '🐶 Dogs': { color: "#eab308" }    // Yellow color
             }}
           >
             <BarChart
@@ -58,8 +57,8 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
               }} />
               <Tooltip content={<ChartTooltipContent formatter={(value) => formatNumber(value as number)} />} />
               <Legend />
-              <Bar dataKey="Humans" stackId="a" fill="hsl(var(--primary))" />
-              <Bar dataKey="Dogs" stackId="a" fill="hsl(var(--heaven-contrast))" />
+              <Bar dataKey="🧑 Humans" stackId="a" fill="#3b82f6" />
+              <Bar dataKey="🐶 Dogs" stackId="a" fill="#eab308" />
             </BarChart>
           </ChartContainer>
         </div>
