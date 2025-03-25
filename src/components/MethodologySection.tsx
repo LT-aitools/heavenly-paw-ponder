@@ -31,7 +31,7 @@ const MethodologySection = ({
     <section className="animate-fade-in">
       <Button
         variant="outline"
-        className="flex w-full items-center justify-between p-4 text-left font-medium border-heaven-lightBlue border-2 rounded-md bg-white hover:bg-heaven-blue/20 transition-colors"
+        className="flex w-full items-center justify-between p-4 text-left font-medium border-heaven-lightBlue border border-opacity-70 rounded-md bg-white hover:bg-heaven-blue/20 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center">

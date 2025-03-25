@@ -51,13 +51,10 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           />
         </div>
         
-        {/* Separator before methodology section */}
-        <div className="pt-6">
-          <Separator className="bg-heaven-mediumBlue opacity-50" />
-        </div>
+        {/* No separator here as requested - removed */}
         
-        {/* Methodology section moved to results page */}
-        <div className="pt-4">
+        {/* Increased padding/margin before methodology section */}
+        <div className="pt-16">
           <MethodologySection
             results={results}
             selectedDoctrine={results.doctrine!}
@@ -66,17 +63,17 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           />
         </div>
         
-        {/* Try Again and Share buttons MOVED BELOW the methodology section */}
+        {/* Try Again and Share buttons with smaller size */}
         <div className="flex justify-center gap-4 flex-wrap pt-8">
           <Button 
             onClick={onTryAgain} 
-            className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-primary text-white hover:bg-primary/90 transition-all"
+            className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-primary text-white hover:bg-primary/90 transition-all"
           >
             <ArrowLeft className="mr-2 h-5 w-5" />
             <span>Try Again</span>
           </Button>
           
-          {/* Share Button - V1 Feature - now using the same styling as Try Again */}
+          {/* Share Button - V1 Feature - now using the same styling as Try Again but smaller */}
           <ShareButton results={results} />
         </div>
       </div>
