@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
 
 // Historical dates for the chart
-const timePoints = ['1700', '1750', '1800', '1850', '1900', '1950', '2000', '2050', '2100'];
+const timePoints = ['1750', '1800', '1850', '1900', '1950', '2000', '2025', '2050', '2100'];
 
 interface PopulationChartProps {
   humanSouls: number;
@@ -47,31 +47,20 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
               </Button>
             </div>
           </div>
-          <div className="relative h-[300px] sm:h-[350px] md:h-[400px] w-full overflow-hidden">
+          <div className="relative h-[400px] w-full overflow-hidden">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={data}
-                margin={{ 
-                  top: 20, 
-                  right: 20, 
-                  left: 20, 
-                  bottom: 80 
-                }}
+                margin={{ top: 20, right: 30, left: 30, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="year" 
-                  tick={{ fontSize: 12 }}
-                />
-                <YAxis 
-                  tickFormatter={(value) => {
-                    if (value >= 1000000000) return `${(value / 1000000000).toFixed(1)}B`;
-                    if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
-                    if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
-                    return value;
-                  }}
-                  tick={{ fontSize: 12 }}
-                />
+                <XAxis dataKey="year" />
+                <YAxis tickFormatter={(value) => {
+                  if (value >= 1000000000) return `${(value / 1000000000).toFixed(1)}B`;
+                  if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
+                  if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
+                  return value;
+                }} />
                 <Tooltip 
                   content={({ active, payload, label }) => {
                     if (active && payload && payload.length) {
@@ -81,6 +70,9 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
                       const dogPercentage = Math.round((dogs / total) * 100);
                       const humanPercentage = 100 - dogPercentage;
                       const isMostlyDogs = dogs > humans;
+                      const yearNum = parseInt(label);
+                      const isFuture = yearNum > 2025;
+                      const isPresent = yearNum === 2025;
                       
                       return (
                         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
@@ -90,7 +82,12 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
                             <div>🐶 Dogs in heaven: {formatNumberToReadable(dogs)}</div>
                           </div>
                           <div className="mt-2 text-sm text-gray-600">
-                            So heaven was mostly ({isMostlyDogs ? dogPercentage : humanPercentage}%) {isMostlyDogs ? 'canine' : 'human'}.
+                            {isPresent 
+                              ? `Heaven is mostly (${isMostlyDogs ? dogPercentage : humanPercentage}%) ${isMostlyDogs ? 'canine' : 'human'}.`
+                              : isFuture
+                              ? `Heaven will be mostly (${isMostlyDogs ? dogPercentage : humanPercentage}%) ${isMostlyDogs ? 'canine' : 'human'}.`
+                              : `So heaven was mostly (${isMostlyDogs ? dogPercentage : humanPercentage}%) ${isMostlyDogs ? 'canine' : 'human'}.`
+                            }
                           </div>
                         </div>
                       );
@@ -98,14 +95,7 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
                     return null;
                   }}
                 />
-                <Legend 
-                  verticalAlign="bottom"
-                  height={36}
-                  wrapperStyle={{ 
-                    paddingTop: '20px',
-                    fontSize: '12px'
-                  }}
-                />
+                <Legend />
                 <Bar dataKey="🧑 Humans" stackId="a" fill="#3b82f6" />
                 <Bar dataKey="🐶 Dogs" stackId="a" fill="#eab308" />
               </BarChart>

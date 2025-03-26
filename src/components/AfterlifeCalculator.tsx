@@ -112,12 +112,17 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
   };
 
   const handleRunCensus = () => {
-    if (validateInputs()) {
-      onRunCensus(results);
-    } else {
-      // Show all errors but scroll to first one
+    // First validate inputs
+    const isValid = validateInputs();
+    
+    // If there are validation errors, scroll to first one
+    if (!isValid) {
       scrollToFirstError();
+      return;
     }
+
+    // If we get here, validation passed, so run the census
+    onRunCensus(results);
   };
 
   return (
@@ -157,7 +162,6 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
           <Button 
             onClick={handleRunCensus} 
             className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
-            disabled={!selectedDoctrine}
           >
             <span>Run My Heaven Census</span>
             <ArrowRight className="ml-2 h-5 w-5" />
