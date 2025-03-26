@@ -62,8 +62,19 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
     edgeCases
   } = params;
 
+  console.log('Calculation Parameters:', {
+    currentYear,
+    doctrineId: doctrine.id,
+    allDogsGoToHeaven,
+    dogGoodnessPercentage,
+    insideSavedPercentage,
+    outsideSavedPercentage,
+    edgeCases
+  });
+
   // Get base figures from Supabase - no fallback
   const baseFigures = await getBaseFigures(currentYear);
+  console.log('Base Figures from Supabase:', baseFigures);
 
   let humanSouls = 0;
   const explanations: string[] = [];
@@ -104,8 +115,19 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
       throw new Error(`Unknown doctrine: ${doctrine.id}`);
   }
 
+  console.log('People in religion calculation:', {
+    doctrine: doctrine.id,
+    peopleInReligion,
+    insideSavedPercentage,
+  });
+
   const soulsSavedInReligion = peopleInReligion * (insideSavedPercentage / 100);
   humanSouls += soulsSavedInReligion;
+
+  console.log('Souls saved in religion:', {
+    soulsSavedInReligion,
+    humanSoulsTotal: humanSouls
+  });
 
   // Add the main religion calculation to explanations
   explanations.push(`${doctrine.name}: ${formatNumber(peopleInReligion)} × ${insideSavedPercentage}% "Good" = ${formatNumber(soulsSavedInReligion)}`);
@@ -114,10 +136,12 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
   if (doctrine.id === 'catholic') {
     if (edgeCases.unbaptizedInfants) {
       humanSouls += baseFigures.unbaptized_infants;
+      console.log('Adding unbaptized infants:', baseFigures.unbaptized_infants);
       explanations.push(`Unbaptized infants: ${formatNumber(baseFigures.unbaptized_infants)}`);
     }
     if (edgeCases.purgatory) {
       humanSouls += baseFigures.in_purgatory;
+      console.log('Adding souls in purgatory:', baseFigures.in_purgatory);
       explanations.push(`Souls in Purgatory: ${formatNumber(baseFigures.in_purgatory)}`);
     }
   }
@@ -129,20 +153,39 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
   if (edgeCases.neverHeard) {
     const neverHeardSouls = baseFigures.never_heard * (outsideSavedPercentage / 100);
     outsideReligionSouls += neverHeardSouls;
+    console.log('Never heard calculation:', {
+      baseNumber: baseFigures.never_heard,
+      percentage: outsideSavedPercentage,
+      result: neverHeardSouls
+    });
     explanations.push(`People who never heard of the religion (included): ${formatNumber(baseFigures.never_heard)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(neverHeardSouls)}`);
   }
   if (edgeCases.otherMonotheists) {
     const otherMonotheistSouls = baseFigures.monotheists * (outsideSavedPercentage / 100);
     outsideReligionSouls += otherMonotheistSouls;
+    console.log('Other monotheists calculation:', {
+      baseNumber: baseFigures.monotheists,
+      percentage: outsideSavedPercentage,
+      result: otherMonotheistSouls
+    });
     explanations.push(`Other monotheists (included): ${formatNumber(baseFigures.monotheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(otherMonotheistSouls)}`);
   }
   if (edgeCases.atheistsPolytheists) {
     const atheistPolytheistSouls = baseFigures.atheists_polytheists * (outsideSavedPercentage / 100);
     outsideReligionSouls += atheistPolytheistSouls;
+    console.log('Atheists/Polytheists calculation:', {
+      baseNumber: baseFigures.atheists_polytheists,
+      percentage: outsideSavedPercentage,
+      result: atheistPolytheistSouls
+    });
     explanations.push(`Atheists or Polytheists (everyone else) (included): ${formatNumber(baseFigures.atheists_polytheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(atheistPolytheistSouls)}`);
   }
 
   humanSouls += outsideReligionSouls;
+  console.log('Final human souls calculation:', {
+    outsideReligionSouls,
+    totalHumanSouls: humanSouls
+  });
 
   // Add total humans before dogs
   explanations.push(`Total human souls = ${formatNumberToReadable(humanSouls)}`);
@@ -151,10 +194,16 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
   let dogSouls = 0;
   if (allDogsGoToHeaven) {
     dogSouls = baseFigures.dogs;
-    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} (All dogs go to heaven) = ${formatNumberToReadable(dogSouls)}`);
+    console.log('Dog souls (all go to heaven):', dogSouls);
+    explanations.push(`\nDogs: ${formatNumber(baseFigures.dogs)} (All dogs go to heaven) = ${formatNumberToReadable(dogSouls)}`);
   } else {
     dogSouls = baseFigures.dogs * (dogGoodnessPercentage / 100);
-    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} × ${dogGoodnessPercentage}% "Good" = ${formatNumberToReadable(dogSouls)}`);
+    console.log('Dog souls calculation:', {
+      baseDogs: baseFigures.dogs,
+      percentage: dogGoodnessPercentage,
+      result: dogSouls
+    });
+    explanations.push(`\nDogs: ${formatNumber(baseFigures.dogs)} × ${dogGoodnessPercentage}% "Good" = ${formatNumberToReadable(dogSouls)}`);
   }
 
   // Determine if there are more dogs or humans
@@ -164,6 +213,12 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
   } else if (humanSouls > dogSouls) {
     moreDogsOrHumans = 'humans';
   }
+
+  console.log('Final calculation results:', {
+    humanSouls,
+    dogSouls,
+    moreDogsOrHumans
+  });
 
   const result: CalculationResult = {
     humanSouls,
