@@ -12,8 +12,8 @@ interface AfterlifeCalculatorProps {
 }
 
 const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
-  // State for doctrine selection - start with null
-  const [selectedDoctrine, setSelectedDoctrine] = useState<Doctrine | null>(null);
+  // State for doctrine selection - start with Catholic
+  const [selectedDoctrine, setSelectedDoctrine] = useState<Doctrine | null>(doctrines.find(d => d.id === 'catholic'));
   
   // State for dog doctrines
   const [allDogsGoToHeaven, setAllDogsGoToHeaven] = useState(true);
@@ -33,8 +33,6 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
     moreDogsOrHumans: 'equal',
     explanations: []
   });
-
-  const [validationErrors, setValidationErrors] = useState<Record<string, boolean>>({});
 
   // Update edge cases when doctrine changes
   useEffect(() => {
@@ -85,84 +83,16 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
     edgeCaseValues
   ]);
 
-  const validateInputs = () => {
-    const errors: Record<string, boolean> = {};
-    
-    if (!selectedDoctrine) {
-      errors['doctrine-selector'] = true;
-      setValidationErrors(errors);
-      return false;
-    }
-    
-    // Check if any required edge cases are not set
-    if (selectedDoctrine.edgeCases && Array.isArray(selectedDoctrine.edgeCases)) {
-      selectedDoctrine.edgeCases.forEach(edgeCase => {
-        if (edgeCase.required && !edgeCaseValues[edgeCase.id]) {
-          errors[`edge-case-${edgeCase.id}`] = true;
-        }
-      });
-    }
-
-    setValidationErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
-  const scrollToFirstError = () => {
-    // Find the first error element
-    const firstErrorId = Object.keys(validationErrors)[0];
-    if (firstErrorId) {
-      const element = document.getElementById(firstErrorId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
-  };
-
-  const handleRunCensus = () => {
-    // First validate inputs
-    const isValid = validateInputs();
-    
-    // If there are validation errors, scroll to first one
-    if (!isValid) {
-      scrollToFirstError();
-      return;
-    }
-
-    // If we get here, validation passed, so run the census
-    onRunCensus(results);
-  };
-
-  // Clear validation errors when selections change
-  const handleDoctrineChange = (doctrine: Doctrine | null) => {
-    setSelectedDoctrine(doctrine);
-    // Clear validation errors when doctrine changes
-    setValidationErrors({});
-  };
-
-  const handleEdgeCaseChange = (values: Record<string, boolean>) => {
-    setEdgeCaseValues(values);
-    // Clear validation errors when edge case changes
-    setValidationErrors(prev => {
-      const newErrors = { ...prev };
-      // Remove errors for any edge cases that are now set
-      Object.keys(values).forEach(id => {
-        delete newErrors[`edge-case-${id}`];
-      });
-      return newErrors;
-    });
-  };
-
   return (
     <div className="w-full max-w-4xl mx-auto space-y-12">
       <div className="grid grid-cols-1 gap-12">
         <DoctrineSelector
           selectedDoctrine={selectedDoctrine}
-          setSelectedDoctrine={handleDoctrineChange}
+          setSelectedDoctrine={setSelectedDoctrine}
           allDogsGoToHeaven={allDogsGoToHeaven}
           setAllDogsGoToHeaven={setAllDogsGoToHeaven}
           dogGoodnessPercentage={dogGoodnessPercentage}
           setDogGoodnessPercentage={setDogGoodnessPercentage}
-          hasError={validationErrors['doctrine-selector']}
         />
         
         {selectedDoctrine && (
@@ -170,8 +100,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
             <EdgeCasesSection
               selectedDoctrine={selectedDoctrine}
               edgeCaseValues={edgeCaseValues}
-              setEdgeCaseValues={handleEdgeCaseChange}
-              validationErrors={validationErrors}
+              setEdgeCaseValues={setEdgeCaseValues}
             />
             
             <GoodnessSliders
@@ -187,12 +116,8 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
         
         <div className="flex justify-center pt-6">
           <Button 
-            onClick={handleRunCensus} 
-            className={`px-8 py-6 text-lg font-medium rounded-full shadow-elevated transition-all text-white
-              ${Object.keys(validationErrors).length > 0 
-                ? 'bg-heaven-contrast/50 cursor-not-allowed' 
-                : 'bg-heaven-contrast hover:bg-heaven-contrast/90'}`}
-            disabled={Object.keys(validationErrors).length > 0}
+            onClick={() => onRunCensus(results)} 
+            className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
           >
             <span>Run My Heaven Census</span>
             <ArrowRight className="ml-2 h-5 w-5" />
