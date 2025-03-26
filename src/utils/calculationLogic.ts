@@ -1,4 +1,5 @@
 import { doctrines, Doctrine } from "@/data/doctrineData";
+import { supabase, BaseFigures } from "@/lib/supabase";
 
 interface CalculationParams {
   doctrine: Doctrine;
@@ -19,17 +20,28 @@ export interface CalculationResult {
   doctrine?: Doctrine;
   allDogsGoToHeaven?: boolean;
   dogGoodnessPercentage?: number;
+  insideSavedPercentage?: number;
+  outsideSavedPercentage?: number;
+  edgeCases?: Record<string, boolean>;
 }
 
-const currentYear = new Date().getFullYear();
+// Function to fetch base figures from Supabase
+export async function getBaseFigures(year: number): Promise<BaseFigures | null> {
+  const { data, error } = await supabase
+    .from('base_figures')
+    .select('*')
+    .eq('year', year)
+    .single();
 
-// Data sources
-const worldPopulation = 8000000000;
-const dogPopulation = 900000000;
-const averageLifespanHumans = 72;
-const averageLifespanDogs = 12;
+  if (error) {
+    console.error('Error fetching base figures:', error);
+    return null;
+  }
 
-export function calculateHeavenPopulation(params: CalculationParams): CalculationResult {
+  return data;
+}
+
+export async function calculateHeavenPopulation(params: CalculationParams): Promise<CalculationResult> {
   const {
     doctrine,
     allDogsGoToHeaven,
@@ -39,40 +51,64 @@ export function calculateHeavenPopulation(params: CalculationParams): Calculatio
     edgeCases
   } = params;
 
-  // Lifespan multiplier based on doctrine
+  // Get base figures from Supabase for current year
+  const currentYear = new Date().getFullYear();
+  const baseFigures = await getBaseFigures(2025); // Using 2025 as it's our closest data point
+  
+  if (!baseFigures) {
+    throw new Error('Could not fetch base figures from database');
+  }
+
+  // Calculate lifespan multipliers
   const humanLifespanMultiplier = doctrine.humanLifespanMultiplier;
   const dogLifespanMultiplier = doctrine.dogLifespanMultiplier;
+  const averageLifespanHumans = 72;
+  const averageLifespanDogs = 12;
 
-  // People inside vs outside the doctrine
-  const percentageInsideDoctrine = doctrine.percentageInsideDoctrine;
-  const percentageOutsideDoctrine = 100 - percentageInsideDoctrine;
+  let humanSouls = 0;
 
-  // Calculate souls saved inside and outside the doctrine
-  const soulsSavedInsideDoctrine = (worldPopulation * (percentageInsideDoctrine / 100)) * (insideSavedPercentage / 100) * humanLifespanMultiplier / averageLifespanHumans;
-  const soulsSavedOutsideDoctrine = (worldPopulation * (percentageOutsideDoctrine / 100)) * (outsideSavedPercentage / 100) * humanLifespanMultiplier / averageLifespanHumans;
-  let humanSouls = soulsSavedInsideDoctrine + soulsSavedOutsideDoctrine;
+  // 1. First calculate people in the religion who would be saved
+  const worldPopulation = baseFigures.humans;
+  const peopleInReligion = worldPopulation * (doctrine.percentageInsideDoctrine / 100);
+  const soulsSavedInReligion = peopleInReligion * (insideSavedPercentage / 100) * humanLifespanMultiplier / averageLifespanHumans;
+  humanSouls += soulsSavedInReligion;
+
+  // 2. For Catholics only, add unbaptized babies and purgatory if selected
+  if (doctrine.id === 'catholic') {
+    if (edgeCases.unbaptizedInfants) {
+      humanSouls += baseFigures.unbaptized_infants;
+    }
+    if (edgeCases.purgatory) {
+      humanSouls += baseFigures.in_purgatory;
+    }
+  }
+
+  // 3. For all religions, add other edge cases multiplied by outside-religion good percentage
+  let outsideReligionSouls = 0;
+  
+  if (edgeCases.neverHeard) {
+    outsideReligionSouls += baseFigures.never_heard;
+  }
+  if (edgeCases.otherMonotheists) {
+    outsideReligionSouls += baseFigures.monotheists;
+  }
+  if (edgeCases.atheistsPolytheists) {
+    outsideReligionSouls += baseFigures.atheists_polytheists;
+  }
+
+  // Apply outside religion percentage to the sum of all included outside groups
+  humanSouls += (outsideReligionSouls * (outsideSavedPercentage / 100) * humanLifespanMultiplier / averageLifespanHumans);
 
   // Dog souls calculation
   let dogSouls = 0;
   if (allDogsGoToHeaven) {
-    dogSouls = dogPopulation * dogLifespanMultiplier / averageLifespanDogs;
+    dogSouls = baseFigures.dogs;
   } else {
-    dogSouls = (dogPopulation * (dogGoodnessPercentage / 100)) * dogLifespanMultiplier / averageLifespanDogs;
-  }
-
-  // Adjustments for edge cases
-  if (edgeCases.babiesDontCount) {
-    humanSouls *= 0.8; // Assume babies make up 20% of the population
-  }
-  if (edgeCases.disabledDontCount) {
-    humanSouls *= 0.9; // Assume disabled people make up 10% of the population
-  }
-  if (edgeCases.onlyGoodCount) {
-    humanSouls *= 0.5; // Assume only 50% of people are "good"
+    dogSouls = baseFigures.dogs * (dogGoodnessPercentage / 100);
   }
 
   // Determine if there are more dogs or humans
-  let moreDogsOrHumans: string = 'equal';
+  let moreDogsOrHumans: 'dogs' | 'humans' | 'equal' = 'equal';
   if (dogSouls > humanSouls) {
     moreDogsOrHumans = 'dogs';
   } else if (humanSouls > dogSouls) {
@@ -80,23 +116,26 @@ export function calculateHeavenPopulation(params: CalculationParams): Calculatio
   }
 
   const explanations: string[] = [
-    `Based on current world population of ${formatNumber(worldPopulation)} and dog population of ${formatNumber(dogPopulation)}.`,
+    `Based on ${currentYear} world population of ${formatNumber(worldPopulation)} and dog population of ${formatNumber(baseFigures.dogs)}.`,
+    `People in ${doctrine.name}: ${formatNumber(peopleInReligion)} (${doctrine.percentageInsideDoctrine}% of world population)`,
+    `Souls saved within ${doctrine.name}: ${formatNumber(soulsSavedInReligion)} (${insideSavedPercentage}% of followers)`,
+    `Outside religion souls considered: ${formatNumber(outsideReligionSouls)} (${outsideSavedPercentage}% saved)`,
     `Average human lifespan: ${averageLifespanHumans} years, average dog lifespan: ${averageLifespanDogs} years.`,
-    `Souls saved inside doctrine: ${formatNumber(soulsSavedInsideDoctrine)}, souls saved outside doctrine: ${formatNumber(soulsSavedOutsideDoctrine)}.`,
-    `Doctrine: ${doctrine.name}, Human Lifespan Multiplier: ${humanLifespanMultiplier}, Dog Lifespan Multiplier: ${dogLifespanMultiplier}.`,
-    `Percentage inside doctrine: ${percentageInsideDoctrine}%, inside saved percentage: ${insideSavedPercentage}%, outside saved percentage: ${outsideSavedPercentage}%.`,
+    `Human Lifespan Multiplier: ${humanLifespanMultiplier}, Dog Lifespan Multiplier: ${dogLifespanMultiplier}.`,
     `All dogs go to heaven: ${allDogsGoToHeaven}, dog goodness percentage: ${dogGoodnessPercentage}%.`
   ];
 
-  // Add additional fields to the result
   const result: CalculationResult = {
     humanSouls,
     dogSouls,
-    moreDogsOrHumans: moreDogsOrHumans as 'dogs' | 'humans' | 'equal',
+    moreDogsOrHumans,
     explanations,
     doctrine: params.doctrine,
     allDogsGoToHeaven: params.allDogsGoToHeaven,
-    dogGoodnessPercentage: params.dogGoodnessPercentage
+    dogGoodnessPercentage: params.dogGoodnessPercentage,
+    insideSavedPercentage: params.insideSavedPercentage,
+    outsideSavedPercentage: params.outsideSavedPercentage,
+    edgeCases: params.edgeCases
   };
 
   return result;

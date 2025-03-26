@@ -52,8 +52,6 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           </div>
         </div>
         
-        {/* No separator here as requested - removed */}
-        
         {/* Methodology section */}
         <div className="relative z-0">
           <MethodologySection
@@ -61,6 +59,9 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
             selectedDoctrine={results.doctrine!}
             allDogsGoToHeaven={results.allDogsGoToHeaven!}
             dogGoodnessPercentage={results.dogGoodnessPercentage!}
+            insideSavedPercentage={results.insideSavedPercentage!}
+            outsideSavedPercentage={results.outsideSavedPercentage!}
+            edgeCases={results.edgeCases!}
           />
         </div>
         

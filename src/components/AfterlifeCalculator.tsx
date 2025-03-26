@@ -50,26 +50,35 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
 
   // Calculate results when inputs change
   useEffect(() => {
-    if (!selectedDoctrine) {
-      setResults({
-        humanSouls: 0,
-        dogSouls: 0,
-        moreDogsOrHumans: 'equal',
-        explanations: []
-      });
-      return;
-    }
+    const calculateResults = async () => {
+      if (!selectedDoctrine) {
+        setResults({
+          humanSouls: 0,
+          dogSouls: 0,
+          moreDogsOrHumans: 'equal',
+          explanations: []
+        });
+        return;
+      }
 
-    const newResults = calculateHeavenPopulation({
-      doctrine: selectedDoctrine,
-      allDogsGoToHeaven,
-      dogGoodnessPercentage,
-      insideSavedPercentage,
-      outsideSavedPercentage,
-      edgeCases: edgeCaseValues
-    });
-    
-    setResults(newResults);
+      try {
+        const newResults = await calculateHeavenPopulation({
+          doctrine: selectedDoctrine,
+          allDogsGoToHeaven,
+          dogGoodnessPercentage,
+          insideSavedPercentage,
+          outsideSavedPercentage,
+          edgeCases: edgeCaseValues
+        });
+        
+        setResults(newResults);
+      } catch (error) {
+        console.error('Error calculating results:', error);
+        // You might want to show an error message to the user here
+      }
+    };
+
+    calculateResults();
   }, [
     selectedDoctrine,
     allDogsGoToHeaven,
