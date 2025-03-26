@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent } from "@/components/ui/card";
 import { formatNumber, formatNumberToReadable } from '@/utils/calculationLogic';
-import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
+import { ChartContainer } from '@/components/ui/chart';
 import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
 
@@ -12,6 +12,17 @@ interface PopulationChartProps {
   humanSouls: number;
   dogSouls: number;
 }
+
+const chartConfig = {
+  "🧑 Humans": {
+    label: "Humans",
+    color: "#3b82f6"
+  },
+  "🐶 Dogs": {
+    label: "Dogs",
+    color: "#eab308"
+  }
+};
 
 const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
   // Generate chart data based on current souls
@@ -26,8 +37,8 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
       
       return {
         year,
-        '🧑 Humans': Math.round(humanSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
-        '🐶 Dogs': Math.round(dogSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
+        "🧑 Humans": Math.round(humanSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
+        "🐶 Dogs": Math.round(dogSouls * (pastPercentage + (yearNum >= 2000 ? futurePercentage : 0))),
       };
     });
   };
@@ -50,7 +61,7 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
             </div>
           </div>
           <div className="relative h-[400px] w-full overflow-hidden">
-            <ResponsiveContainer width="100%" height="100%">
+            <ChartContainer config={chartConfig}>
               <BarChart
                 data={data}
                 margin={{ top: 20, right: 30, left: 30, bottom: 10 }}
@@ -61,13 +72,13 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
                   if (value >= 1000000000) return `${(value / 1000000000).toFixed(1)}B`;
                   if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
                   if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
-                  return value;
+                  return value.toString();
                 }} />
                 <Tooltip 
                   content={({ active, payload, label }) => {
                     if (active && payload && payload.length) {
-                      const humans = payload[0].value;
-                      const dogs = payload[1].value;
+                      const humans = Number(payload[0].value) || 0;
+                      const dogs = Number(payload[1].value) || 0;
                       const total = humans + dogs;
                       const dogPercentage = Math.round((dogs / total) * 100);
                       const humanPercentage = 100 - dogPercentage;
@@ -101,7 +112,7 @@ const PopulationChart = ({ humanSouls, dogSouls }: PopulationChartProps) => {
                 <Bar dataKey="🧑 Humans" stackId="a" fill="#3b82f6" />
                 <Bar dataKey="🐶 Dogs" stackId="a" fill="#eab308" />
               </BarChart>
-            </ResponsiveContainer>
+            </ChartContainer>
           </div>
         </div>
       </CardContent>

@@ -344,3 +344,5 @@ const MethodologySection = ({
     </section>
   );
 };
+
+export default MethodologySection;
