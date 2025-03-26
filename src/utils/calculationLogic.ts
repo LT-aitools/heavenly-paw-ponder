@@ -2,6 +2,7 @@ import { doctrines, Doctrine } from "@/data/doctrineData";
 import { supabase, BaseFigures } from "@/lib/supabase";
 
 interface CalculationParams {
+  currentYear: number;
   doctrine: Doctrine;
   allDogsGoToHeaven: boolean;
   dogGoodnessPercentage: number;
@@ -26,77 +27,33 @@ export interface CalculationResult {
 }
 
 // Function to fetch base figures from Supabase
-export async function getBaseFigures(year: number): Promise<BaseFigures | null> {
-  console.log('Fetching base figures for year:', year);
-  console.log('Using Supabase URL:', import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_URL);
-  
+export async function getBaseFigures(year: number): Promise<BaseFigures> {
   try {
-    // First try to get all rows to see if we can connect at all
-    const testQuery = await supabase
-      .from('base_figures')
-      .select('year')
-      .limit(1);
-    
-    console.log('Test query result:', testQuery);
-
-    if (testQuery.error) {
-      console.error('Test query failed:', testQuery.error);
-      return null;
-    }
-
-    // Now try the actual query
     const { data, error } = await supabase
       .from('base_figures')
       .select('id, year, humans, dogs, unbaptized_infants, never_heard, monotheists, atheists_polytheists, in_purgatory, catholic, protestant_evangelical, protestant_mainline, christian_orthodox, jew_orthodox, jew_reform, muslim_sunni, muslim_shia, universalist')
       .eq('year', year)
-      .maybeSingle();
+      .single();
 
     if (error) {
-      console.error('Error fetching base figures:', {
-        error,
-        year,
-        message: error.message,
-        details: error.details,
-        hint: error.hint
-      });
-      return null;
+      console.error('Error fetching base figures:', error);
+      throw new Error(`Failed to fetch data for year ${year}: ${error.message}`);
     }
 
     if (!data) {
-      console.log('No data found for year:', year, 'Using default values');
-      // Return default values if no data found
-      return {
-        id: 0,
-        year: year,
-        humans: 8000000000, // 8 billion default
-        dogs: 900000000, // 900 million default
-        unbaptized_infants: 100000000,
-        never_heard: 1000000000,
-        monotheists: 2000000000,
-        atheists_polytheists: 1000000000,
-        in_purgatory: 500000000,
-        catholic: 1200000000,
-        protestant_evangelical: 600000000,
-        protestant_mainline: 400000000,
-        christian_orthodox: 300000000,
-        jew_orthodox: 15000000,
-        jew_reform: 10000000,
-        muslim_sunni: 1500000000,
-        muslim_shia: 200000000,
-        universalist: 50000000
-      };
+      throw new Error(`No data found for year ${year}. Please ensure the database has entries for this year.`);
     }
 
-    console.log('Successfully fetched data for year:', year, data);
     return data;
-  } catch (e) {
-    console.error('Unexpected error fetching base figures:', e);
-    return null;
+  } catch (error) {
+    console.error('Error in getBaseFigures:', error);
+    throw error;
   }
 }
 
-export async function calculateHeavenPopulation(params: CalculationParams): Promise<CalculationResult> {
+export async function calculateSoulsInHeaven(params: CalculationParams): Promise<CalculationResult> {
   const {
+    currentYear,
     doctrine,
     allDogsGoToHeaven,
     dogGoodnessPercentage,
@@ -105,35 +62,62 @@ export async function calculateHeavenPopulation(params: CalculationParams): Prom
     edgeCases
   } = params;
 
-  // Get base figures from Supabase for current year
-  const currentYear = new Date().getFullYear();
-  const baseFigures = await getBaseFigures(2025); // Using 2025 as our future projection point
-  
-  if (!baseFigures) {
-    throw new Error('Could not fetch base figures from database');
-  }
-
-  // Calculate lifespan multipliers
-  const humanLifespanMultiplier = doctrine.humanLifespanMultiplier;
-  const dogLifespanMultiplier = doctrine.dogLifespanMultiplier;
-  const averageLifespanHumans = 72;
-  const averageLifespanDogs = 12;
+  const baseFigures = await getBaseFigures(currentYear);
 
   let humanSouls = 0;
+  const explanations: string[] = [];
 
   // 1. First calculate people in the religion who would be saved
-  const worldPopulation = baseFigures.humans;
-  const peopleInReligion = worldPopulation * (doctrine.percentageInsideDoctrine / 100);
-  const soulsSavedInReligion = peopleInReligion * (insideSavedPercentage / 100) * humanLifespanMultiplier / averageLifespanHumans;
+  let peopleInReligion = 0;
+  
+  // Use the correct column based on doctrine
+  switch (doctrine.id) {
+    case 'catholic':
+      peopleInReligion = baseFigures.catholic;
+      break;
+    case 'protestant_evangelical':
+      peopleInReligion = baseFigures.protestant_evangelical;
+      break;
+    case 'protestant_mainline':
+      peopleInReligion = baseFigures.protestant_mainline;
+      break;
+    case 'christian_orthodox':
+      peopleInReligion = baseFigures.christian_orthodox;
+      break;
+    case 'jew_orthodox':
+      peopleInReligion = baseFigures.jew_orthodox;
+      break;
+    case 'jew_reform':
+      peopleInReligion = baseFigures.jew_reform;
+      break;
+    case 'muslim_sunni':
+      peopleInReligion = baseFigures.muslim_sunni;
+      break;
+    case 'muslim_shia':
+      peopleInReligion = baseFigures.muslim_shia;
+      break;
+    case 'universalist':
+      peopleInReligion = baseFigures.universalist;
+      break;
+    default:
+      throw new Error(`Unknown doctrine: ${doctrine.id}`);
+  }
+
+  const soulsSavedInReligion = peopleInReligion * (insideSavedPercentage / 100);
   humanSouls += soulsSavedInReligion;
+
+  // Add the main religion calculation to explanations
+  explanations.push(`${doctrine.name}: ${formatNumber(peopleInReligion)} × ${insideSavedPercentage}% "Good" = ${formatNumber(soulsSavedInReligion)}`);
 
   // 2. For Catholics only, add unbaptized babies and purgatory if selected
   if (doctrine.id === 'catholic') {
     if (edgeCases.unbaptizedInfants) {
       humanSouls += baseFigures.unbaptized_infants;
+      explanations.push(`Unbaptized infants: ${formatNumber(baseFigures.unbaptized_infants)}`);
     }
     if (edgeCases.purgatory) {
       humanSouls += baseFigures.in_purgatory;
+      explanations.push(`Souls in Purgatory: ${formatNumber(baseFigures.in_purgatory)}`);
     }
   }
 
@@ -141,24 +125,34 @@ export async function calculateHeavenPopulation(params: CalculationParams): Prom
   let outsideReligionSouls = 0;
   
   if (edgeCases.neverHeard) {
-    outsideReligionSouls += baseFigures.never_heard;
+    const neverHeardSouls = baseFigures.never_heard * (outsideSavedPercentage / 100);
+    outsideReligionSouls += neverHeardSouls;
+    explanations.push(`People who never heard of the religion: ${formatNumber(baseFigures.never_heard)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(neverHeardSouls)}`);
   }
   if (edgeCases.otherMonotheists) {
-    outsideReligionSouls += baseFigures.monotheists;
+    const otherMonotheistSouls = baseFigures.monotheists * (outsideSavedPercentage / 100);
+    outsideReligionSouls += otherMonotheistSouls;
+    explanations.push(`Other monotheists: ${formatNumber(baseFigures.monotheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(otherMonotheistSouls)}`);
   }
   if (edgeCases.atheistsPolytheists) {
-    outsideReligionSouls += baseFigures.atheists_polytheists;
+    const atheistPolytheistSouls = baseFigures.atheists_polytheists * (outsideSavedPercentage / 100);
+    outsideReligionSouls += atheistPolytheistSouls;
+    explanations.push(`Atheists and Polytheists: ${formatNumber(baseFigures.atheists_polytheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(atheistPolytheistSouls)}`);
   }
 
-  // Apply outside religion percentage to the sum of all included outside groups
-  humanSouls += (outsideReligionSouls * (outsideSavedPercentage / 100) * humanLifespanMultiplier / averageLifespanHumans);
+  humanSouls += outsideReligionSouls;
+
+  // Add total humans
+  explanations.push(`Total human souls = ${formatNumber(humanSouls)}`);
 
   // Dog souls calculation
   let dogSouls = 0;
   if (allDogsGoToHeaven) {
     dogSouls = baseFigures.dogs;
+    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} (All dogs go to heaven)`);
   } else {
     dogSouls = baseFigures.dogs * (dogGoodnessPercentage / 100);
+    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} × ${dogGoodnessPercentage}% "Good" = ${formatNumber(dogSouls)}`);
   }
 
   // Determine if there are more dogs or humans
@@ -168,16 +162,6 @@ export async function calculateHeavenPopulation(params: CalculationParams): Prom
   } else if (humanSouls > dogSouls) {
     moreDogsOrHumans = 'humans';
   }
-
-  const explanations: string[] = [
-    `Based on ${currentYear} world population of ${formatNumber(worldPopulation)} and dog population of ${formatNumber(baseFigures.dogs)}.`,
-    `People in ${doctrine.name}: ${formatNumber(peopleInReligion)} (${doctrine.percentageInsideDoctrine}% of world population)`,
-    `Souls saved within ${doctrine.name}: ${formatNumber(soulsSavedInReligion)} (${insideSavedPercentage}% of followers)`,
-    `Outside religion souls considered: ${formatNumber(outsideReligionSouls)} (${outsideSavedPercentage}% saved)`,
-    `Average human lifespan: ${averageLifespanHumans} years, average dog lifespan: ${averageLifespanDogs} years.`,
-    `Human Lifespan Multiplier: ${humanLifespanMultiplier}, Dog Lifespan Multiplier: ${dogLifespanMultiplier}.`,
-    `All dogs go to heaven: ${allDogsGoToHeaven}, dog goodness percentage: ${dogGoodnessPercentage}%.`
-  ];
 
   const result: CalculationResult = {
     humanSouls,
