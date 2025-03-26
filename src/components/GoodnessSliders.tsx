@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Users, UserCheck } from "lucide-react";
@@ -41,14 +40,15 @@ const GoodnessSliders = ({
   const getReligionLabel = () => {
     switch (selectedDoctrine.id) {
       case 'catholic':
-      case 'evangelical':
-      case 'mainlineProtestant':
-      case 'orthodoxChristian':
+      case 'protestant_evangelical':
+      case 'protestant_mainline':
+      case 'christian_orthodox':
         return 'Christians';
-      case 'muslim':
+      case 'muslim_sunni':
+      case 'muslim_shia':
         return 'Muslims';
-      case 'judaismOrthodox':
-      case 'judaismReform':
+      case 'jew_orthodox':
+      case 'jew_reform':
         return 'Jews';
       default:
         return 'Religious Adherents';

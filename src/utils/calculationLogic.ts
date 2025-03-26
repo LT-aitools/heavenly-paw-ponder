@@ -124,6 +124,7 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
   // 3. For all religions, add other edge cases multiplied by outside-religion good percentage
   let outsideReligionSouls = 0;
   
+  // Calculate edge cases only if they're enabled
   if (edgeCases.neverHeard) {
     const neverHeardSouls = baseFigures.never_heard * (outsideSavedPercentage / 100);
     outsideReligionSouls += neverHeardSouls;
@@ -142,7 +143,7 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
 
   humanSouls += outsideReligionSouls;
 
-  // Add total humans
+  // Add total humans before dogs
   explanations.push(`Total human souls = ${formatNumber(humanSouls)}`);
 
   // Dog souls calculation

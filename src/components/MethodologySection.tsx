@@ -62,7 +62,11 @@ const MethodologySection = ({
     // 2. Edge cases - only show if they were an option for this doctrine
     if (selectedDoctrine.id === 'catholic') {
       const unbaptizedInfants = Math.round(parseInt(worldPopulation.replace(/,/g, '')) * 0.004); // 0.4% of world population
-      calculationText.push(`Unbaptized infants (${edgeCases.unbaptizedInfants ? 'included' : 'excluded'}): ${edgeCases.unbaptizedInfants ? formatNumber(unbaptizedInfants) : 'Zero'}`);
+      if (edgeCases.unbaptizedInfants) {
+        calculationText.push(`Unbaptized infants (included): ${formatNumber(unbaptizedInfants)}`);
+      } else {
+        calculationText.push(`Unbaptized infants (excluded): Zero`);
+      }
     }
     
     // Only show never heard if it was an option
@@ -98,7 +102,11 @@ const MethodologySection = ({
     // Only show purgatory for Catholic doctrine
     if (selectedDoctrine.id === 'catholic') {
       const purgatory = Math.round(parseInt(worldPopulation.replace(/,/g, '')) * 0.025); // 2.5% of world population
-      calculationText.push(`Those in Purgatory (${edgeCases.purgatory ? 'included' : 'excluded'}): ${edgeCases.purgatory ? formatNumber(purgatory) : 'Zero'}`);
+      if (edgeCases.purgatory) {
+        calculationText.push(`Those in Purgatory (included): ${formatNumber(purgatory)}`);
+      } else {
+        calculationText.push(`Those in Purgatory (excluded): Zero`);
+      }
     }
     
     // Add a separator before dog calculations

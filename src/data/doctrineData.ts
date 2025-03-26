@@ -33,21 +33,21 @@ export const edgeCases: EdgeCase[] = [
     label: 'People Who Never Heard Of the Religion',
     description: 'Those who lived without exposure to this religion',
     defaultValue: false,
-    applicableTo: ['catholic', 'mainlineProtestant', 'orthodoxChristian', 'muslim', 'judaismOrthodox', 'judaismReform'],
+    applicableTo: ['catholic', 'protestant_mainline', 'christian_orthodox', 'muslim_sunni', 'muslim_shia', 'jew_orthodox', 'jew_reform'],
   },
   {
     id: 'otherMonotheists',
     label: 'Other Monotheists with Good Morals',
     description: 'People of other monotheistic faiths who lived morally',
     defaultValue: false,
-    applicableTo: ['catholic', 'mainlineProtestant', 'orthodoxChristian', 'muslim', 'judaismOrthodox', 'judaismReform'],
+    applicableTo: ['catholic', 'protestant_mainline', 'christian_orthodox', 'muslim_sunni', 'muslim_shia', 'jew_orthodox', 'jew_reform'],
   },
   {
     id: 'atheistsPolytheists',
     label: 'Atheists / Polytheists with Good Morals',
     description: 'Non-believers or those of polytheistic faiths who lived morally',
     defaultValue: false, 
-    applicableTo: ['catholic', 'mainlineProtestant', 'orthodoxChristian', 'muslim', 'judaismOrthodox', 'judaismReform'],
+    applicableTo: ['catholic', 'protestant_mainline', 'christian_orthodox', 'muslim_sunni', 'muslim_shia', 'jew_orthodox', 'jew_reform'],
   },
   {
     id: 'purgatory',
@@ -79,7 +79,7 @@ export const doctrines: Doctrine[] = [
     percentageInsideDoctrine: 25
   },
   {
-    id: 'evangelical',
+    id: 'protestant_evangelical',
     name: 'Christianity (Protestant – Evangelical)',
     description: 'Evangelical Protestant view of salvation through faith alone',
     defaultInsideSavedPercentage: 80,
@@ -98,7 +98,7 @@ export const doctrines: Doctrine[] = [
     percentageInsideDoctrine: 15
   },
   {
-    id: 'mainlineProtestant',
+    id: 'protestant_mainline',
     name: 'Christianity (Protestant – Mainline)',
     description: 'Mainline Protestant theology with broader salvation possibilities',
     defaultInsideSavedPercentage: 85,
@@ -117,7 +117,7 @@ export const doctrines: Doctrine[] = [
     percentageInsideDoctrine: 10
   },
   {
-    id: 'orthodoxChristian',
+    id: 'christian_orthodox',
     name: 'Christianity (Orthodox)',
     description: 'Eastern Orthodox understanding of salvation',
     defaultInsideSavedPercentage: 80,
@@ -136,8 +136,8 @@ export const doctrines: Doctrine[] = [
     percentageInsideDoctrine: 10
   },
   {
-    id: 'muslim',
-    name: 'Islam (Sunni/Shia)',
+    id: 'muslim_sunni',
+    name: 'Islam (Sunni)',
     description: 'Islamic theology regarding paradise',
     defaultInsideSavedPercentage: 85,
     defaultOutsideSavedPercentage: 20,
@@ -155,7 +155,26 @@ export const doctrines: Doctrine[] = [
     percentageInsideDoctrine: 20
   },
   {
-    id: 'judaismOrthodox',
+    id: 'muslim_shia',
+    name: 'Islam (Shia)',
+    description: 'Islamic theology regarding paradise',
+    defaultInsideSavedPercentage: 85,
+    defaultOutsideSavedPercentage: 20,
+    edgeCases: {
+      unbaptizedInfants: true,
+      neverHeard: true,
+      otherMonotheists: false,
+      atheistsPolytheists: false,
+      purgatory: false
+    },
+    supportsPurgatory: false,
+    includesAnimals: false,
+    humanLifespanMultiplier: 6000,
+    dogLifespanMultiplier: 3000,
+    percentageInsideDoctrine: 20
+  },
+  {
+    id: 'jew_orthodox',
     name: 'Judaism (Orthodox)',
     description: 'Orthodox Jewish views on afterlife',
     defaultInsideSavedPercentage: 90,
@@ -174,7 +193,7 @@ export const doctrines: Doctrine[] = [
     percentageInsideDoctrine: 0.2
   },
   {
-    id: 'judaismReform',
+    id: 'jew_reform',
     name: 'Judaism (Reform)',
     description: 'Reform Jewish perspective on afterlife',
     defaultInsideSavedPercentage: 95,
