@@ -39,7 +39,12 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
   // Update edge cases when doctrine changes
   useEffect(() => {
     if (selectedDoctrine) {
-      setEdgeCaseValues(selectedDoctrine.edgeCases);
+      // Initialize edge cases as an object with false values
+      const initialEdgeCases: Record<string, boolean> = {};
+      selectedDoctrine.edgeCases.forEach(edgeCase => {
+        initialEdgeCases[edgeCase.id] = false;
+      });
+      setEdgeCaseValues(initialEdgeCases);
       setInsideSavedPercentage(selectedDoctrine.defaultInsideSavedPercentage);
       setOutsideSavedPercentage(selectedDoctrine.defaultOutsideSavedPercentage);
     } else {
@@ -85,10 +90,12 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
     
     if (!selectedDoctrine) {
       errors['doctrine-selector'] = true;
+      setValidationErrors(errors);
+      return false;
     }
     
-    if (selectedDoctrine) {
-      // Check if any required edge cases are not set
+    // Check if any required edge cases are not set
+    if (selectedDoctrine.edgeCases && Array.isArray(selectedDoctrine.edgeCases)) {
       selectedDoctrine.edgeCases.forEach(edgeCase => {
         if (edgeCase.required && !edgeCaseValues[edgeCase.id]) {
           errors[`edge-case-${edgeCase.id}`] = true;
@@ -181,7 +188,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
         <div className="flex justify-center pt-6">
           <Button 
             onClick={handleRunCensus} 
-            className={`px-8 py-6 text-lg font-medium rounded-full shadow-elevated transition-all
+            className={`px-8 py-6 text-lg font-medium rounded-full shadow-elevated transition-all text-white
               ${Object.keys(validationErrors).length > 0 
                 ? 'bg-heaven-contrast/50 cursor-not-allowed' 
                 : 'bg-heaven-contrast hover:bg-heaven-contrast/90'}`}
