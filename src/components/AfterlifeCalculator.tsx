@@ -125,12 +125,32 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
     onRunCensus(results);
   };
 
+  // Clear validation errors when selections change
+  const handleDoctrineChange = (doctrine: Doctrine | null) => {
+    setSelectedDoctrine(doctrine);
+    // Clear validation errors when doctrine changes
+    setValidationErrors({});
+  };
+
+  const handleEdgeCaseChange = (values: Record<string, boolean>) => {
+    setEdgeCaseValues(values);
+    // Clear validation errors when edge case changes
+    setValidationErrors(prev => {
+      const newErrors = { ...prev };
+      // Remove errors for any edge cases that are now set
+      Object.keys(values).forEach(id => {
+        delete newErrors[`edge-case-${id}`];
+      });
+      return newErrors;
+    });
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto space-y-12">
       <div className="grid grid-cols-1 gap-12">
         <DoctrineSelector
           selectedDoctrine={selectedDoctrine}
-          setSelectedDoctrine={setSelectedDoctrine}
+          setSelectedDoctrine={handleDoctrineChange}
           allDogsGoToHeaven={allDogsGoToHeaven}
           setAllDogsGoToHeaven={setAllDogsGoToHeaven}
           dogGoodnessPercentage={dogGoodnessPercentage}
@@ -143,7 +163,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
             <EdgeCasesSection
               selectedDoctrine={selectedDoctrine}
               edgeCaseValues={edgeCaseValues}
-              setEdgeCaseValues={setEdgeCaseValues}
+              setEdgeCaseValues={handleEdgeCaseChange}
               validationErrors={validationErrors}
             />
             
@@ -161,7 +181,11 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
         <div className="flex justify-center pt-6">
           <Button 
             onClick={handleRunCensus} 
-            className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
+            className={`px-8 py-6 text-lg font-medium rounded-full shadow-elevated transition-all
+              ${Object.keys(validationErrors).length > 0 
+                ? 'bg-heaven-contrast/50 cursor-not-allowed' 
+                : 'bg-heaven-contrast hover:bg-heaven-contrast/90'}`}
+            disabled={Object.keys(validationErrors).length > 0}
           >
             <span>Run My Heaven Census</span>
             <ArrowRight className="ml-2 h-5 w-5" />
