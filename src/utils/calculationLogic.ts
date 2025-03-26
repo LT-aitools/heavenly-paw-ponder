@@ -1,4 +1,4 @@
-import { doctrines, Doctrine } from "@/data/doctrineData";
+import { doctrines, Doctrine, historicalData } from "@/data/doctrineData";
 import { supabase, BaseFigures } from "@/lib/supabase";
 
 interface CalculationParams {
@@ -62,6 +62,7 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
     edgeCases
   } = params;
 
+  // Get base figures from Supabase - no fallback
   const baseFigures = await getBaseFigures(currentYear);
 
   let humanSouls = 0;
@@ -128,32 +129,32 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
   if (edgeCases.neverHeard) {
     const neverHeardSouls = baseFigures.never_heard * (outsideSavedPercentage / 100);
     outsideReligionSouls += neverHeardSouls;
-    explanations.push(`People who never heard of the religion: ${formatNumber(baseFigures.never_heard)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(neverHeardSouls)}`);
+    explanations.push(`People who never heard of the religion (included): ${formatNumber(baseFigures.never_heard)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(neverHeardSouls)}`);
   }
   if (edgeCases.otherMonotheists) {
     const otherMonotheistSouls = baseFigures.monotheists * (outsideSavedPercentage / 100);
     outsideReligionSouls += otherMonotheistSouls;
-    explanations.push(`Other monotheists: ${formatNumber(baseFigures.monotheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(otherMonotheistSouls)}`);
+    explanations.push(`Other monotheists (included): ${formatNumber(baseFigures.monotheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(otherMonotheistSouls)}`);
   }
   if (edgeCases.atheistsPolytheists) {
     const atheistPolytheistSouls = baseFigures.atheists_polytheists * (outsideSavedPercentage / 100);
     outsideReligionSouls += atheistPolytheistSouls;
-    explanations.push(`Atheists and Polytheists: ${formatNumber(baseFigures.atheists_polytheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(atheistPolytheistSouls)}`);
+    explanations.push(`Atheists or Polytheists (everyone else) (included): ${formatNumber(baseFigures.atheists_polytheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(atheistPolytheistSouls)}`);
   }
 
   humanSouls += outsideReligionSouls;
 
   // Add total humans before dogs
-  explanations.push(`Total human souls = ${formatNumber(humanSouls)}`);
+  explanations.push(`Total human souls = ${formatNumberToReadable(humanSouls)}`);
 
   // Dog souls calculation
   let dogSouls = 0;
   if (allDogsGoToHeaven) {
     dogSouls = baseFigures.dogs;
-    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} (All dogs go to heaven)`);
+    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} (All dogs go to heaven) = ${formatNumberToReadable(dogSouls)}`);
   } else {
     dogSouls = baseFigures.dogs * (dogGoodnessPercentage / 100);
-    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} × ${dogGoodnessPercentage}% "Good" = ${formatNumber(dogSouls)}`);
+    explanations.push(`Dogs: ${formatNumber(baseFigures.dogs)} × ${dogGoodnessPercentage}% "Good" = ${formatNumberToReadable(dogSouls)}`);
   }
 
   // Determine if there are more dogs or humans
