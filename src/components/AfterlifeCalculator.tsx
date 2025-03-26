@@ -37,12 +37,8 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
   // Update edge cases when doctrine changes
   useEffect(() => {
     if (selectedDoctrine) {
-      // Initialize edge cases as an object with false values
-      const initialEdgeCases: Record<string, boolean> = {};
-      selectedDoctrine.edgeCases.forEach(edgeCase => {
-        initialEdgeCases[edgeCase.id] = false;
-      });
-      setEdgeCaseValues(initialEdgeCases);
+      // Initialize edge cases from the selected doctrine's default values
+      setEdgeCaseValues(selectedDoctrine.edgeCases);
       setInsideSavedPercentage(selectedDoctrine.defaultInsideSavedPercentage);
       setOutsideSavedPercentage(selectedDoctrine.defaultOutsideSavedPercentage);
     } else {
