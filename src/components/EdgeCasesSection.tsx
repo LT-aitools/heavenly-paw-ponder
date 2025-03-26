@@ -9,12 +9,14 @@ interface EdgeCasesSectionProps {
   selectedDoctrine: Doctrine;
   edgeCaseValues: Record<string, boolean>;
   setEdgeCaseValues: (values: Record<string, boolean>) => void;
+  validationErrors?: Record<string, boolean>;
 }
 
 const EdgeCasesSection = ({
   selectedDoctrine,
   edgeCaseValues,
-  setEdgeCaseValues
+  setEdgeCaseValues,
+  validationErrors
 }: EdgeCasesSectionProps) => {
   // Filter edge cases applicable to the selected doctrine
   const applicableEdgeCases = allEdgeCases.filter(ec => 
@@ -35,37 +37,37 @@ const EdgeCasesSection = ({
   };
 
   return (
-    <section className="animate-fade-in space-y-6">
-      <div className="flex items-center">
-        <Sparkles className="mr-2 h-5 w-5 text-primary" />
-        <h2 className="text-xl font-medium">Edge Cases & Exceptions</h2>
-      </div>
-
-      {/* Main Edge Cases */}
+    <section className="space-y-6">
       {applicableEdgeCases.length > 0 && (
-        <Card className="glass-card">
-          <CardContent className="p-4">
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground mb-4">
-                Are the following groups allowed into heaven?
-              </p>
-              
-              {applicableEdgeCases.map((edgeCase) => (
-                <div key={edgeCase.id} className="flex justify-between items-center">
-                  <Label htmlFor={`edge-case-${edgeCase.id}`} className="cursor-pointer">
-                    {edgeCase.label}
-                  </Label>
-                  <Switch
-                    id={`edge-case-${edgeCase.id}`}
-                    checked={edgeCaseValues[edgeCase.id] || false}
-                    onCheckedChange={(checked) => handleEdgeCaseChange(edgeCase.id, checked)}
-                  />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold tracking-tight">Edge Cases & Exceptions</h2>
+          <p className="text-muted-foreground">
+            Special cases that might affect your afterlife destination
+          </p>
+        </div>
       )}
+      <div className="grid gap-4">
+        {applicableEdgeCases.map((edgeCase) => (
+          <Card 
+            key={edgeCase.id} 
+            className={`glass-card ${validationErrors?.[`edge-case-${edgeCase.id}`] ? 'border-red-500' : ''}`}
+            id={`edge-case-${edgeCase.id}`}
+          >
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium leading-none">{edgeCase.label}</p>
+                <Switch
+                  checked={edgeCaseValues[edgeCase.id] || false}
+                  onCheckedChange={(checked) => handleEdgeCaseChange(edgeCase.id, checked)}
+                />
+              </div>
+              {validationErrors?.[`edge-case-${edgeCase.id}`] && (
+                <p className="text-sm text-red-500 mt-2">This field is required</p>
+              )}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
       {/* Purgatory Section */}
       {purgatoryCase && selectedDoctrine.supportsPurgatory && (

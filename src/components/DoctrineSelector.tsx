@@ -13,6 +13,7 @@ interface DoctrineSelectorProps {
   setAllDogsGoToHeaven: (value: boolean) => void;
   dogGoodnessPercentage: number;
   setDogGoodnessPercentage: (value: number) => void;
+  hasError?: boolean;
 }
 
 const DoctrineSelector = ({
@@ -21,7 +22,8 @@ const DoctrineSelector = ({
   allDogsGoToHeaven,
   setAllDogsGoToHeaven,
   dogGoodnessPercentage,
-  setDogGoodnessPercentage
+  setDogGoodnessPercentage,
+  hasError
 }: DoctrineSelectorProps) => {
   return (
     <div className="space-y-12 animate-fade-in">
@@ -34,7 +36,7 @@ const DoctrineSelector = ({
           Select a religious doctrine to calculate its heaven's population
         </p>
         
-        <Card className="glass-card overflow-hidden">
+        <Card className={`glass-card overflow-hidden ${hasError ? 'border-red-500' : ''}`}>
           <CardContent className="p-4">
             <Select 
               value={selectedDoctrine?.id || ""}
@@ -47,7 +49,7 @@ const DoctrineSelector = ({
                 }
               }}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger className={`w-full ${hasError ? 'border-red-500' : ''}`}>
                 <SelectValue placeholder="Select a doctrine" />
               </SelectTrigger>
               <SelectContent>
@@ -58,6 +60,9 @@ const DoctrineSelector = ({
                 ))}
               </SelectContent>
             </Select>
+            {hasError && (
+              <p className="text-sm text-red-500 mt-2">Please select a doctrine</p>
+            )}
           </CardContent>
         </Card>
       </section>

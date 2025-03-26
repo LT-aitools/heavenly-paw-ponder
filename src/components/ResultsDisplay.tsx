@@ -1,6 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculationResult, formatNumber } from "@/utils/calculationLogic";
 import { Sparkles, Users, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { RotateCcw } from "lucide-react";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
 interface ResultsDisplayProps {
   results: CalculationResult;
@@ -65,6 +68,60 @@ const ResultsDisplay = ({ results }: ResultsDisplayProps) => {
           </CardContent>
         </Card>
       </div>
+
+      <Card className="glass-card">
+        <CardContent className="p-4">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold tracking-tight">Population Distribution</h2>
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-muted-foreground">Total: {totalPopulation.toLocaleString()}</span>
+                <Button variant="outline" size="sm" onClick={handleReset}>
+                  <RotateCcw className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+            <div className="relative h-[400px] w-full overflow-hidden">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={data}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {data.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Legend
+                    verticalAlign="bottom"
+                    height={36}
+                    content={({ payload }) => (
+                      <div className="flex flex-wrap justify-center gap-4 pt-4">
+                        {payload?.map((entry, index) => (
+                          <div key={`item-${index}`} className="flex items-center space-x-2">
+                            <div
+                              className="h-3 w-3 rounded-full"
+                              style={{ backgroundColor: entry.color }}
+                            />
+                            <span className="text-sm text-muted-foreground">
+                              {entry.value}: {((entry.payload.value / totalPopulation) * 100).toFixed(1)}%
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

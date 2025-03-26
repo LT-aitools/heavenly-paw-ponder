@@ -34,6 +34,8 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
     explanations: []
   });
 
+  const [validationErrors, setValidationErrors] = useState<Record<string, boolean>>({});
+
   // Update edge cases when doctrine changes
   useEffect(() => {
     if (selectedDoctrine) {
@@ -78,9 +80,44 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
     edgeCaseValues
   ]);
 
+  const validateInputs = () => {
+    const errors: Record<string, boolean> = {};
+    
+    if (!selectedDoctrine) {
+      errors['doctrine-selector'] = true;
+    }
+    
+    if (selectedDoctrine) {
+      // Check if any required edge cases are not set
+      selectedDoctrine.edgeCases.forEach(edgeCase => {
+        if (edgeCase.required && !edgeCaseValues[edgeCase.id]) {
+          errors[`edge-case-${edgeCase.id}`] = true;
+        }
+      });
+    }
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const scrollToFirstError = () => {
+    // Find the first error element
+    const firstErrorId = Object.keys(validationErrors)[0];
+    if (firstErrorId) {
+      const element = document.getElementById(firstErrorId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  };
+
   const handleRunCensus = () => {
-    if (!selectedDoctrine) return;
-    onRunCensus(results);
+    if (validateInputs()) {
+      onRunCensus(results);
+    } else {
+      // Show all errors but scroll to first one
+      scrollToFirstError();
+    }
   };
 
   return (
@@ -93,6 +130,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
           setAllDogsGoToHeaven={setAllDogsGoToHeaven}
           dogGoodnessPercentage={dogGoodnessPercentage}
           setDogGoodnessPercentage={setDogGoodnessPercentage}
+          hasError={validationErrors['doctrine-selector']}
         />
         
         {selectedDoctrine && (
@@ -101,6 +139,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
               selectedDoctrine={selectedDoctrine}
               edgeCaseValues={edgeCaseValues}
               setEdgeCaseValues={setEdgeCaseValues}
+              validationErrors={validationErrors}
             />
             
             <GoodnessSliders
