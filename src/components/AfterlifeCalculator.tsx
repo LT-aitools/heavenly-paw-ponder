@@ -3,7 +3,7 @@ import { doctrines, Doctrine } from '@/data/doctrineData';
 import DoctrineSelector from './DoctrineSelector';
 import EdgeCasesSection from './EdgeCasesSection';
 import GoodnessSliders from './GoodnessSliders';
-import { calculateHeavenPopulation, CalculationResult } from '@/utils/calculationLogic';
+import { calculateSoulsInHeaven, CalculationResult } from '@/utils/calculationLogic';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
@@ -62,8 +62,9 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
       }
 
       try {
-        const newResults = await calculateHeavenPopulation({
+        const newResults = await calculateSoulsInHeaven({
           doctrine: selectedDoctrine,
+          currentYear: 2025,
           allDogsGoToHeaven,
           dogGoodnessPercentage,
           insideSavedPercentage,

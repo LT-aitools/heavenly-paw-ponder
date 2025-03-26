@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import ResultsDisplay from './ResultsDisplay';
 import MethodologySection from './MethodologySection';
-import PopulationChart from './PopulationChart';
 import ShareButton from './ShareButton';
 import { CalculationResult } from '@/utils/calculationLogic';
 import { Button } from '@/components/ui/button';
@@ -14,46 +13,37 @@ interface ResultsScreenProps {
 }
 
 const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
-  const [animationComplete, setAnimationComplete] = useState(false);
-
-  useEffect(() => {
-    // Set a timeout to complete the animation after 3 seconds
-    const timer = setTimeout(() => {
-      setAnimationComplete(true);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const [showMethodology, setShowMethodology] = useState(false);
 
   return (
-    <div className="flex-grow py-12 md:py-20 px-4 md:px-6 relative">
-      {/* Cloud reveal animation */}
-      <div className={`cloud-reveal-animation ${animationComplete ? 'complete' : ''}`}>
-        <div className="cloud-left"></div>
-        <div className="cloud-right"></div>
-      </div>
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className="space-y-8">
+        <div className="flex justify-between items-center">
+          <Button
+            variant="outline"
+            onClick={onTryAgain}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Try Different Parameters
+          </Button>
+          <ShareButton results={results} />
+        </div>
 
-      {/* Results content */}
-      <div className={`w-full max-w-4xl mx-auto space-y-10 transition-opacity duration-500 ${animationComplete ? 'opacity-100' : 'opacity-0'}`}>
-        <ResultsDisplay results={results} />
-        
-        {/* Separator after results display */}
-        <div className="pt-4">
-          <Separator className="bg-heaven-mediumBlue opacity-50" />
+        <ResultsDisplay results={results} onReset={onTryAgain} />
+
+        <Separator />
+
+        <div className="text-center">
+          <Button
+            variant="outline"
+            onClick={() => setShowMethodology(!showMethodology)}
+          >
+            {showMethodology ? 'Hide' : 'Show'} Methodology
+          </Button>
         </div>
-        
-        <div className="grid grid-cols-1 gap-6 pt-4">
-          {/* Population Chart - V1 Feature */}
-          <div className="relative z-10">
-            <PopulationChart 
-              humanSouls={results.humanSouls} 
-              dogSouls={results.dogSouls} 
-            />
-          </div>
-        </div>
-        
-        {/* Methodology section */}
-        <div className="relative z-0">
+
+        {showMethodology && (
           <MethodologySection
             results={results}
             selectedDoctrine={results.doctrine!}
@@ -63,21 +53,7 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
             outsideSavedPercentage={results.outsideSavedPercentage!}
             edgeCases={results.edgeCases!}
           />
-        </div>
-        
-        {/* Try Again and Share buttons with smaller size */}
-        <div className="flex justify-center gap-4 flex-wrap pt-8">
-          <Button 
-            onClick={onTryAgain} 
-            className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
-          >
-            <ArrowLeft className="mr-2 h-5 w-5" />
-            <span>Try Again</span>
-          </Button>
-          
-          {/* Share Button - V1 Feature - now using the same styling as Try Again but smaller */}
-          <ShareButton results={results} />
-        </div>
+        )}
       </div>
     </div>
   );
