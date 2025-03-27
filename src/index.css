@@ -64,7 +64,8 @@
   }
 
   .heaven-gradient {
-    background: linear-gradient(135deg, #E3F2FD, #BBDEFB, #90CAF9);
+    background: linear-gradient(135deg, #1E3A8A, #2563EB, #3B82F6);
+    color: white;
   }
 
   /* Cloud styles for header */

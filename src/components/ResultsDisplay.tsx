@@ -51,10 +51,10 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
         <div 
           className={`text-5xl md:text-6xl font-bold mt-6 mb-12 transition-all duration-500 ${
             moreDogsOrHumans === 'dogs' 
-              ? 'text-heaven-contrast' 
+              ? 'text-white' 
               : moreDogsOrHumans === 'humans' 
-                ? 'text-primary' 
-                : 'text-muted-foreground'
+                ? 'text-white' 
+                : 'text-white'
           }`}
         >
           {moreDogsOrHumans === 'equal' 
@@ -158,8 +158,8 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                     }}
                   />
                   <Legend />
-                  <Bar dataKey="🧑 Humans" stackId="a" fill="#3b82f6" />
-                  <Bar dataKey="🐶 Dogs" stackId="a" fill="#eab308" />
+                  <Bar dataKey="🧑 Humans" stackId="a" fill="#FFFFFF" />
+                  <Bar dataKey="🐶 Dogs" stackId="a" fill="#FFFFFF" />
                 </BarChart>
               </ResponsiveContainer>
             </div>

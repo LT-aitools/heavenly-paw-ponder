@@ -4,32 +4,30 @@ import { Share } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 interface ShareButtonProps {
-  results: {
-    humanSouls: number;
-    dogSouls: number;
-    moreDogsOrHumans: 'dogs' | 'humans' | 'equal';
-  };
+  doctrine: string;
+  totalSouls: number;
+  humanSouls: number;
+  dogSouls: number;
 }
 
-const ShareButton = ({ results }: ShareButtonProps) => {
+export function ShareButton({
+  doctrine,
+  totalSouls,
+  humanSouls,
+  dogSouls,
+}: ShareButtonProps) {
   const [isSharing, setIsSharing] = useState(false);
 
   const handleShare = async () => {
     setIsSharing(true);
     
-    const message = `I just ran the Heaven Census! In heaven, there are more ${
-      results.moreDogsOrHumans === 'dogs' 
-        ? 'dogs'
-        : results.moreDogsOrHumans === 'humans'
-          ? 'humans'
-          : 'equal numbers of dogs and humans'
-    }. Check it out yourself!`;
+    const shareText = `Check out my results from The Great Heaven Census! According to my selected doctrine (${doctrine}), ${totalSouls.toLocaleString()} souls are in heaven, including ${humanSouls.toLocaleString()} humans and ${dogSouls.toLocaleString()} dogs.`;
     
     try {
       if (navigator.share) {
         await navigator.share({
-          title: 'Population of Heaven',
-          text: message,
+          title: "The Great Heaven Census Results",
+          text: shareText,
           url: window.location.href,
         });
         toast({
@@ -38,7 +36,7 @@ const ShareButton = ({ results }: ShareButtonProps) => {
         });
       } else {
         // Fallback for browsers that don't support the Web Share API
-        await navigator.clipboard.writeText(`${message} ${window.location.href}`);
+        await navigator.clipboard.writeText(shareText);
         toast({
           title: "Copied to clipboard!",
           description: "Share link has been copied to your clipboard.",
@@ -66,6 +64,4 @@ const ShareButton = ({ results }: ShareButtonProps) => {
       <span>Share My Heaven Census</span>
     </Button>
   );
-};
-
-export default ShareButton;
+}
