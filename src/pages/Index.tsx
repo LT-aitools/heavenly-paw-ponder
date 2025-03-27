@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import AfterlifeCalculator from '@/components/AfterlifeCalculator';
 import ResultsScreen from '@/components/ResultsScreen';
@@ -93,9 +92,6 @@ const Index = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair leading-tight mb-6 animate-fade-in">
                 The Great Heaven Census
               </h1>
-              <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto animate-slide-up [text-shadow:_0_0_8px_rgba(255,255,255,0.3)]">
-                Ever wondered if there are more dogs or humans in the afterlife? Now you can find out.
-              </p>
             </div>
           </div>
 

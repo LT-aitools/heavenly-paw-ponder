@@ -33,7 +33,7 @@ const DoctrineSelector = ({
           <h2 className="text-xl font-medium text-blue-500">1. Choose Your Afterlife Doctrine</h2>
         </div>
         <p className="text-muted-foreground mb-4">
-          Select a religious doctrine to calculate its heaven's population
+          Pick a religious framework to shape the main rules for entry. 
         </p>
         
         <Card className={`glass-card overflow-hidden ${hasError ? 'border-red-500' : ''}`}>
@@ -72,7 +72,9 @@ const DoctrineSelector = ({
           <Heart className="mr-2 h-5 w-5 text-blue-500" />
           <h2 className="text-xl font-medium text-blue-500">2. ...And Your Dogtrine</h2>
         </div>
-        
+           <p className="text-muted-foreground mb-4">
+          What’s your position on pups?  
+         </p>
         <Card className="glass-card overflow-hidden">
           <CardContent className="p-4">
             <RadioGroup 
