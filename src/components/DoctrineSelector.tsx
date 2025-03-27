@@ -32,7 +32,7 @@ const DoctrineSelector = ({
           <Church className="mr-2 h-5 w-5 text-blue-500" />
           <h2 className="text-xl font-medium text-blue-500">1. Choose Your Afterlife Doctrine</h2>
         </div>
-        <div className="mb-6">
+        <div className="mb-2">
           <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
             Pick a religious framework to shape the main rules for entry. 
           </p>
@@ -74,7 +74,7 @@ const DoctrineSelector = ({
           <Heart className="mr-2 h-5 w-5 text-blue-500" />
           <h2 className="text-xl font-medium text-blue-500">2. ...And Your Dogtrine</h2>
         </div>
-        <div className="mb-6">
+        <div className="mb-2">
           <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
             What's your position on pups?  
           </p>

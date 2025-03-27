@@ -61,7 +61,7 @@ const GoodnessSliders = ({
         <UserCheck className="mr-2 h-5 w-5 text-blue-500" />
         <h2 className="text-xl font-medium text-blue-500">4. Estimate Who's Good 😇</h2>
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
           Not everyone gets a halo. Who's actually well-behaved?
         </p>
