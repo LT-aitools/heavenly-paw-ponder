@@ -27,18 +27,20 @@ const DoctrineSelector = ({
 }: DoctrineSelectorProps) => {
   return (
     <div className="space-y-12 animate-fade-in">
-      <section>
-        <div className="mb-2 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
-          <Church className="mr-2 h-5 w-5 text-blue-500" />
-          <h2 className="text-xl font-medium text-blue-500">1. Choose Your Afterlife Doctrine</h2>
-        </div>
-        <div className="mb-2">
-          <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
-            Pick a religious framework to shape the main rules for entry. 
-          </p>
+      <section className="relative">
+        <div className="absolute -left-4 -right-20 z-0">
+          <div className="mb-2 inline-flex items-center bg-blue-50 px-3 py-3 rounded-lg backdrop-blur-sm">
+            <Church className="mr-2 h-5 w-5 text-blue-500" />
+            <h2 className="text-xl font-medium text-blue-500">1. Choose Your Afterlife Doctrine</h2>
+          </div>
+          <div className="mb-2">
+            <p className="text-muted-foreground inline-block bg-blue-50 px-2 py-1 rounded-md">
+              Pick a religious framework to shape the main rules for entry. 
+            </p>
+          </div>
         </div>
         
-        <Card className={`glass-card overflow-hidden ${hasError ? 'border-red-500' : ''}`}>
+        <Card className={`glass-card overflow-hidden relative z-10 mt-20 ${hasError ? 'border-red-500' : ''}`}>
           <CardContent className="p-4">
             <Select 
               value={selectedDoctrine?.id || ""}
@@ -69,17 +71,20 @@ const DoctrineSelector = ({
         </Card>
       </section>
 
-      <section>
-        <div className="mb-2 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
-          <Heart className="mr-2 h-5 w-5 text-blue-500" />
-          <h2 className="text-xl font-medium text-blue-500">2. ...And Your Dogtrine</h2>
+      <section className="relative">
+        <div className="absolute -left-4 -right-20 z-0">
+          <div className="mb-2 inline-flex items-center bg-blue-50 px-3 py-3 rounded-lg backdrop-blur-sm">
+            <Heart className="mr-2 h-5 w-5 text-blue-500" />
+            <h2 className="text-xl font-medium text-blue-500">2. ...And Your Dogtrine</h2>
+          </div>
+          <div className="mb-2">
+            <p className="text-muted-foreground inline-block bg-blue-50 px-2 py-1 rounded-md">
+              What's your position on pups?  
+            </p>
+          </div>
         </div>
-        <div className="mb-2">
-          <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
-            What's your position on pups?  
-          </p>
-        </div>
-        <Card className="glass-card overflow-hidden">
+        
+        <Card className="glass-card overflow-hidden relative z-10 mt-20">
           <CardContent className="p-4">
             <RadioGroup 
               value={allDogsGoToHeaven ? 'allDogsGood' : 'someDogsGood'}
