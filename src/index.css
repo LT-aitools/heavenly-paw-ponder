@@ -50,7 +50,7 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    background-image: linear-gradient(to bottom, #E3F2FD, #BBDEFB, #BBDEFB, #E3F2FD);
+    background-image: linear-gradient(to bottom, #BBDEFB, #BBDEFB, #E3F2FD, #E3F2FD);
     background-attachment: fixed;
   }
 
@@ -83,8 +83,10 @@
   /* Floating icon styles */
   .floating-icon {
     position: absolute;
-    opacity: 0.8;
-    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.5));
+    opacity: 0.4;
+    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.3));
+    color: #3B82F6; /* Medium blue color */
+    z-index: -1;
   }
 
   .floating-person {
@@ -97,6 +99,49 @@
     top: 40%;
     right: 15%;
     animation: float 8s ease-in-out infinite reverse;
+  }
+
+  /* Additional floating icons */
+  .floating-person-2 {
+    top: 65%;
+    left: 25%;
+    animation: float 7s ease-in-out infinite;
+    transform: scale(0.8);
+  }
+
+  .floating-dog-2 {
+    top: 80%;
+    right: 30%;
+    animation: float 9s ease-in-out infinite reverse;
+    transform: scale(0.7);
+  }
+
+  .floating-person-3 {
+    top: 45%;
+    left: 75%;
+    animation: float 8.5s ease-in-out infinite;
+    transform: scale(0.9);
+  }
+
+  .floating-dog-3 {
+    top: 15%;
+    right: 60%;
+    animation: float 7.5s ease-in-out infinite reverse;
+    transform: scale(0.85);
+  }
+
+  .floating-person-4 {
+    top: 90%;
+    left: 45%;
+    animation: float 6.5s ease-in-out infinite;
+    transform: scale(0.75);
+  }
+
+  .floating-dog-4 {
+    top: 55%;
+    right: 5%;
+    animation: float 8.2s ease-in-out infinite reverse;
+    transform: scale(0.9);
   }
 
   /* Heaven Gates Animation */

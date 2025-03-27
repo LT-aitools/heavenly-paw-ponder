@@ -61,9 +61,9 @@ const GoodnessSliders = ({
         <UserCheck className="mr-2 h-5 w-5 text-blue-500" />
         <h2 className="text-xl font-medium text-blue-500">4. Estimate Who's Good 😇</h2>
       </div>
-          <p className="text-muted-foreground mb-4">
-          Not everyone gets a halo. Who’s actually well-behaved?
-        </p>
+      <p className="text-muted-foreground mb-4">
+        Not everyone gets a halo. Who's actually well-behaved?
+      </p>
       
       <Card className="glass-card-whimsy">
         <CardContent className="p-4">
@@ -85,7 +85,7 @@ const GoodnessSliders = ({
                 onChange={(e) => setInsideSavedPercentage(parseInt(e.target.value))}
                 className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
                 style={{
-                  background: `linear-gradient(to right, #E3F2FD 0%, #E3F2FD ${100 - insideSavedPercentage}%, #42A5F5 ${100 - insideSavedPercentage}%, #42A5F5 100%)`
+                  background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${insideSavedPercentage}%, #E3F2FD ${insideSavedPercentage}%, #E3F2FD 100%)`
                 }}
               />
               <p className="text-sm text-muted-foreground">
@@ -111,7 +111,7 @@ const GoodnessSliders = ({
                   onChange={(e) => setOutsideSavedPercentage(parseInt(e.target.value))}
                   className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
                   style={{
-                    background: `linear-gradient(to right, #E3F2FD 0%, #E3F2FD ${100 - outsideSavedPercentage}%, #42A5F5 ${100 - outsideSavedPercentage}%, #42A5F5 100%)`
+                    background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${outsideSavedPercentage}%, #E3F2FD ${outsideSavedPercentage}%, #E3F2FD 100%)`
                   }}
                 />
                 <p className="text-sm text-muted-foreground">
