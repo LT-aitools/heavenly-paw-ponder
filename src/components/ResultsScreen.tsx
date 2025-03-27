@@ -41,7 +41,8 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           <Button
             variant="outline"
             onClick={onTryAgain}
-            className="flex items-center gap-2 btn-whimsy-outline"
+            className="flex items-center gap-2 w-full sm:w-auto h-12 text-heaven-blue border-heaven-blue hover:bg-heaven-blue/10 rounded-full px-6"
+            size="lg"
           >
             <ArrowLeft className="h-4 w-4" />
             Try Different Parameters
@@ -84,8 +85,8 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           <Button
             variant="outline"
             onClick={onTryAgain}
-            className="flex items-center gap-2 w-full sm:w-auto h-12"
-            size="sm"
+            className="flex items-center gap-2 w-full sm:w-auto h-12 text-heaven-blue border-heaven-blue hover:bg-heaven-blue/10 rounded-full px-6"
+            size="lg"
           >
             <ArrowLeft className="h-4 w-4" />
             Try Different Parameters
