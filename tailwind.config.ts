@@ -70,6 +70,11 @@ export default {
 					deepBlue: '#64B5F6',
 					accent: '#42A5F5',
 					contrast: '#1E88E5',
+					pink: '#F8BBD0',
+					peach: '#FFCCBC',
+					mint: '#B2DFDB',
+					lavender: '#D1C4E9',
+					lemon: '#FFF9C4',
 				}
 			},
 			borderRadius: {
@@ -109,6 +114,15 @@ export default {
 				'scale-in': {
 					from: { transform: 'scale(0.95)', opacity: '0' },
 					to: { transform: 'scale(1)', opacity: '1' }
+				},
+				'wiggle': {
+					'0%, 100%': { transform: 'rotate(0deg)' },
+					'25%': { transform: 'rotate(-5deg)' },
+					'75%': { transform: 'rotate(5deg)' }
+				},
+				'bounce-light': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' }
 				}
 			},
 			animation: {
@@ -119,11 +133,13 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'slide-up': 'slide-up 0.5s ease-out',
 				'slide-down': 'slide-down 0.5s ease-out',
-				'scale-in': 'scale-in 0.5s ease-out'
+				'scale-in': 'scale-in 0.5s ease-out',
+				'wiggle': 'wiggle 1s ease-in-out infinite',
+				'bounce-light': 'bounce-light 2s ease-in-out infinite'
 			},
 			fontFamily: {
 				'sans': ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
-				'display': ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif']
+				'display': ['Outfit', 'SF Pro Display', 'Inter', 'system-ui', 'sans-serif']
 			},
 			boxShadow: {
 				'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
