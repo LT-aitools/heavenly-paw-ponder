@@ -24,6 +24,7 @@ export interface CalculationResult {
   insideSavedPercentage?: number;
   outsideSavedPercentage?: number;
   edgeCases?: Record<string, boolean>;
+  historicalData?: { year: string; humanSouls: number; dogSouls: number; }[];
 }
 
 // Function to fetch base figures from Supabase
@@ -263,3 +264,30 @@ export const formatNumberToReadable = (num: number): string => {
     return num.toString();
   }
 };
+
+export async function calculateHistoricalData(params: CalculationParams): Promise<{ year: string; humanSouls: number; dogSouls: number; }[]> {
+  const years = ['1750', '1800', '1850', '1900', '1950', '2000', '2025', '2050', '2100'];
+  const historicalResults = [];
+
+  for (const year of years) {
+    const yearParams = {
+      ...params,
+      currentYear: parseInt(year)
+    };
+
+    try {
+      const yearResult = await calculateSoulsInHeaven(yearParams);
+      historicalResults.push({
+        year,
+        humanSouls: yearResult.humanSouls,
+        dogSouls: yearResult.dogSouls
+      });
+    } catch (error) {
+      console.error(`Error calculating data for year ${year}:`, error);
+      // If we can't get data for a year, skip it
+      continue;
+    }
+  }
+
+  return historicalResults;
+}

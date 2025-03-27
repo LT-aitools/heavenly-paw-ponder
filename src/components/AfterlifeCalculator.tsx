@@ -3,12 +3,12 @@ import { doctrines, Doctrine } from '@/data/doctrineData';
 import DoctrineSelector from './DoctrineSelector';
 import EdgeCasesSection from './EdgeCasesSection';
 import GoodnessSliders from './GoodnessSliders';
-import { calculateSoulsInHeaven, CalculationResult } from '@/utils/calculationLogic';
+import { calculateSoulsInHeaven, calculateHistoricalData, CalculationResult } from '@/utils/calculationLogic';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 interface AfterlifeCalculatorProps {
-  onRunCensus: (results: CalculationResult) => void;
+  onRunCensus: (results: CalculationResult & { historicalData: { year: string; humanSouls: number; dogSouls: number; }[] }) => void;
 }
 
 const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
@@ -62,7 +62,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
       }
 
       try {
-        const newResults = await calculateSoulsInHeaven({
+        const params = {
           doctrine: selectedDoctrine,
           currentYear: 2025,
           allDogsGoToHeaven,
@@ -70,12 +70,19 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
           insideSavedPercentage,
           outsideSavedPercentage,
           edgeCases: edgeCaseValues
-        });
+        };
+
+        const [newResults, historicalResults] = await Promise.all([
+          calculateSoulsInHeaven(params),
+          calculateHistoricalData(params)
+        ]);
         
-        setResults(newResults);
+        setResults({
+          ...newResults,
+          historicalData: historicalResults
+        });
       } catch (error) {
         console.error('Error calculating results:', error);
-        // You might want to show an error message to the user here
       }
     };
 

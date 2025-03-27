@@ -16,6 +16,7 @@ interface ResultsScreenProps {
 const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
   const [showMethodology, setShowMethodology] = useState(false);
   const [showCloudAnimation, setShowCloudAnimation] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Trigger cloud reveal animation
@@ -25,6 +26,21 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Only show results when we have valid data
+    if (results && results.humanSouls > 0) {
+      setIsLoading(false);
+    }
+  }, [results]);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="text-center text-heaven-blue">Loading your heavenly census...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -41,11 +57,10 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           <Button
             variant="outline"
             onClick={onTryAgain}
-            className="flex items-center gap-2 w-full sm:w-auto h-12 text-heaven-blue border-heaven-blue hover:bg-heaven-blue/10 rounded-full px-6"
-            size="lg"
+            className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-white text-heaven-contrast border border-heaven-contrast hover:bg-heaven-contrast/5 transition-all flex items-center gap-2 w-full sm:w-auto"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Try Different Parameters
+            <ArrowLeft className="h-5 w-5" />
+            <span>Try Different Parameters</span>
           </Button>
         </div>
 
@@ -85,11 +100,10 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           <Button
             variant="outline"
             onClick={onTryAgain}
-            className="flex items-center gap-2 w-full sm:w-auto h-12 text-heaven-blue border-heaven-blue hover:bg-heaven-blue/10 rounded-full px-6"
-            size="lg"
+            className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-white text-heaven-contrast border border-heaven-contrast hover:bg-heaven-contrast/5 transition-all flex items-center gap-2 w-full sm:w-auto"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Try Different Parameters
+            <ArrowLeft className="h-5 w-5" />
+            <span>Try Different Parameters</span>
           </Button>
           
           <ShareButton 
