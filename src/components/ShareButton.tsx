@@ -1,6 +1,7 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Share } from 'lucide-react';
+import { Share, Sparkles } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 interface ShareButtonProps {
@@ -19,10 +20,10 @@ const ShareButton = ({ results }: ShareButtonProps) => {
     
     const message = `I just ran the Heaven Census! In heaven, there are more ${
       results.moreDogsOrHumans === 'dogs' 
-        ? 'dogs'
+        ? 'dogs 🐶'
         : results.moreDogsOrHumans === 'humans'
-          ? 'humans'
-          : 'equal numbers of dogs and humans'
+          ? 'humans 👼'
+          : 'equal numbers of dogs and humans 🐶👼'
     }. Check it out yourself!`;
     
     try {
@@ -60,10 +61,12 @@ const ShareButton = ({ results }: ShareButtonProps) => {
     <Button
       onClick={handleShare}
       disabled={isSharing}
-      className="px-6 py-4 text-md font-medium rounded-full shadow-elevated bg-white text-heaven-contrast border border-heaven-contrast hover:bg-heaven-contrast/5 transition-all"
+      className="btn-whimsy w-full sm:w-auto h-12 flex items-center gap-2" 
+      size="sm"
     >
-      <Share className="mr-2 h-5 w-5" />
+      <Share className="h-4 w-4" />
       <span>Share My Heaven Census</span>
+      <Sparkles className="h-3 w-3 text-white/80 animate-pulse-gentle" />
     </Button>
   );
 };

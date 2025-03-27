@@ -1,6 +1,7 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Users, UserCheck } from "lucide-react";
+import { Users, UserCheck, Sparkles } from "lucide-react";
 import { Doctrine } from "@/data/doctrineData";
 
 interface GoodnessSliderProps {
@@ -58,17 +59,20 @@ const GoodnessSliders = ({
   return (
     <section className="animate-fade-in">
       <div className="mb-4 flex items-center">
-        <UserCheck className="mr-2 h-5 w-5 text-primary" />
-        <h2 className="text-xl font-medium">Who's Good? 😇</h2>
+        <UserCheck className="mr-2 h-5 w-5 text-heaven-accent" />
+        <h2 className="text-xl font-medium text-heaven-contrast">Who's Good? 😇</h2>
       </div>
       
-      <Card className="glass-card">
+      <Card className="glass-card-whimsy">
         <CardContent className="p-4">
           <div className="space-y-6">
             <div className="space-y-4">
               <Label htmlFor="inside-saved" className="flex justify-between">
-                <span>% of {getReligionLabel()} who are saved</span>
-                <span className="font-medium">{insideSavedPercentage}%</span>
+                <span className="flex items-center">
+                  <Sparkles className="h-3 w-3 mr-2 text-heaven-accent" />
+                  <span>% of {getReligionLabel()} who are saved</span>
+                </span>
+                <span className="font-medium text-heaven-contrast">{insideSavedPercentage}%</span>
               </Label>
               <input
                 id="inside-saved"
@@ -77,7 +81,10 @@ const GoodnessSliders = ({
                 max="100"
                 value={insideSavedPercentage}
                 onChange={(e) => setInsideSavedPercentage(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
+                style={{
+                  background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${insideSavedPercentage}%, #E3F2FD ${insideSavedPercentage}%, #E3F2FD 100%)`
+                }}
               />
               <p className="text-sm text-muted-foreground">
                 The percentage of people within {selectedDoctrine.name} who qualify for heaven.
@@ -87,8 +94,11 @@ const GoodnessSliders = ({
             {showOutsideSlider && (
               <div className="space-y-4 animate-slide-up">
                 <Label htmlFor="outside-saved" className="flex justify-between">
-                  <span>% of non-{getReligionLabel()} who are saved</span>
-                  <span className="font-medium">{outsideSavedPercentage}%</span>
+                  <span className="flex items-center">
+                    <Sparkles className="h-3 w-3 mr-2 text-heaven-accent" />
+                    <span>% of non-{getReligionLabel()} who are saved</span>
+                  </span>
+                  <span className="font-medium text-heaven-contrast">{outsideSavedPercentage}%</span>
                 </Label>
                 <input
                   id="outside-saved"
@@ -97,7 +107,10 @@ const GoodnessSliders = ({
                   max="100"
                   value={outsideSavedPercentage}
                   onChange={(e) => setOutsideSavedPercentage(parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                  className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
+                  style={{
+                    background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${outsideSavedPercentage}%, #E3F2FD ${outsideSavedPercentage}%, #E3F2FD 100%)`
+                  }}
                 />
                 <p className="text-sm text-muted-foreground">
                   The percentage of people outside {selectedDoctrine.name} who qualify for heaven.

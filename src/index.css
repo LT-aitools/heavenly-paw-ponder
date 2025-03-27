@@ -1,5 +1,7 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -45,10 +47,15 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
   }
 
   .glass-card {
@@ -59,12 +66,29 @@
     @apply shadow-glass-hover bg-white/80;
   }
 
+  .glass-card-whimsy {
+    @apply bg-white/70 backdrop-blur-md rounded-xl shadow-glass border-2 border-heaven-accent/50 transition-all duration-300;
+  }
+
+  .glass-card-whimsy:hover {
+    @apply shadow-glass-hover bg-white/80 border-heaven-accent/80;
+    transform: translateY(-3px);
+  }
+
   .section-transition {
     @apply transition-all duration-500 ease-in-out;
   }
 
   .heaven-gradient {
-    background: linear-gradient(135deg, #E3F2FD, #BBDEFB, #90CAF9);
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb, #d1ecff);
+  }
+
+  .heaven-gradient-pastel {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f, #fda085);
+  }
+
+  .heaven-gradient-purple {
+    background: linear-gradient(135deg, #d4a5ff, #b3a5ff, #a0c4ff);
   }
 
   /* Cloud styles for header */
@@ -113,6 +137,70 @@
     animation: cloud-float 22s linear infinite reverse;
   }
 
+  .angel {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    opacity: 0.6;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    animation: angel-float 12s ease-in-out infinite;
+  }
+
+  .angel-1 {
+    top: 15%;
+    right: 10%;
+    animation-delay: -2s;
+  }
+
+  .angel-2 {
+    bottom: 25%;
+    left: 8%;
+    animation-delay: -4s;
+  }
+
+  .halo {
+    position: absolute;
+    width: 40px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(255,223,128,0), rgba(255,223,128,0.8), rgba(255,223,128,0));
+    animation: halo-glow 3s ease-in-out infinite;
+  }
+
+  /* Whimsical input styles */
+  .input-whimsy {
+    @apply bg-white/80 border-2 border-heaven-accent/50 rounded-lg px-4 py-3 focus:border-heaven-accent focus:ring-heaven-accent/30 transition-all duration-300;
+  }
+
+  .input-whimsy:focus {
+    @apply border-heaven-accent ring-4 ring-heaven-accent/20 transform scale-[1.01];
+  }
+
+  .btn-whimsy {
+    @apply rounded-full bg-gradient-to-r from-heaven-accent to-heaven-contrast text-white font-medium px-6 py-3 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.98];
+  }
+
+  .btn-whimsy-outline {
+    @apply rounded-full border-2 border-heaven-accent bg-white/30 backdrop-blur-sm text-heaven-contrast font-medium px-6 py-3 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:bg-white/50;
+  }
+
+  /* Doctrine card styles */
+  .doctrine-card {
+    @apply relative overflow-hidden rounded-xl bg-white/80 border-2 border-transparent transition-all duration-300 cursor-pointer;
+  }
+
+  .doctrine-card:hover {
+    @apply border-heaven-accent/60 shadow-lg transform -translate-y-1;
+  }
+
+  .doctrine-card.selected {
+    @apply border-heaven-accent bg-heaven-blue/30 shadow-lg;
+  }
+
+  .doctrine-card-badge {
+    @apply absolute top-2 right-2 bg-heaven-accent/90 text-white text-xs font-bold px-2 py-1 rounded-full z-10;
+  }
+
   @keyframes cloud-float {
     0% {
       transform: translateX(0) scale(1);
@@ -122,6 +210,29 @@
     }
     100% {
       transform: translateX(0) scale(1);
+    }
+  }
+
+  @keyframes angel-float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-15px) rotate(-5deg);
+    }
+    75% {
+      transform: translateY(10px) rotate(5deg);
+    }
+  }
+
+  @keyframes halo-glow {
+    0%, 100% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
     }
   }
 
@@ -205,5 +316,54 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Icon decorations */
+  .icon-accent {
+    @apply text-heaven-accent;
+    filter: drop-shadow(0 2px 4px rgba(66, 165, 245, 0.3));
+  }
+  
+  /* Methodology Toggle Button */
+  .methodology-toggle {
+    @apply relative overflow-hidden rounded-full border border-heaven-accent px-6 py-2 font-medium text-heaven-contrast transition-all hover:border-heaven-contrast;
+  }
+  
+  .methodology-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(230, 255, 250, 0.2), rgba(200, 230, 255, 0.4));
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+  
+  .methodology-toggle:hover::before {
+    opacity: 1;
+  }
+  
+  /* Button bounce effect */
+  .btn-bounce:hover {
+    animation: btn-bounce 0.4s ease;
+  }
+  
+  @keyframes btn-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  /* Wiggle animation for elements */
+  .wiggle:hover {
+    animation: wiggle 0.5s ease;
+  }
+  
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
   }
 }
