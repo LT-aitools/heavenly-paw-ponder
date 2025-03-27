@@ -28,12 +28,12 @@ const DoctrineSelector = ({
   return (
     <div className="space-y-12 animate-fade-in">
       <section>
-        <div className="mb-4 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
+        <div className="mb-2 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
           <Church className="mr-2 h-5 w-5 text-blue-500" />
           <h2 className="text-xl font-medium text-blue-500">1. Choose Your Afterlife Doctrine</h2>
         </div>
-        <div className="mb-4">
-          <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-2 rounded-md">
+        <div className="mb-6">
+          <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
             Pick a religious framework to shape the main rules for entry. 
           </p>
         </div>
@@ -70,12 +70,12 @@ const DoctrineSelector = ({
       </section>
 
       <section>
-        <div className="mb-4 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
+        <div className="mb-2 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
           <Heart className="mr-2 h-5 w-5 text-blue-500" />
           <h2 className="text-xl font-medium text-blue-500">2. ...And Your Dogtrine</h2>
         </div>
-        <div className="mb-4">
-          <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-2 rounded-md">
+        <div className="mb-6">
+          <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
             What's your position on pups?  
           </p>
         </div>

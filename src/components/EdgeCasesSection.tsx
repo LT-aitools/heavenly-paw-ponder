@@ -40,14 +40,16 @@ const EdgeCasesSection = ({
     <section className="space-y-6">
       {applicableEdgeCases.length > 0 && (
         <>
-          <div className="mb-4 inline-flex items-center bg-blue-50/80 px-4 py-2 rounded-lg backdrop-blur-sm">
+          <div className="mb-2 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
             <Scale className="mr-2 h-5 w-5 text-blue-500" />
             <h2 className="text-xl font-medium text-blue-500">3. Decide the Fate of Edge Cases</h2>
           </div>
-          <p className="text-muted-foreground mb-4 inline-block bg-blue-50/80 px-3 py-1 rounded-md">
-            Theology is full of edge cases: Should we include these groups? We've offered some default 
-            choices based on your doctrine, but you don't have to be so dogmatic about them.
-          </p>
+          <div className="mb-6">
+            <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
+              Theology is full of edge cases: Should we include these groups? We've offered some default 
+              choices based on your doctrine, but you don't have to be so dogmatic about them.
+            </p>
+          </div>
         </>
       )}
       <div className="grid gap-4">

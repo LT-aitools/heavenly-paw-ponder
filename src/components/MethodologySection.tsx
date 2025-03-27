@@ -290,23 +290,48 @@ const MethodologySection = ({
                                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">6.8 - 7.8</td>
                                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">Smallpox, malaria, famines</td>
                                 </tr>
+                                <tr>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">1800</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">8.5 - 9.5</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">Early industrialization health impacts</td>
+                                </tr>
+                                <tr>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">1850</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">11 - 13</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">Cholera pandemics, colonial conflicts</td>
+                                </tr>
+                                <tr>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">1900</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">16 - 18</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">TB/influenza, maternal mortality</td>
+                                </tr>
+                                <tr>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">1950</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">23 - 25</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">WWII, pre-antibiotic era</td>
+                                </tr>
+                                <tr>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">2000</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">48 - 52</td>
+                                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">AIDS crisis, aging populations</td>
+                                </tr>
                               </tbody>
                             </table>
                           </div>
                         <br></br>
                         <p><i>Examples of citations: 
-                        <a href="#">CDC</a>, 
-                        <a href="#">Answers</a>, 
-                        <a href="#">Our World in Data</a>, 
-                        <a href="#">Wikipedia</a>, 
-                        <a href="#">PloS Medicine</a>, 
-                        <a href="#">Pew</a>, 
-                        <a href="#">Institut National D'etudes Demographiques</a>, 
-                        <a href="#">Population Reference Bureau</a>, 
-                        <a href="#">Statista</a>, 
-                        <a href="#">World Economic Forum (climate deaths)</a>, 
-                        <a href="#">World Population Review</a>, 
-                        <a href="#">World Economic Form (2100 pop)</a>
+                        <a href="https://www.cdc.gov/nchs/data-visualization/mortality-trends/index.htm">CDC</a>, 
+                        <a href="https://www.answers.com/sociology/How_many_people_have_died_in_the_history_of_the_world">Answers</a>, 
+                        <a href="https://ourworldindata.org/population-growth-over-time">Our World in Data</a>, 
+                        <a href="https://en.wikipedia.org/wiki/List_of_countries_by_population_in_1900">Wikipedia</a>, 
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1664601/">PloS Medicine</a>, 
+                        <a href="https://www.pewresearch.org/short-read/2014/02/03/10-projections-for-the-global-population-in-2050/">Pew</a>, 
+                        <a href="https://www.ined.fr/en/everything_about_population/demographic-facts-sheets/faq/how-many-people-since-the-first-humans/">Institut National D'etudes Demographiques</a>, 
+                        <a href="https://www.prb.org/articles/how-many-people-have-ever-lived-on-earth/">Population Reference Bureau</a>, 
+                        <a href="https://www.statista.com/statistics/997040/world-population-by-continent-1950-2020/">Statista</a>, 
+                        <a href="https://www.weforum.org/press/2024/01/wef24-climate-crisis-health/">World Economic Forum (climate deaths)</a>, 
+                        <a href="https://worldpopulationreview.com/countries/deaths-per-day">World Population Review</a>, 
+                        <a href="https://www.weforum.org/stories/2021/12/population-boom-or-bust-global-earth-size-people/">World Economic Form (2100 pop)</a>
                         </i></p>
                     </div>
                   </details>
@@ -333,25 +358,26 @@ const MethodologySection = ({
                       </ul>
                       <br></br>
                       <p><i>Examples of citations: On historical figures: 
-                      <a href="#">J Sci Study Religion (NIH)</a>, 
-                      <a href="#">Met Museum, Library of Congress</a>, 
-                      <a href="#">Khan Academy</a>, 
-                      <a href="#">Wikipedia (Islam)</a>, 
-                      <a href="#">Britannica</a>, 
-                      <a href="#">Sikh Net</a>; 
+                      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3035005/">J Sci Study Religion (NIH)</a>, 
+                      <a href="https://www.metmuseum.org/essays/religion-and-culture-in-north-america-1600-1700">Met Museum</a>, 
+                      <a href="https://www.loc.gov/exhibits/religion/rel02.html">Library of Congress</a>, 
+                      <a href="https://www.khanacademy.org/humanities/ap-art-history/introduction-cultures-religions-apah/judaism-apah/a/jewish-history1750-to-ww-ii">Khan Academy</a>, 
+                      <a href="https://en.wikipedia.org/wiki/Spread_of_Islam">Wikipedia (Islam)</a>, 
+                      <a href="https://www.britannica.com/topic/Judaism/Modern-Judaism-c-1750-to-the-present">Britannica</a>, 
+                      <a href="https://www.sikhnet.com/news/islamic-india-biggest-holocaust-world-history">Sikh Net</a>; 
                       General or present-day: 
-                      <a href="#">Pew (Muslim)</a>, 
-                      <a href="#">Britannica</a>, 
-                      <a href="#">Pew (India)</a>, 
-                      <a href="#">Catholic.com</a>, 
-                      <a href="#">Pew (Orthodox Christianity)</a>, 
-                      <a href="#">Pew (Mainline Protestant)</a>, 
-                      <a href="#">Council on Foreign Relations</a>; 
+                      <a href="https://www.pewresearch.org/religion/2009/10/07/mapping-the-global-muslim-population/">Pew (Muslim)</a>, 
+                      <a href="https://www.britannica.com/story/what-is-the-most-widely-practiced-religion-in-the-world">Britannica</a>, 
+                      <a href="https://www.pewresearch.org/religion/2021/09/21/population-growth-and-religious-composition/">Pew (India)</a>, 
+                      <a href="http://Catholic.com">Catholic.com</a>, 
+                      <a href="https://www.pewresearch.org/religion/2017/11/08/orthodox-christianity-in-the-21st-century/">Pew (Orthodox Christianity)</a>, 
+                      <a href="https://www.pewresearch.org/short-reads/2015/05/18/mainline-protestants-make-up-shrinking-number-of-u-s-adults/">Pew (Mainline Protestant)</a>, 
+                      <a href="https://www.cfr.org/article/sunni-shia-divide">Council on Foreign Relations</a>; 
                       Future projections: 
-                      <a href="#">Pew (world)</a>, 
-                      <a href="#">Pew (US)</a>, 
-                      <a href="#">Pew (world)</a>, 
-                      <a href="#">Pew (world)</a>
+                      <a href="https://www.pewresearch.org/religion/2015/04/02/religious-projections-2010-2050/">Pew (world)</a>, 
+                      <a href="https://www.pewresearch.org/religion/2022/09/13/projecting-u-s-religious-groups-population-shares-by-2070/">Pew (US)</a>, 
+                      <a href="https://www.pewresearch.org/religion/2017/04/05/the-changing-global-religious-landscape/">Pew (world)</a>, 
+                      <a href="https://www.pewresearch.org/religion/2022/12/21/key-findings-from-the-global-religious-futures-project/">Pew (world)</a>
                       </i></p>
                     </div>
                   </details>

@@ -57,12 +57,12 @@ const GoodnessSliders = ({
 
   return (
     <section className="animate-fade-in">
-      <div className="mb-4 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
+      <div className="mb-2 inline-flex items-center bg-blue-50/80 px-6 py-3 rounded-lg backdrop-blur-sm">
         <UserCheck className="mr-2 h-5 w-5 text-blue-500" />
         <h2 className="text-xl font-medium text-blue-500">4. Estimate Who's Good 😇</h2>
       </div>
-      <div className="mb-4">
-        <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-2 rounded-md">
+      <div className="mb-6">
+        <p className="text-muted-foreground inline-block bg-blue-50/80 px-4 py-1 rounded-md">
           Not everyone gets a halo. Who's actually well-behaved?
         </p>
       </div>
