@@ -1,3 +1,4 @@
+
 import { doctrines, Doctrine, historicalData } from "@/data/doctrineData";
 import { supabase, BaseFigures } from "@/lib/supabase";
 
@@ -26,7 +27,31 @@ export interface CalculationResult {
   edgeCases?: Record<string, boolean>;
 }
 
-// Function to fetch base figures from Supabase
+// Mock data for when Supabase connection fails
+const mockBaseFigures: Record<number, BaseFigures> = {
+  2024: {
+    id: 1,
+    year: 2024,
+    humans: 8000000000,  // 8 billion humans
+    dogs: 900000000,     // 900 million dogs
+    unbaptized_infants: 300000000,
+    never_heard: 1000000000,
+    monotheists: 4000000000,
+    atheists_polytheists: 2000000000,
+    in_purgatory: 800000000,
+    catholic: 1200000000,
+    protestant_evangelical: 600000000,
+    protestant_mainline: 400000000,
+    christian_orthodox: 300000000,
+    jew_orthodox: 15000000,
+    jew_reform: 10000000,
+    muslim_sunni: 1500000000,
+    muslim_shia: 200000000,
+    universalist: 50000000
+  }
+};
+
+// Function to fetch base figures from Supabase with fallback to mock data
 export async function getBaseFigures(year: number): Promise<BaseFigures> {
   try {
     const { data, error } = await supabase
@@ -36,17 +61,41 @@ export async function getBaseFigures(year: number): Promise<BaseFigures> {
       .single();
 
     if (error) {
-      console.error('Error fetching base figures:', error);
+      console.warn('Error fetching base figures:', error);
+      console.info('Using mock data instead.');
+      
+      // Fall back to mock data if there's an error
+      const mockData = mockBaseFigures[year] || mockBaseFigures[2024];
+      if (mockData) {
+        return mockData;
+      }
+      
       throw new Error(`Failed to fetch data for year ${year}: ${error.message}`);
     }
 
     if (!data) {
+      console.warn(`No data found for year ${year}. Using mock data.`);
+      
+      // Fall back to mock data if no data is found
+      const mockData = mockBaseFigures[year] || mockBaseFigures[2024];
+      if (mockData) {
+        return mockData;
+      }
+      
       throw new Error(`No data found for year ${year}. Please ensure the database has entries for this year.`);
     }
 
     return data;
   } catch (error) {
-    console.error('Error in getBaseFigures:', error);
+    console.warn('Error in getBaseFigures:', error);
+    console.info('Using mock data instead.');
+    
+    // Final fallback to mock data
+    const mockData = mockBaseFigures[year] || mockBaseFigures[2024];
+    if (mockData) {
+      return mockData;
+    }
+    
     throw error;
   }
 }
