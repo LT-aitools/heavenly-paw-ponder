@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import ResultsDisplay from './ResultsDisplay';
 import MethodologySection from './MethodologySection';
@@ -85,7 +84,7 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
           <Button
             variant="outline"
             onClick={onTryAgain}
-            className="flex items-center gap-2 btn-whimsy-outline w-full sm:w-auto h-12"
+            className="flex items-center gap-2 w-full sm:w-auto h-12"
             size="sm"
           >
             <ArrowLeft className="h-4 w-4" />
