@@ -154,22 +154,6 @@ const Index = () => {
               <div className="cloud opacity-50 cloud-4" style={{ top: '80%', right: '8%', transform: 'scale(1.1)' }}></div>
             </div>
 
-            {/* Angel and Dog Stickers */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img src="/angel1.png" alt="" className="absolute w-16 h-16 top-[10%] left-[2%] opacity-60" />
-              <img src="/angel2.png" alt="" className="absolute w-16 h-16 top-[20%] right-[2%] opacity-60" />
-              <img src="/angel3.png" alt="" className="absolute w-16 h-16 top-[40%] left-[3%] opacity-60" />
-              <img src="/angel4.png" alt="" className="absolute w-16 h-16 top-[60%] right-[3%] opacity-60" />
-              <img src="/angel5.png" alt="" className="absolute w-16 h-16 top-[75%] left-[1%] opacity-60" />
-              <img src="/angel6.png" alt="" className="absolute w-16 h-16 top-[85%] right-[1%] opacity-60" />
-              <img src="/angel7.png" alt="" className="absolute w-16 h-16 top-[30%] right-[4%] opacity-60" />
-              
-              <img src="/dog-angel1.png" alt="" className="absolute w-16 h-16 top-[15%] right-[3%] opacity-60" />
-              <img src="/dog-angel2.png" alt="" className="absolute w-16 h-16 top-[45%] left-[2%] opacity-60" />
-              <img src="/dog-angel3.png" alt="" className="absolute w-16 h-16 top-[70%] right-[2%] opacity-60" />
-              <img src="/dog-angel4.png" alt="" className="absolute w-16 h-16 top-[90%] left-[3%] opacity-60" />
-            </div>
-            
             {/* Calculator Content */}
             <div className="relative z-10">
               <AfterlifeCalculator onRunCensus={handleRunCensus} />
