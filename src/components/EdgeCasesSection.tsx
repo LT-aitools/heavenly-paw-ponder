@@ -40,46 +40,44 @@ const EdgeCasesSection = ({
     <section className="relative">
       {applicableEdgeCases.length > 0 && (
         <>
-          <div className="absolute -right-16 left-1/3 z-0">
-            <div className="mb-2 inline-flex items-center bg-blue-50 px-3 py-3 rounded-lg backdrop-blur-sm rotate-[2deg]">
-              <Scale className="mr-2 h-5 w-5 text-blue-500" />
-              <h2 className="text-xl font-medium text-blue-500">3. Decide the Fate of Edge Cases</h2>
-            </div>
+          <div className="mb-2 inline-flex items-center">
+            <Scale className="mr-2 h-5 w-5 text-blue-500" />
+            <h2 className="text-xl font-medium text-blue-500">3. Decide the Fate of Edge Cases</h2>
           </div>
-          <div className="mb-4 mt-16">
-            <p className="text-muted-foreground inline-block bg-blue-50 px-2 py-1 rounded-md">
+          <div className="mb-4">
+            <p className="text-muted-foreground">
               Theology is full of edge cases: Should we include these groups? We've offered some default 
               choices based on your doctrine, but you don't have to be so dogmatic about them.
             </p>
           </div>
+          <div className="grid gap-4">
+            {applicableEdgeCases.map((edgeCase) => (
+              <Card 
+                key={edgeCase.id} 
+                className={`glass-card-whimsy ${validationErrors?.[`edge-case-${edgeCase.id}`] ? 'border-red-500' : ''}`}
+                id={`edge-case-${edgeCase.id}`}
+              >
+                <CardContent className="pt-6 pb-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <Sparkles className="h-4 w-4 mr-2 text-heaven-accent" />
+                      <p className="text-sm font-medium leading-none">{edgeCase.label}</p>
+                    </div>
+                    <Switch
+                      checked={edgeCaseValues[edgeCase.id] || false}
+                      onCheckedChange={(checked) => handleEdgeCaseChange(edgeCase.id, checked)}
+                      className="data-[state=checked]:bg-heaven-accent"
+                    />
+                  </div>
+                  {validationErrors?.[`edge-case-${edgeCase.id}`] && (
+                    <p className="text-sm text-red-500 mt-2">This field is required</p>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </>
       )}
-      <div className="grid gap-4 relative z-10">
-        {applicableEdgeCases.map((edgeCase) => (
-          <Card 
-            key={edgeCase.id} 
-            className={`glass-card-whimsy ${validationErrors?.[`edge-case-${edgeCase.id}`] ? 'border-red-500' : ''}`}
-            id={`edge-case-${edgeCase.id}`}
-          >
-            <CardContent className="pt-6 pb-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Sparkles className="h-4 w-4 mr-2 text-heaven-accent" />
-                  <p className="text-sm font-medium leading-none">{edgeCase.label}</p>
-                </div>
-                <Switch
-                  checked={edgeCaseValues[edgeCase.id] || false}
-                  onCheckedChange={(checked) => handleEdgeCaseChange(edgeCase.id, checked)}
-                  className="data-[state=checked]:bg-heaven-accent"
-                />
-              </div>
-              {validationErrors?.[`edge-case-${edgeCase.id}`] && (
-                <p className="text-sm text-red-500 mt-2">This field is required</p>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
 
       {/* Purgatory Section */}
       {purgatoryCase && selectedDoctrine.supportsPurgatory && (
