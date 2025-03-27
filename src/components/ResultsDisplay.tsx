@@ -78,15 +78,10 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
         <CardContent className="p-4">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold tracking-tight">Population Distribution</h2>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-muted-foreground">
-                  Total: {formatNumberToReadable(humanSouls + dogSouls)}
-                </span>
-                <Button variant="outline" size="sm" onClick={handleReset}>
-                  <RotateCcw className="h-4 w-4" />
-                </Button>
-              </div>
+              <h2 className="text-xl font-semibold tracking-tight">Heaven Population, Over (Earthly) Time</h2>
+              <span className="text-sm text-muted-foreground">
+                Total: {formatNumberToReadable(humanSouls + dogSouls)}
+              </span>
             </div>
             <div className="relative h-[400px] w-full overflow-hidden">
               {historicalData ? (

@@ -294,9 +294,9 @@ const MethodologySection = ({
                           </div>
 
                         <p><i>Examples of citations: CDC, Answers, Our World in Data, Wikipedia, 
-                        PloS Medicine, Pew, Institut National D’etudes Demographiques, 
+                        PloS Medicine, Pew, Institut National D'etudes Demographiques, 
                         Population Reference Bureau, Statista, World Economic Forum (climate deaths), 
-                        World Population Review, World Economic Form (2100 pop)<i></p>
+                        World Population Review, World Economic Form (2100 pop)</i></p>
                     </div>
                   </details>
                   
@@ -313,19 +313,21 @@ const MethodologySection = ({
                         <li>Religious estimates were therefore instead based on historical migration patterns and regional dominance patterns</li>
                         <li>These estimates should be treated as approximate ranges rather than precise counts, particularly for pre-20th century figures where records are fragmentary.</li>
                         <li>For sub-religions, assumed certain breakdowns:
+                          <ul className="list-disc pl-5 mt-1">
                             <li>Christianity: 33% Catholic, 25% Orthodox, 42% Protestant pre-1900</li>
                             <li>Islam: 80% Sunni/20% Shia split maintained through history</li>
                             <li>Judaism: 90% Orthodox pre-1800, 60% post-WWII</li>
+                          </ul>
                         </li>
                       </ul>
                       <p><i>Examples of citations: On historical figures: 
                       J Sci Study Religion (NIH), 
-                      Met Museum, Library of Congress,  Khan Academy, 
+                      Met Museum, Library of Congress, Khan Academy, 
                       Wikipedia (Islam), Britannica, Sikh Net; 
                       General or present-day: Pew (Muslim), Britannica, 
                       Pew (India), Catholic.com, Pew (Orthodox Christianity), 
                       Pew (Mainline Protestant), Council on Foreign Relations; 
-                      Future projections: Pew (world), Pew (US), Pew (world), Pew (world)]</i></p>
+                      Future projections: Pew (world), Pew (US), Pew (world), Pew (world)</i></p>
                     </div>
                   </details>
                 </div>
