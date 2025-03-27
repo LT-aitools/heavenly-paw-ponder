@@ -4,7 +4,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { doctrines, dogtrines, Doctrine } from "@/data/doctrineData";
-import { Church, Heart, Scale, UserCheck } from "lucide-react";
+import { Church, Heart } from "lucide-react";
 
 interface DoctrineSelectorProps {
   selectedDoctrine: Doctrine | null;
@@ -124,32 +124,6 @@ const DoctrineSelector = ({
                 </div>
               </div>
             )}
-          </CardContent>
-        </Card>
-      </section>
-
-      <section>
-        <div className="mb-4 flex items-center">
-          <Scale className="mr-2 h-5 w-5 text-blue-500" />
-          <h2 className="text-xl font-medium text-blue-500">3. Decide the Fate of Edge Cases</h2>
-        </div>
-        
-        <Card className="glass-card overflow-hidden">
-          <CardContent className="p-4">
-            {/* Edge cases content will be added here */}
-          </CardContent>
-        </Card>
-      </section>
-
-      <section>
-        <div className="mb-4 flex items-center">
-          <UserCheck className="mr-2 h-5 w-5 text-blue-500" />
-          <h2 className="text-xl font-medium text-blue-500">4. Estimate Who's Good 😇</h2>
-        </div>
-        
-        <Card className="glass-card overflow-hidden">
-          <CardContent className="p-4">
-            {/* Edge cases content will be added here */}
           </CardContent>
         </Card>
       </section>
