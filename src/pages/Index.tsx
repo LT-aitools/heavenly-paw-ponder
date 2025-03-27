@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AfterlifeCalculator from '@/components/AfterlifeCalculator';
 import ResultsScreen from '@/components/ResultsScreen';
-import { Sparkles, ChevronDown } from "lucide-react";
+import { Sparkles, ChevronDown, User, Dog } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { CalculationResult } from '@/utils/calculationLogic';
 
@@ -36,6 +36,10 @@ const Index = () => {
               <div className="cloud cloud-3"></div>
               <div className="cloud cloud-4"></div>
             </div>
+            
+            {/* Floating Icons */}
+            <User className="floating-icon floating-person text-white w-12 h-12" />
+            <Dog className="floating-icon floating-dog text-white w-12 h-12" />
             
             <div className="max-w-4xl mx-auto relative z-10">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/70 backdrop-blur-xs shadow-sm text-primary font-medium mb-8">
