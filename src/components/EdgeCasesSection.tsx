@@ -40,21 +40,21 @@ const EdgeCasesSection = ({
     <section className="relative">
       {applicableEdgeCases.length > 0 && (
         <>
-          <div className="absolute -left-4 -right-20 z-0">
-            <div className="mb-2 inline-flex items-center bg-blue-50 px-3 py-3 rounded-lg backdrop-blur-sm">
+          <div className="absolute -right-16 left-1/3 z-0">
+            <div className="mb-2 inline-flex items-center bg-blue-50 px-3 py-3 rounded-lg backdrop-blur-sm rotate-[2deg]">
               <Scale className="mr-2 h-5 w-5 text-blue-500" />
               <h2 className="text-xl font-medium text-blue-500">3. Decide the Fate of Edge Cases</h2>
             </div>
-            <div className="mb-2">
-              <p className="text-muted-foreground inline-block bg-blue-50 px-2 py-1 rounded-md">
-                Theology is full of edge cases: Should we include these groups? We've offered some default 
-                choices based on your doctrine, but you don't have to be so dogmatic about them.
-              </p>
-            </div>
+          </div>
+          <div className="mb-4 mt-16">
+            <p className="text-muted-foreground inline-block bg-blue-50 px-2 py-1 rounded-md">
+              Theology is full of edge cases: Should we include these groups? We've offered some default 
+              choices based on your doctrine, but you don't have to be so dogmatic about them.
+            </p>
           </div>
         </>
       )}
-      <div className="grid gap-4 relative z-10 mt-20">
+      <div className="grid gap-4 relative z-10">
         {applicableEdgeCases.map((edgeCase) => (
           <Card 
             key={edgeCase.id} 

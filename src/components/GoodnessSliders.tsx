@@ -57,75 +57,74 @@ const GoodnessSliders = ({
 
   return (
     <section className="animate-fade-in relative">
-      <div className="absolute -left-4 -right-20 z-0">
+      <div className="absolute left-1/4 -right-4 z-0">
         <div className="mb-2 inline-flex items-center bg-blue-50 px-3 py-3 rounded-lg backdrop-blur-sm">
           <UserCheck className="mr-2 h-5 w-5 text-blue-500" />
           <h2 className="text-xl font-medium text-blue-500">4. Estimate Who's Good 😇</h2>
         </div>
-        <div className="mb-2">
-          <p className="text-muted-foreground inline-block bg-blue-50 px-2 py-1 rounded-md">
-            Not everyone gets a halo. Who's actually well-behaved?
-          </p>
-        </div>
       </div>
-      
-      <Card className="glass-card-whimsy relative z-10 mt-20">
-        <CardContent className="p-4">
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <Label htmlFor="inside-saved" className="flex justify-between">
-                <span className="flex items-center">
-                  <Sparkles className="h-3 w-3 mr-2 text-heaven-accent" />
-                  <span>% of {getReligionLabel()} who are saved</span>
-                </span>
-                <span className="font-medium text-heaven-contrast">{insideSavedPercentage}%</span>
-              </Label>
-              <input
-                id="inside-saved"
-                type="range"
-                min="0"
-                max="100"
-                value={insideSavedPercentage}
-                onChange={(e) => setInsideSavedPercentage(parseInt(e.target.value))}
-                className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
-                style={{
-                  background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${insideSavedPercentage}%, #E3F2FD ${insideSavedPercentage}%, #E3F2FD 100%)`
-                }}
-              />
-              <p className="text-sm text-muted-foreground">
-                The percentage of people within {selectedDoctrine.name} who qualify for heaven.
-              </p>
-            </div>
-
-            {showOutsideSlider && (
-              <div className="space-y-4 animate-slide-up">
-                <Label htmlFor="outside-saved" className="flex justify-between">
+      <div className="relative z-10 pt-14">
+        <p className="text-muted-foreground inline-block bg-blue-50 px-2 py-1 rounded-md mb-4">
+          Not everyone gets a halo. Who's actually well-behaved?
+        </p>
+        <Card className="glass-card-whimsy">
+          <CardContent className="p-4">
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <Label htmlFor="inside-saved" className="flex justify-between">
                   <span className="flex items-center">
                     <Sparkles className="h-3 w-3 mr-2 text-heaven-accent" />
-                    <span>% of non-{getReligionLabel()} who are saved</span>
+                    <span>% of {getReligionLabel()} who are saved</span>
                   </span>
-                  <span className="font-medium text-heaven-contrast">{outsideSavedPercentage}%</span>
+                  <span className="font-medium text-heaven-contrast">{insideSavedPercentage}%</span>
                 </Label>
                 <input
-                  id="outside-saved"
+                  id="inside-saved"
                   type="range"
                   min="0"
                   max="100"
-                  value={outsideSavedPercentage}
-                  onChange={(e) => setOutsideSavedPercentage(parseInt(e.target.value))}
+                  value={insideSavedPercentage}
+                  onChange={(e) => setInsideSavedPercentage(parseInt(e.target.value))}
                   className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
                   style={{
-                    background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${outsideSavedPercentage}%, #E3F2FD ${outsideSavedPercentage}%, #E3F2FD 100%)`
+                    background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${insideSavedPercentage}%, #E3F2FD ${insideSavedPercentage}%, #E3F2FD 100%)`
                   }}
                 />
                 <p className="text-sm text-muted-foreground">
-                  The percentage of people outside {selectedDoctrine.name} who qualify for heaven.
+                  The percentage of people within {selectedDoctrine.name} who qualify for heaven.
                 </p>
               </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+
+              {showOutsideSlider && (
+                <div className="space-y-4 animate-slide-up">
+                  <Label htmlFor="outside-saved" className="flex justify-between">
+                    <span className="flex items-center">
+                      <Sparkles className="h-3 w-3 mr-2 text-heaven-accent" />
+                      <span>% of non-{getReligionLabel()} who are saved</span>
+                    </span>
+                    <span className="font-medium text-heaven-contrast">{outsideSavedPercentage}%</span>
+                  </Label>
+                  <input
+                    id="outside-saved"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={outsideSavedPercentage}
+                    onChange={(e) => setOutsideSavedPercentage(parseInt(e.target.value))}
+                    className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
+                    style={{
+                      background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${outsideSavedPercentage}%, #E3F2FD ${outsideSavedPercentage}%, #E3F2FD 100%)`
+                    }}
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    The percentage of people outside {selectedDoctrine.name} who qualify for heaven.
+                  </p>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </section>
   );
 };
