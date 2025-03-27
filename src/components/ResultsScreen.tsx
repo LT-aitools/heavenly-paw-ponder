@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import ResultsDisplay from './ResultsDisplay';
 import MethodologySection from './MethodologySection';
-import ShareButton from './ShareButton';
+import { ShareButton } from './ShareButton';
 import { CalculationResult } from '@/utils/calculationLogic';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, BookOpen, Sparkles } from 'lucide-react';
@@ -71,7 +70,12 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
             Try Different Parameters
           </Button>
           
-          <ShareButton results={results} />
+          <ShareButton 
+            doctrine={results.doctrine?.name || 'Unknown'}
+            totalSouls={results.humanSouls + results.dogSouls}
+            humanSouls={results.humanSouls}
+            dogSouls={results.dogSouls}
+          />
         </div>
       </div>
     </div>
