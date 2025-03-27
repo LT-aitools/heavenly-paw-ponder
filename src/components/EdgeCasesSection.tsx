@@ -45,16 +45,9 @@ const EdgeCasesSection = ({
             <h2 className="text-xl font-medium text-blue-500">3. Decide the Fate of Edge Cases</h2>
           </div>
           <p className="text-muted-foreground mb-4">
-            Theology is full of edge cases: Should we include these groups?
+            Theology is full of edge cases: Should we include these groups? We've offered some default 
+            choices based on your doctrine, but you don't have to be so dogmatic about them.
           </p>
-          <Card className="glass-card-whimsy mb-6">
-            <CardContent className="p-4">
-              <p className="text-muted-foreground mb-4">
-                Theology is full of edge cases: Should we include these groups? We've offered some default 
-                choices based on your doctrine, but you don't have to be so dogmatic about them. 
-              </p>
-            </CardContent>
-          </Card>
         </>
       )}
       <div className="grid gap-4">

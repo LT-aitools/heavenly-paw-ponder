@@ -73,7 +73,7 @@ const DoctrineSelector = ({
           <h2 className="text-xl font-medium text-blue-500">2. ...And Your Dogtrine</h2>
         </div>
            <p className="text-muted-foreground mb-4">
-          What’s your position on pups?  
+          What's your position on pups?  
          </p>
         <Card className="glass-card overflow-hidden">
           <CardContent className="p-4">
@@ -126,32 +126,6 @@ const DoctrineSelector = ({
                 </div>
               </div>
             )}
-          </CardContent>
-        </Card>
-      </section>
-
-      <section>
-        <div className="mb-4 flex items-center">
-          <Scale className="mr-2 h-5 w-5 text-blue-500" />
-          <h2 className="text-xl font-medium text-blue-500">3. Decide the Fate of Edge Cases</h2>
-        </div>
-        
-        <Card className="glass-card overflow-hidden">
-          <CardContent className="p-4">
-            {/* Edge cases content will be added here */}
-          </CardContent>
-        </Card>
-      </section>
-
-      <section>
-        <div className="mb-4 flex items-center">
-          <UserCheck className="mr-2 h-5 w-5 text-blue-500" />
-          <h2 className="text-xl font-medium text-blue-500">4. Estimate Who's Good 😇</h2>
-        </div>
-        
-        <Card className="glass-card overflow-hidden">
-          <CardContent className="p-4">
-            {/* Edge cases content will be added here */}
           </CardContent>
         </Card>
       </section>

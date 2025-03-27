@@ -125,7 +125,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
             onClick={() => onRunCensus(results)} 
             className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
           >
-            <span>Run My Heaven Census</span>
+            <span>Run My Heaven Census 🐶🧍</span>
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
