@@ -87,24 +87,48 @@
   .floating-person {
     top: 25%;
     left: 15%;
-    animation: float 6s ease-in-out infinite;
+    animation: float-left 8s ease-in-out infinite;
   }
 
   .floating-dog {
     top: 40%;
     right: 15%;
-    animation: float 8s ease-in-out infinite reverse;
+    animation: float-right 8s ease-in-out infinite;
   }
 
-  @keyframes float {
+  @keyframes float-left {
     0% {
-      transform: translateY(0px) rotate(0deg);
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-30px) translateX(20px) rotate(5deg);
     }
     50% {
-      transform: translateY(-20px) rotate(5deg);
+      transform: translateY(0px) translateX(40px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(20px) translateX(20px) rotate(-5deg);
     }
     100% {
-      transform: translateY(0px) rotate(0deg);
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+  }
+
+  @keyframes float-right {
+    0% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(20px) translateX(-20px) rotate(-5deg);
+    }
+    50% {
+      transform: translateY(-30px) translateX(-40px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-20px) translateX(-20px) rotate(5deg);
+    }
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
     }
   }
 
@@ -246,5 +270,21 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.2);
+  }
+
+  /* Calculator section gradient */
+  .calculator-gradient {
+    background: linear-gradient(180deg, #60A5FA 0%, #93C5FD 30%, #E6F3FF 100%);
+    position: relative;
+  }
+
+  .calculator-gradient::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(180deg, transparent, #60A5FA);
   }
 }

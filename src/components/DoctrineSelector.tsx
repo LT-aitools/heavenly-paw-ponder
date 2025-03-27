@@ -29,8 +29,8 @@ const DoctrineSelector = ({
     <div className="space-y-12 animate-fade-in">
       <section>
         <div className="mb-4 flex items-center">
-          <Church className="mr-2 h-5 w-5 text-primary" />
-          <h2 className="text-xl font-medium">Choose Your Afterlife Doctrine</h2>
+          <Church className="mr-2 h-5 w-5 text-[rgb(30,136,229)]" />
+          <h2 className="text-xl font-medium text-[rgb(30,136,229)]">1. Choose Your Afterlife Doctrine</h2>
         </div>
         <p className="text-muted-foreground mb-4">
           Select a religious doctrine to calculate its heaven's population
@@ -49,12 +49,12 @@ const DoctrineSelector = ({
                 }
               }}
             >
-              <SelectTrigger className={`w-full ${hasError ? 'border-red-500' : ''}`}>
+              <SelectTrigger className={`w-full h-14 text-lg border-2 focus:border-primary ${hasError ? 'border-red-500' : 'border-input'}`}>
                 <SelectValue placeholder="Select a doctrine" />
               </SelectTrigger>
               <SelectContent>
                 {doctrines.map((doctrine) => (
-                  <SelectItem key={doctrine.id} value={doctrine.id}>
+                  <SelectItem key={doctrine.id} value={doctrine.id} className="text-base py-2">
                     {doctrine.name}
                   </SelectItem>
                 ))}
@@ -69,8 +69,8 @@ const DoctrineSelector = ({
 
       <section>
         <div className="mb-4 flex items-center">
-          <Heart className="mr-2 h-5 w-5 text-primary" />
-          <h2 className="text-xl font-medium">...And your Dogtrine</h2>
+          <Heart className="mr-2 h-5 w-5 text-[rgb(30,136,229)]" />
+          <h2 className="text-xl font-medium text-[rgb(30,136,229)]">2. ...And Your Dogtrine</h2>
         </div>
         
         <Card className="glass-card overflow-hidden">

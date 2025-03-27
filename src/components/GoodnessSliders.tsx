@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Users, UserCheck, Sparkles } from "lucide-react";
@@ -59,8 +58,8 @@ const GoodnessSliders = ({
   return (
     <section className="animate-fade-in">
       <div className="mb-4 flex items-center">
-        <UserCheck className="mr-2 h-5 w-5 text-heaven-accent" />
-        <h2 className="text-xl font-medium text-heaven-contrast">Who's Good? 😇</h2>
+        <UserCheck className="mr-2 h-5 w-5 text-[rgb(30,136,229)]" />
+        <h2 className="text-xl font-medium text-[rgb(30,136,229)]">4. Estimate Who's Good 😇</h2>
       </div>
       
       <Card className="glass-card-whimsy">

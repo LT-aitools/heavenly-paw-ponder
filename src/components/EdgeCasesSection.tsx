@@ -1,9 +1,8 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Scale } from "lucide-react";
 import { Doctrine, edgeCases as allEdgeCases } from "@/data/doctrineData";
 
 interface EdgeCasesSectionProps {
@@ -41,7 +40,10 @@ const EdgeCasesSection = ({
     <section className="space-y-6">
       {applicableEdgeCases.length > 0 && (
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold tracking-tight text-heaven-contrast">Edge Cases & Exceptions</h2>
+          <div className="mb-4 flex items-center">
+            <Scale className="mr-2 h-5 w-5 text-[rgb(30,136,229)]" />
+            <h2 className="text-xl font-medium text-[rgb(30,136,229)]">3. Decide the Fate of Edge Cases</h2>
+          </div>
           <p className="text-muted-foreground">
             Special cases that might affect your afterlife destination
           </p>

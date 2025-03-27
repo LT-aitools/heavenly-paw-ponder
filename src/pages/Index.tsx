@@ -97,7 +97,7 @@ const Index = () => {
           </div>
 
           {/* Main Content - Inputs */}
-          <div id="calculator-section" className="flex-grow py-12 md:py-20 px-4 md:px-6 bg-gray-50">
+          <div id="calculator-section" className="flex-grow py-12 md:py-20 px-4 md:px-6 calculator-gradient">
             <AfterlifeCalculator onRunCensus={handleRunCensus} />
           </div>
         </>
