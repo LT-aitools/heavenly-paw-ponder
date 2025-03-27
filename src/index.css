@@ -1,5 +1,7 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -49,6 +51,8 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+    background-image: linear-gradient(to bottom, #E3F2FD, #BBDEFB, #BBDEFB, #E3F2FD);
+    background-attachment: fixed;
   }
 
   .glass-card {
@@ -96,16 +100,169 @@
     animation: float 8s ease-in-out infinite reverse;
   }
 
-  @keyframes float {
-    0% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-20px) rotate(5deg);
-    }
-    100% {
-      transform: translateY(0px) rotate(0deg);
-    }
+  /* Heaven Gates Animation */
+  .heaven-gates {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .gate-left, .gate-right {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    background-color: #E3F2FD;
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+    z-index: 60;
+  }
+
+  .gate-left {
+    left: 0;
+    background: linear-gradient(to right, #BBDEFB, #90CAF9);
+    box-shadow: inset -5px 0 15px rgba(255, 255, 255, 0.5);
+    transform-origin: left center;
+  }
+
+  .gate-right {
+    right: 0;
+    background: linear-gradient(to left, #BBDEFB, #90CAF9);
+    box-shadow: inset 5px 0 15px rgba(255, 255, 255, 0.5);
+    transform-origin: right center;
+  }
+
+  .heaven-gates.open .gate-left {
+    transform: perspective(1200px) rotateY(90deg);
+  }
+
+  .heaven-gates.open .gate-right {
+    transform: perspective(1200px) rotateY(-90deg);
+  }
+
+  .gate-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 55;
+    opacity: 1;
+    transition: opacity 0.3s ease-out 0.8s;
+  }
+
+  .heaven-gates.open .gate-content {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .gate-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+    margin-bottom: 1rem;
+  }
+
+  .gate-subtitle {
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+
+  /* Gate decorations */
+  .gate-clouds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 56;
+    pointer-events: none;
+  }
+
+  /* Results section enhancement */
+  .results-container {
+    position: relative;
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border-radius: 2rem;
+    overflow: hidden;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+  }
+
+  .results-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 70 C 65 90, 85 70, 70 55 S 80 30, 70 25, 60 25, 50 40 S 35 50, 35 60, 40 70, 50 70 Z' fill='white' fill-opacity='0.05'/%3E%3C/svg%3E") repeat;
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .results-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .floating-cloud {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    filter: blur(1px);
+    z-index: 0;
+  }
+
+  .cloud-1 {
+    width: 120px;
+    height: 60px;
+    top: 10%;
+    left: 5%;
+    animation: cloud-float-1 25s linear infinite;
+  }
+
+  .cloud-2 {
+    width: 150px;
+    height: 75px;
+    top: 60%;
+    right: 8%;
+    animation: cloud-float-2 20s linear infinite;
+  }
+
+  .cloud-3 {
+    width: 100px;
+    height: 50px;
+    bottom: 15%;
+    left: 15%;
+    animation: cloud-float-3 30s linear infinite;
+  }
+
+  @keyframes cloud-float-1 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(30px); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes cloud-float-2 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-30px); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes cloud-float-3 {
+    0% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(20px) translateY(-10px); }
+    100% { transform: translateX(0) translateY(0); }
   }
 
   /* Cloud styles for header */
@@ -228,6 +385,40 @@
     transition: opacity 500ms, transform 500ms;
   }
 
+  /* Special heaven button */
+  .btn-heavenly {
+    @apply relative overflow-hidden bg-gradient-to-r from-blue-400 to-blue-500 text-white rounded-lg px-6 py-3 transform transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-heavenly::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+  }
+
+  .btn-heavenly:hover::before {
+    left: 100%;
+  }
+
+  .btn-whimsy-outline {
+    @apply border-blue-300 text-blue-600 hover:bg-blue-50 hover:border-blue-400 transition-all duration-300;
+  }
+
+  .methodology-toggle {
+    @apply text-blue-600 border-blue-200 hover:bg-blue-50 transition-all duration-300;
+  }
+
+  /* Fancy titles */
+  .fancy-title {
+    @apply font-playfair text-blue-800 leading-tight;
+    text-shadow: 0 1px 2px rgba(59, 130, 246, 0.2);
+  }
+
   /* Custom scroll style */
   ::-webkit-scrollbar {
     width: 8px;
@@ -246,5 +437,17 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.2);
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
   }
 }

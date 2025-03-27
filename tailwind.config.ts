@@ -139,7 +139,8 @@ export default {
 			},
 			fontFamily: {
 				'sans': ['Inter var', 'Inter', 'system-ui', 'sans-serif'],
-				'display': ['Outfit', 'SF Pro Display', 'Inter', 'system-ui', 'sans-serif']
+				'display': ['Outfit', 'SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
+                'playfair': ['Playfair Display', 'serif']
 			},
 			boxShadow: {
 				'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',

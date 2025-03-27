@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+
+import { useEffect, useState, useRef } from 'react';
 import AfterlifeCalculator from '@/components/AfterlifeCalculator';
 import ResultsScreen from '@/components/ResultsScreen';
 import { Sparkles, ChevronDown, User, Dog } from "lucide-react";
-import { Button } from '@/components/ui/button';
 import { CalculationResult } from '@/utils/calculationLogic';
 
 const Index = () => {
   const [showResults, setShowResults] = useState(false);
   const [calculationResults, setCalculationResults] = useState<CalculationResult | null>(null);
+  const [gatesOpen, setGatesOpen] = useState(false);
+  const heavenGatesRef = useRef<HTMLDivElement>(null);
 
   // Add scroll to top on component mount
   useEffect(() => {
@@ -16,7 +18,30 @@ const Index = () => {
 
   const handleRunCensus = (results: CalculationResult) => {
     setCalculationResults(results);
-    setShowResults(true);
+    
+    // Show gates animation before revealing results
+    const gatesElement = heavenGatesRef.current;
+    if (gatesElement) {
+      gatesElement.style.display = 'block';
+      
+      // Wait a short moment then start animation
+      setTimeout(() => {
+        setGatesOpen(true);
+        
+        // After animation completes, show results and hide gates
+        setTimeout(() => {
+          setShowResults(true);
+          
+          // Hide gates after showing results
+          setTimeout(() => {
+            gatesElement.style.display = 'none';
+            setGatesOpen(false);
+          }, 500);
+        }, 1500);
+      }, 100);
+    } else {
+      setShowResults(true);
+    }
   };
 
   const handleTryAgain = () => {
@@ -25,6 +50,25 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Heaven Gates Animation */}
+      <div 
+        ref={heavenGatesRef} 
+        className={`heaven-gates ${gatesOpen ? 'open' : ''}`} 
+        style={{ display: 'none' }}
+      >
+        <div className="gate-content">
+          <h2 className="gate-title">The Gates of Heaven</h2>
+          <p className="gate-subtitle">Opening to reveal your results...</p>
+        </div>
+        <div className="gate-left"></div>
+        <div className="gate-right"></div>
+        <div className="gate-clouds">
+          <div className="cloud" style={{ top: '20%', left: '10%', transform: 'scale(0.8)' }}></div>
+          <div className="cloud" style={{ top: '40%', right: '15%', transform: 'scale(1.2)' }}></div>
+          <div className="cloud" style={{ bottom: '20%', left: '20%', transform: 'scale(1)' }}></div>
+        </div>
+      </div>
+
       {!showResults ? (
         <>
           {/* Hero Section with Clouds */}
@@ -46,7 +90,7 @@ const Index = () => {
                 <Sparkles className="mr-2 h-4 w-4" />
                 <span>Who's in Heaven? A Spiritual Census</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair leading-tight mb-6 animate-fade-in">
                 The Great Heaven Census
               </h1>
               <p className="text-lg md:text-xl text-gray-800 max-w-2xl mx-auto animate-slide-up [text-shadow:_0_0_8px_rgba(255,255,255,0.3)]">
@@ -66,18 +110,18 @@ const Index = () => {
                 </p>
 
                 <div className="space-y-4">
-                  <h2 className="text-xl font-bold text-gray-700">You'll enter:</h2>
+                  <h2 className="text-xl font-bold text-gray-700 font-playfair">You'll enter:</h2>
                   <ul className="space-y-2 text-base text-gray-600">
                     <li className="flex items-start">
-                      <span className="mr-2">•</span>
+                      <span className="mr-2 text-heaven-accent">•</span>
                       <span>Which religion defines the afterlife</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="mr-2">•</span>
+                      <span className="mr-2 text-heaven-accent">•</span>
                       <span>What happens to babies, nonbelievers, and the unreached</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="mr-2">•</span>
+                      <span className="mr-2 text-heaven-accent">•</span>
                       <span>Whether dogs get judged — or just welcomed in</span>
                     </li>
                   </ul>
@@ -97,7 +141,7 @@ const Index = () => {
           </div>
 
           {/* Main Content - Inputs */}
-          <div id="calculator-section" className="flex-grow py-12 md:py-20 px-4 md:px-6 bg-gray-50">
+          <div id="calculator-section" className="flex-grow py-12 md:py-20 px-4 md:px-6 bg-gradient-to-b from-white to-heaven-blue/30">
             <AfterlifeCalculator onRunCensus={handleRunCensus} />
           </div>
         </>
