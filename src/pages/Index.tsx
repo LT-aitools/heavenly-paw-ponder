@@ -146,21 +146,34 @@ const Index = () => {
 
           {/* Main Content - Inputs */}
           <div id="calculator-section" className="flex-grow py-12 md:py-20 px-4 md:px-6 relative bg-blue-50">
+            {/* Background Clouds */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="cloud opacity-30 cloud-1" style={{ top: '10%', left: '5%', transform: 'scale(0.8)' }}></div>
+              <div className="cloud opacity-30 cloud-2" style={{ top: '30%', right: '10%', transform: 'scale(1.2)' }}></div>
+              <div className="cloud opacity-30 cloud-3" style={{ top: '60%', left: '15%', transform: 'scale(0.9)' }}></div>
+              <div className="cloud opacity-30 cloud-4" style={{ top: '80%', right: '8%', transform: 'scale(1.1)' }}></div>
+            </div>
+
             {/* Angel and Dog Stickers */}
-            <img src="/angel1.png" alt="" className="absolute w-16 h-16 top-[10%] left-[5%] opacity-60" />
-            <img src="/angel2.png" alt="" className="absolute w-16 h-16 top-[20%] right-[8%] opacity-60" />
-            <img src="/angel3.png" alt="" className="absolute w-16 h-16 top-[40%] left-[12%] opacity-60" />
-            <img src="/angel4.png" alt="" className="absolute w-16 h-16 top-[60%] right-[15%] opacity-60" />
-            <img src="/angel5.png" alt="" className="absolute w-16 h-16 top-[75%] left-[7%] opacity-60" />
-            <img src="/angel6.png" alt="" className="absolute w-16 h-16 top-[85%] right-[10%] opacity-60" />
-            <img src="/angel7.png" alt="" className="absolute w-16 h-16 top-[30%] right-[20%] opacity-60" />
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img src="/angel1.png" alt="" className="absolute w-16 h-16 top-[10%] left-[5%] opacity-60" />
+              <img src="/angel2.png" alt="" className="absolute w-16 h-16 top-[20%] right-[8%] opacity-60" />
+              <img src="/angel3.png" alt="" className="absolute w-16 h-16 top-[40%] left-[12%] opacity-60" />
+              <img src="/angel4.png" alt="" className="absolute w-16 h-16 top-[60%] right-[15%] opacity-60" />
+              <img src="/angel5.png" alt="" className="absolute w-16 h-16 top-[75%] left-[7%] opacity-60" />
+              <img src="/angel6.png" alt="" className="absolute w-16 h-16 top-[85%] right-[10%] opacity-60" />
+              <img src="/angel7.png" alt="" className="absolute w-16 h-16 top-[30%] right-[20%] opacity-60" />
+              
+              <img src="/dog-angel1.png" alt="" className="absolute w-16 h-16 top-[15%] right-[25%] opacity-60" />
+              <img src="/dog-angel2.png" alt="" className="absolute w-16 h-16 top-[45%] left-[20%] opacity-60" />
+              <img src="/dog-angel3.png" alt="" className="absolute w-16 h-16 top-[70%] right-[5%] opacity-60" />
+              <img src="/dog-angel4.png" alt="" className="absolute w-16 h-16 top-[90%] left-[15%] opacity-60" />
+            </div>
             
-            <img src="/dog-angel1.png" alt="" className="absolute w-16 h-16 top-[15%] right-[25%] opacity-60" />
-            <img src="/dog-angel2.png" alt="" className="absolute w-16 h-16 top-[45%] left-[20%] opacity-60" />
-            <img src="/dog-angel3.png" alt="" className="absolute w-16 h-16 top-[70%] right-[5%] opacity-60" />
-            <img src="/dog-angel4.png" alt="" className="absolute w-16 h-16 top-[90%] left-[15%] opacity-60" />
-            
-            <AfterlifeCalculator onRunCensus={handleRunCensus} />
+            {/* Calculator Content */}
+            <div className="relative z-10">
+              <AfterlifeCalculator onRunCensus={handleRunCensus} />
+            </div>
           </div>
         </>
       ) : (
