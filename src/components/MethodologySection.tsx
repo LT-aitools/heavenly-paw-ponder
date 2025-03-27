@@ -234,6 +234,7 @@ const MethodologySection = ({
                         <li>Current global dog population and trends are based on available data.</li>
                         <li>Euthanasia rates and stray dog populations also factor into mortality totals.</li>
                       </ul>
+                      <br></br>
                       <p><i>Examples of citations: [<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11579424/">Scientific Reports (NIH)</a>, 
                       <a href="https://worldanimalfoundation.org/advocate/dog-statistics/">World Animal Foundation</a>, 
                         <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9798575/">BMC Veterinary Research (NIH)</a>, 
@@ -292,11 +293,21 @@ const MethodologySection = ({
                               </tbody>
                             </table>
                           </div>
-
-                        <p><i>Examples of citations: CDC, Answers, Our World in Data, Wikipedia, 
-                        PloS Medicine, Pew, Institut National D'etudes Demographiques, 
-                        Population Reference Bureau, Statista, World Economic Forum (climate deaths), 
-                        World Population Review, World Economic Form (2100 pop)</i></p>
+                        <br></br>
+                        <p><i>Examples of citations: 
+                        <a href="#">CDC</a>, 
+                        <a href="#">Answers</a>, 
+                        <a href="#">Our World in Data</a>, 
+                        <a href="#">Wikipedia</a>, 
+                        <a href="#">PloS Medicine</a>, 
+                        <a href="#">Pew</a>, 
+                        <a href="#">Institut National D'etudes Demographiques</a>, 
+                        <a href="#">Population Reference Bureau</a>, 
+                        <a href="#">Statista</a>, 
+                        <a href="#">World Economic Forum (climate deaths)</a>, 
+                        <a href="#">World Population Review</a>, 
+                        <a href="#">World Economic Form (2100 pop)</a>
+                        </i></p>
                     </div>
                   </details>
                   
@@ -320,25 +331,32 @@ const MethodologySection = ({
                           </ul>
                         </li>
                       </ul>
+                      <br></br>
                       <p><i>Examples of citations: On historical figures: 
-                      J Sci Study Religion (NIH), 
-                      Met Museum, Library of Congress, Khan Academy, 
-                      Wikipedia (Islam), Britannica, Sikh Net; 
-                      General or present-day: Pew (Muslim), Britannica, 
-                      Pew (India), Catholic.com, Pew (Orthodox Christianity), 
-                      Pew (Mainline Protestant), Council on Foreign Relations; 
-                      Future projections: Pew (world), Pew (US), Pew (world), Pew (world)</i></p>
+                      <a href="#">J Sci Study Religion (NIH)</a>, 
+                      <a href="#">Met Museum, Library of Congress</a>, 
+                      <a href="#">Khan Academy</a>, 
+                      <a href="#">Wikipedia (Islam)</a>, 
+                      <a href="#">Britannica</a>, 
+                      <a href="#">Sikh Net</a>; 
+                      General or present-day: 
+                      <a href="#">Pew (Muslim)</a>, 
+                      <a href="#">Britannica</a>, 
+                      <a href="#">Pew (India)</a>, 
+                      <a href="#">Catholic.com</a>, 
+                      <a href="#">Pew (Orthodox Christianity)</a>, 
+                      <a href="#">Pew (Mainline Protestant)</a>, 
+                      <a href="#">Council on Foreign Relations</a>; 
+                      Future projections: 
+                      <a href="#">Pew (world)</a>, 
+                      <a href="#">Pew (US)</a>, 
+                      <a href="#">Pew (world)</a>, 
+                      <a href="#">Pew (world)</a>
+                      </i></p>
                     </div>
                   </details>
                 </div>
 
-                <div>
-                  <h4 className="font-medium mb-2">Current Results</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Human Souls: {formatNumber(results.humanSouls)}</li>
-                    <li>Dog Souls: {formatNumber(results.dogSouls)}</li>
-                  </ul>
-                </div>
               </div>
             </div>
           )}
