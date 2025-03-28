@@ -204,8 +204,8 @@ const MethodologySection = ({
                         {results.historicalData?.map((data) => (
                           <tr key={data.year}>
                             <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{data.year}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{formatNumber(data.humanSouls)}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{formatNumber(data.dogSouls)}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{formatNumber(data.humans)}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{formatNumber(data.dogs)}</td>
                           </tr>
                         ))}
                       </tbody>

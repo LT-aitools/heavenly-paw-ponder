@@ -26,8 +26,8 @@ export interface CalculationResult {
   edgeCases?: Record<string, boolean>;
   historicalData?: {
     year: string;
-    humanSouls: number;
-    dogSouls: number;
+    humans: number;
+    dogs: number;
     catholic: number;
     protestant_evangelical: number;
     protestant_mainline: number;
