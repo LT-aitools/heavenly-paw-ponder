@@ -50,7 +50,7 @@ const DoctrineSelector = ({
               <SelectTrigger className={`w-full h-14 text-lg border-2 focus:border-primary ${hasError ? 'border-red-500' : 'border-input'}`}>
                 <SelectValue placeholder="Select a doctrine" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-[400px]">
                 {doctrines.map((doctrine) => (
                   <SelectItem key={doctrine.id} value={doctrine.id} className="text-base py-2">
                     {doctrine.name}

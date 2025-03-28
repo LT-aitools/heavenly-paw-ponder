@@ -112,6 +112,10 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
     case 'universalist':
       peopleInReligion = baseFigures.universalist;
       break;
+    case 'atheism':
+      // For atheism, we'll count atheists/polytheists as "in religion"
+      peopleInReligion = baseFigures.atheists_polytheists;
+      break;
     default:
       throw new Error(`Unknown doctrine: ${doctrine.id}`);
   }

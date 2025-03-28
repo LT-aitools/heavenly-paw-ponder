@@ -18,6 +18,11 @@ const EdgeCasesSection = ({
   setEdgeCaseValues,
   validationErrors
 }: EdgeCasesSectionProps) => {
+  // Hide entire section for Universalist and Atheism
+  if (selectedDoctrine.id === 'universalist' || selectedDoctrine.id === 'atheism') {
+    return null;
+  }
+
   // Filter edge cases applicable to the selected doctrine
   const applicableEdgeCases = allEdgeCases.filter(ec => 
     ec.applicableTo.includes(selectedDoctrine.id) && ec.id !== 'purgatory'

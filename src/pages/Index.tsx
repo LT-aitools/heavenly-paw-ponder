@@ -21,22 +21,17 @@ const Index = () => {
     // First, set the results to show (but they'll be behind the gates)
     setShowResults(true);
     
-    // Show gates animation
-    const gatesElement = heavenGatesRef.current;
-    if (gatesElement) {
-      gatesElement.style.display = 'block';
-      
-      // Start the gates animation after a short delay
-      setTimeout(() => {
-        setGatesOpen(true);
-        
-        // Hide gates after animation completes
-        setTimeout(() => {
-          gatesElement.style.display = 'none';
-          setGatesOpen(false);
-        }, 2500);
-      }, 500);
-    }
+    // Start the gates animation immediately since gates are already visible
+    setGatesOpen(true);
+    
+    // Hide gates after animation completes
+    setTimeout(() => {
+      const gatesElement = heavenGatesRef.current;
+      if (gatesElement) {
+        gatesElement.style.display = 'none';
+        setGatesOpen(false);
+      }
+    }, 2500);
   };
 
   const handleTryAgain = () => {

@@ -39,8 +39,15 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
     if (selectedDoctrine) {
       // Initialize edge cases from the selected doctrine's default values
       setEdgeCaseValues(selectedDoctrine.edgeCases);
-      setInsideSavedPercentage(selectedDoctrine.defaultInsideSavedPercentage);
-      setOutsideSavedPercentage(selectedDoctrine.defaultOutsideSavedPercentage);
+      
+      // For atheism, force insideSavedPercentage to 0
+      if (selectedDoctrine.id === 'atheism') {
+        setInsideSavedPercentage(0);
+        setOutsideSavedPercentage(selectedDoctrine.defaultOutsideSavedPercentage);
+      } else {
+        setInsideSavedPercentage(selectedDoctrine.defaultInsideSavedPercentage);
+        setOutsideSavedPercentage(selectedDoctrine.defaultOutsideSavedPercentage);
+      }
     } else {
       setEdgeCaseValues({});
       setInsideSavedPercentage(0);
@@ -140,6 +147,12 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
         <div className="flex justify-center pt-6">
           <Button 
             onClick={() => {
+              // Show gates immediately (but keep them closed)
+              const gatesElement = document.querySelector('.heaven-gates') as HTMLElement;
+              if (gatesElement) {
+                gatesElement.style.display = 'block';
+              }
+
               const params = {
                 doctrine: selectedDoctrine,
                 currentYear: 2025,
@@ -150,6 +163,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
                 edgeCases: edgeCaseValues
               };
 
+              // Calculate results in the background
               Promise.all([
                 calculateSoulsInHeaven(params),
                 calculateHistoricalData(params)
@@ -167,6 +181,10 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
                 onRunCensus(finalResults);
               }).catch(error => {
                 console.error('Error calculating results:', error);
+                // If there's an error, hide the gates
+                if (gatesElement) {
+                  gatesElement.style.display = 'none';
+                }
               });
             }}
             className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
