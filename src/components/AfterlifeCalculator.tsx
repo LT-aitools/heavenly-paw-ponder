@@ -89,7 +89,6 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
         };
         
         setResults(finalResults);
-        onRunCensus(finalResults);
       } catch (error) {
         console.error('Error calculating results:', error);
       }
