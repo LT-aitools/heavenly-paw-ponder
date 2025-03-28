@@ -241,14 +241,16 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
   return result;
 }
 
-export const formatNumber = (number: number): string => {
-  try {
-    return new Intl.NumberFormat().format(Math.round(number));
-  } catch (e) {
-    console.error('Error formatting number:', number, e);
-    return number.toString();
+export function formatNumber(num: number): string {
+  if (num >= 1000000000) {
+    return (num / 1000000000).toFixed(2);
+  } else if (num >= 1000000) {
+    return (num / 1000000).toFixed(2);
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(2);
   }
-};
+  return num.toString();
+}
 
 export const formatNumberToReadable = (num: number): string => {
   try {
