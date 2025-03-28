@@ -198,7 +198,7 @@ const MethodologySection = ({
                   {/* Total Souls Table */}
                   <details className="group">
                     <summary className="flex items-center justify-between cursor-pointer list-none text-sm font-medium text-primary hover:text-primary/80">
-                      <span>Total Human and Dog Souls</span>
+                      <span>🔢 Table: Total Human and Dog Souls</span>
                       <span className="transition group-open:rotate-180">
                         <ChevronDown className="h-4 w-4" />
                       </span>
@@ -230,7 +230,7 @@ const MethodologySection = ({
                   {/* Christian Denominations Table */}
                   <details className="group">
                     <summary className="flex items-center justify-between cursor-pointer list-none text-sm font-medium text-primary hover:text-primary/80">
-                      <span>Christian Denominations</span>
+                      <span>🔢 Table: Christian Denominations</span>
                       <span className="transition group-open:rotate-180">
                         <ChevronDown className="h-4 w-4" />
                       </span>
@@ -266,7 +266,7 @@ const MethodologySection = ({
                   {/* Other Religions Table */}
                   <details className="group">
                     <summary className="flex items-center justify-between cursor-pointer list-none text-sm font-medium text-primary hover:text-primary/80">
-                      <span>Other Religions</span>
+                      <span>🔢 Table: Other Religions</span>
                       <span className="transition group-open:rotate-180">
                         <ChevronDown className="h-4 w-4" />
                       </span>
@@ -306,7 +306,7 @@ const MethodologySection = ({
                   {/* Edge Cases Table */}
                   <details className="group">
                     <summary className="flex items-center justify-between cursor-pointer list-none text-sm font-medium text-primary hover:text-primary/80">
-                      <span>Edge Cases</span>
+                      <span>🔢 Table: Edge Cases</span>
                       <span className="transition group-open:rotate-180">
                         <ChevronDown className="h-4 w-4" />
                       </span>

@@ -26,6 +26,7 @@ export interface CalculationResult {
   edgeCases?: Record<string, boolean>;
   historicalData?: {
     year: string;
+    // Raw data from Supabase
     humans: number;
     dogs: number;
     catholic: number;
@@ -41,6 +42,9 @@ export interface CalculationResult {
     unbaptized_infants: number;
     never_heard: number;
     in_purgatory: number;
+    // Calculated souls in heaven
+    humanSouls: number;
+    dogSouls: number;
   }[];
 }
 
@@ -260,7 +264,7 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
 
 export const formatNumber = (number: number): string => {
   try {
-    return new Intl.NumberFormat().format(Math.round(number));
+  return new Intl.NumberFormat().format(Math.round(number));
   } catch (e) {
     console.error('Error formatting number:', number, e);
     return number.toString();
@@ -286,32 +290,25 @@ export const formatNumberToReadable = (num: number): string => {
   }
 };
 
-export async function calculateHistoricalData(params: CalculationParams): Promise<{
-  year: string;
-  humans: number;
-  dogs: number;
-  catholic: number;
-  protestant_evangelical: number;
-  protestant_mainline: number;
-  christian_orthodox: number;
-  jew_orthodox: number;
-  jew_reform: number;
-  muslim_sunni: number;
-  muslim_shia: number;
-  universalist: number;
-  atheists_polytheists: number;
-  unbaptized_infants: number;
-  never_heard: number;
-  in_purgatory: number;
-}[]> {
+export async function calculateHistoricalData(params: CalculationParams): Promise<CalculationResult['historicalData']> {
   const years = ['1750', '1800', '1850', '1900', '1950', '2000', '2025', '2050', '2100'];
   const historicalResults = [];
 
   for (const year of years) {
     try {
+      // Get raw data from Supabase
       const baseFigures = await getBaseFigures(parseInt(year));
+      
+      // Calculate souls in heaven for this year
+      const yearParams = {
+        ...params,
+        currentYear: parseInt(year)
+      };
+      const yearResults = await calculateSoulsInHeaven(yearParams);
+      
       historicalResults.push({
         year,
+        // Raw data
         humans: baseFigures.humans,
         dogs: baseFigures.dogs,
         catholic: baseFigures.catholic,
@@ -326,7 +323,10 @@ export async function calculateHistoricalData(params: CalculationParams): Promis
         atheists_polytheists: baseFigures.atheists_polytheists,
         unbaptized_infants: baseFigures.unbaptized_infants,
         never_heard: baseFigures.never_heard,
-        in_purgatory: baseFigures.in_purgatory
+        in_purgatory: baseFigures.in_purgatory,
+        // Calculated souls
+        humanSouls: yearResults.humanSouls,
+        dogSouls: yearResults.dogSouls
       });
     } catch (error) {
       console.error(`Error calculating data for year ${year}:`, error);
