@@ -92,7 +92,7 @@ const DoctrineSelector = ({
                     htmlFor={`dogtrine-${dogtrine.id}`}
                     className="flex flex-col justify-between h-full p-4 rounded-md border-2 border-border bg-background hover:bg-accent hover:text-accent-foreground cursor-pointer 
                       transition-all duration-200 ease-in-out
-                      peer-data-[state=checked]:border-primary peer-data-[state=checked]:text-foreground 
+                      peer-data-[state=checked]:border-[#42A5F5] peer-data-[state=checked]:text-foreground 
                       peer-data-[state=checked]:bg-primary/5"
                   >
                     <div className="font-medium text-left">{dogtrine.name}</div>

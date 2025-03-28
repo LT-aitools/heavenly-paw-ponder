@@ -41,23 +41,23 @@ const EdgeCasesSection = ({
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Scale className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-bold font-playfair">3. Handle Edge Cases</h2>
+          <h2 className="text-2xl font-bold font-playfair">3. Any exceptions?</h2>
         </div>
-        <p className="text-muted-foreground">What happens to special cases?</p>
+        <p className="text-muted-foreground">Theology is full of edge cases: Should we include these groups? We've offered some default choices based on your doctrine, but you don't have to be so dogmatic about them.</p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {applicableEdgeCases.map((edgeCase) => (
           <Card 
             key={edgeCase.id} 
             className={validationErrors?.[`edge-case-${edgeCase.id}`] ? 'border-red-500' : ''}
             id={`edge-case-${edgeCase.id}`}
           >
-            <CardContent className="pt-6 pb-4">
-              <div className="flex items-center justify-between">
+            <CardContent className="p-4">
+              <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <Sparkles className="h-4 w-4 mr-2 text-heaven-accent" />
-                  <p className="text-sm font-medium leading-none">{edgeCase.label}</p>
+                  <span className="text-sm font-medium leading-none">{edgeCase.label}</span>
                 </div>
                 <Switch
                   checked={edgeCaseValues[edgeCase.id] || false}
@@ -75,21 +75,19 @@ const EdgeCasesSection = ({
 
       {/* Purgatory Section */}
       {purgatoryCase && selectedDoctrine.supportsPurgatory && (
-        <Card className="glass-card-whimsy">
+        <Card>
           <CardContent className="p-4">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <Label htmlFor={`edge-case-${purgatoryCase.id}`} className="cursor-pointer flex items-center">
-                  <Sparkles className="h-4 w-4 mr-2 text-heaven-accent" />
-                  <span>Count those still in purgatory as 'in heaven'?</span>
-                </Label>
-                <Switch
-                  id={`edge-case-${purgatoryCase.id}`}
-                  checked={edgeCaseValues[purgatoryCase.id] || false}
-                  onCheckedChange={(checked) => handleEdgeCaseChange(purgatoryCase.id, checked)}
-                  className="data-[state=checked]:bg-heaven-accent"
-                />
-              </div>
+            <div className="flex justify-between items-center">
+              <Label htmlFor={`edge-case-${purgatoryCase.id}`} className="cursor-pointer flex items-center">
+                <Sparkles className="h-4 w-4 mr-2 text-heaven-accent" />
+                <span>Count those still in purgatory as 'in heaven'?</span>
+              </Label>
+              <Switch
+                id={`edge-case-${purgatoryCase.id}`}
+                checked={edgeCaseValues[purgatoryCase.id] || false}
+                onCheckedChange={(checked) => handleEdgeCaseChange(purgatoryCase.id, checked)}
+                className="data-[state=checked]:bg-heaven-accent"
+              />
             </div>
           </CardContent>
         </Card>

@@ -67,31 +67,29 @@ const GoodnessSliders = ({
 
       <Card>
         <CardContent className="p-4">
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <Label htmlFor="inside-saved" className="flex justify-between">
-                <span className="flex items-center">
-                  <Sparkles className="h-3 w-3 mr-2 text-heaven-accent" />
-                  <span>% of {getReligionLabel()} who are saved</span>
-                </span>
-                <span className="font-medium text-heaven-contrast">{insideSavedPercentage}%</span>
-              </Label>
-              <input
-                id="inside-saved"
-                type="range"
-                min="0"
-                max="100"
-                value={insideSavedPercentage}
-                onChange={(e) => setInsideSavedPercentage(parseInt(e.target.value))}
-                className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
-                style={{
-                  background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${insideSavedPercentage}%, #E3F2FD ${insideSavedPercentage}%, #E3F2FD 100%)`
-                }}
-              />
-              <p className="text-sm text-muted-foreground">
-                The percentage of people within {selectedDoctrine.name} who qualify for heaven.
-              </p>
-            </div>
+          <div className="space-y-4">
+            <Label htmlFor="inside-saved" className="flex justify-between">
+              <span className="flex items-center">
+                <Sparkles className="h-3 w-3 mr-2 text-heaven-accent" />
+                <span>% of {getReligionLabel()} who are saved</span>
+              </span>
+              <span className="font-medium text-heaven-contrast">{insideSavedPercentage}%</span>
+            </Label>
+            <input
+              id="inside-saved"
+              type="range"
+              min="0"
+              max="100"
+              value={insideSavedPercentage}
+              onChange={(e) => setInsideSavedPercentage(parseInt(e.target.value))}
+              className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
+              style={{
+                background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${insideSavedPercentage}%, #E3F2FD ${insideSavedPercentage}%, #E3F2FD 100%)`
+              }}
+            />
+            <p className="text-sm text-muted-foreground">
+              The percentage of people within {selectedDoctrine.name} who qualify for heaven.
+            </p>
 
             {showOutsideSlider && (
               <div className="space-y-4 animate-slide-up">

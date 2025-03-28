@@ -152,6 +152,10 @@ const Index = () => {
               <div className="cloud opacity-50 cloud-2" style={{ top: '30%', right: '10%', transform: 'scale(1.2)' }}></div>
               <div className="cloud opacity-50 cloud-3" style={{ top: '60%', left: '15%', transform: 'scale(0.9)' }}></div>
               <div className="cloud opacity-50 cloud-4" style={{ top: '80%', right: '8%', transform: 'scale(1.1)' }}></div>
+              <div className="cloud opacity-50 cloud-5" style={{ top: '20%', right: '15%', transform: 'scale(1.0)' }}></div>
+              <div className="cloud opacity-50 cloud-6" style={{ top: '45%', left: '8%', transform: 'scale(1.3)' }}></div>
+              <div className="cloud opacity-50 cloud-7" style={{ top: '70%', right: '12%', transform: 'scale(0.7)' }}></div>
+              <div className="cloud opacity-50 cloud-8" style={{ top: '90%', left: '12%', transform: 'scale(1.4)' }}></div>
             </div>
 
             {/* Calculator Content */}
