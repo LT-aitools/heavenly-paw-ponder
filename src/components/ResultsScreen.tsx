@@ -29,7 +29,7 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
 
   useEffect(() => {
     // Only show results when we have valid data
-    if (results && results.humanSouls > 0) {
+    if (results && typeof results.humanSouls === 'number' && typeof results.dogSouls === 'number') {
       setIsLoading(false);
     }
   }, [results]);
