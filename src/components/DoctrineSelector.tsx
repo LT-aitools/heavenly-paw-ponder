@@ -4,7 +4,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { doctrines, dogtrines, Doctrine } from "@/data/doctrineData";
-import { Church, Heart, Scale, UserCheck } from "lucide-react";
+import { Church, Heart, Scale, UserCheck, Dog } from "lucide-react";
 
 interface DoctrineSelectorProps {
   selectedDoctrine: Doctrine | null;
@@ -26,21 +26,15 @@ const DoctrineSelector = ({
   hasError
 }: DoctrineSelectorProps) => {
   return (
-    <div className="space-y-12 animate-fade-in">
-      <section className="relative">
-        <div className="absolute -left-4 -right-20 z-0">
-          <div className="mb-2 inline-flex items-center bg-blue-50/80 px-3 py-3 rounded-lg backdrop-blur-sm">
-            <Church className="mr-2 h-5 w-5 text-blue-500" />
-            <h2 className="text-xl font-medium text-blue-500">1. Choose Your Afterlife Doctrine</h2>
-          </div>
-          <div className="mb-2">
-            <p className="text-muted-foreground inline-block bg-blue-50/80 px-2 py-1 rounded-md">
-              Pick a religious framework to shape the main rules for entry. 
-            </p>
-          </div>
+    <div className="space-y-8">
+      {/* Step 1: Main Religion */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-2">
+          <Church className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-bold font-playfair">1. Choose Your Afterlife Doctrine</h2>
         </div>
-        
-        <Card className={`glass-card overflow-hidden relative z-10 mt-20 ${hasError ? 'border-red-500' : ''}`}>
+        <p className="text-muted-foreground">Pick a religious framework to shape the main rules for entry.</p>
+        <Card className={`${hasError ? 'border-red-500' : ''}`}>
           <CardContent className="p-4">
             <Select 
               value={selectedDoctrine?.id || ""}
@@ -69,22 +63,16 @@ const DoctrineSelector = ({
             )}
           </CardContent>
         </Card>
-      </section>
+      </div>
 
-      <section className="relative">
-        <div className="absolute -left-4 -right-20 z-0">
-          <div className="mb-2 inline-flex items-center bg-blue-50/80 px-3 py-3 rounded-lg backdrop-blur-sm">
-            <Heart className="mr-2 h-5 w-5 text-blue-500" />
-            <h2 className="text-xl font-medium text-blue-500">2. ...And Your Dogtrine</h2>
-          </div>
-          <div className="mb-2">
-            <p className="text-muted-foreground inline-block bg-blue-50/80 px-2 py-1 rounded-md">
-              What's your position on pups?  
-            </p>
-          </div>
+      {/* Step 2: Dog Doctrine */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-2">
+          <Dog className="h-6 w-6 text-primary" />
+          <h2 className="text-2xl font-bold font-playfair">2. ...And Your Dogtrine</h2>
         </div>
-        
-        <Card className="glass-card overflow-hidden relative z-10 mt-20">
+        <p className="text-muted-foreground">What's your position on pups?</p>
+        <Card>
           <CardContent className="p-4">
             <RadioGroup 
               value={allDogsGoToHeaven ? 'allDogsGood' : 'someDogsGood'}
@@ -137,7 +125,7 @@ const DoctrineSelector = ({
             )}
           </CardContent>
         </Card>
-      </section>
+      </div>
     </div>
   );
 };
