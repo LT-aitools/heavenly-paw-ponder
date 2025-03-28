@@ -18,28 +18,24 @@ const Index = () => {
   const handleRunCensus = (results: CalculationResult) => {
     setCalculationResults(results);
     
-    // Show gates animation before revealing results
+    // First, set the results to show (but they'll be behind the gates)
+    setShowResults(true);
+    
+    // Show gates animation
     const gatesElement = heavenGatesRef.current;
     if (gatesElement) {
       gatesElement.style.display = 'block';
       
-      // Wait a short moment then start animation
+      // Start the gates animation after a short delay
       setTimeout(() => {
         setGatesOpen(true);
         
-        // After animation completes, show results and hide gates
+        // Hide gates after animation completes
         setTimeout(() => {
-          setShowResults(true);
-          
-          // Hide gates after showing results
-          setTimeout(() => {
-            gatesElement.style.display = 'none';
-            setGatesOpen(false);
-          }, 500);
+          gatesElement.style.display = 'none';
+          setGatesOpen(false);
         }, 2500);
-      }, 100);
-    } else {
-      setShowResults(true);
+      }, 500);
     }
   };
 
