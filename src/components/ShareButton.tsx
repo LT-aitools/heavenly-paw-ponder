@@ -41,7 +41,7 @@ export function ShareButton({
               key={`angel${num}`}
               src={`/angel${num}.png`}
               alt={`Angel ${num}`}
-              className="absolute w-[30px] h-[30px] animate-bounce"
+              className="absolute w-[120px] h-[120px] animate-bounce"
               style={{
                 top: `${Math.random() * 80 + 10}%`,
                 left: `${Math.random() * 80 + 10}%`,
@@ -51,12 +51,12 @@ export function ShareButton({
           ))}
           
           {/* Dog angel stickers */}
-          {[1, 2, 3, 4, 5, 6, 7].map((num) => (
+          {[1, 2, 3, 4].map((num) => (
             <img
               key={`dog-angel${num}`}
               src={`/dog-angel${num}.png`}
               alt={`Dog Angel ${num}`}
-              className="absolute w-[30px] h-[30px] animate-bounce"
+              className="absolute w-[120px] h-[120px] animate-bounce"
               style={{
                 top: `${Math.random() * 80 + 10}%`,
                 left: `${Math.random() * 80 + 10}%`,
@@ -69,7 +69,7 @@ export function ShareButton({
           <img
             src="/animated-werner-dog.gif"
             alt="Animated Werner Dog"
-            className="absolute w-[60px] h-[60px] animate-bounce"
+            className="absolute w-[240px] h-[240px]"
             style={{
               top: `${Math.random() * 80 + 10}%`,
               left: `${Math.random() * 80 + 10}%`,
@@ -79,7 +79,7 @@ export function ShareButton({
           <img
             src="/sora-angel-pup.gif"
             alt="Sora Angel Pup"
-            className="absolute w-[60px] h-[60px] animate-bounce"
+            className="absolute w-[240px] h-[240px]"
             style={{
               top: `${Math.random() * 80 + 10}%`,
               left: `${Math.random() * 80 + 10}%`,
