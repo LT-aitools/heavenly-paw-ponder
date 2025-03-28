@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CalculationResult, formatNumber, formatNumberToReadable } from "@/utils/calculationLogic";
 import { Doctrine } from "@/data/doctrineData";
-import { BookOpen, Info, Calculator, ChevronDown } from "lucide-react";
+import { BookOpen, Info, Calculator, ChevronDown, ScrollText } from "lucide-react";
 
 interface MethodologySectionProps {
   results: CalculationResult;
@@ -25,6 +25,7 @@ const MethodologySection = ({
   edgeCases
 }: MethodologySectionProps) => {
   const [activeTab, setActiveTab] = useState('calculations');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // No results yet or atheism (no methodology to show)
   if ((results.humanSouls === 0 && results.dogSouls === 0) || selectedDoctrine.id === 'atheism') {
@@ -203,7 +204,7 @@ const MethodologySection = ({
                 
                 <div className="space-y-2 mt-4">
                   <details className="group">
-                    <summary className="flex items-center justify-between cursor-pointer list-none text-xs font-medium">
+                    <summary className="flex items-center justify-between cursor-pointer list-none text-xs font-medium text-primary hover:text-primary/90">
                       <span>More notes on overall dog population</span>
                       <span className="transition group-open:rotate-180">
                         <ChevronDown className="h-4 w-4" />
@@ -235,20 +236,20 @@ const MethodologySection = ({
                         <li>Euthanasia rates and stray dog populations also factor into mortality totals.</li>
                       </ul>
                       <br></br>
-                      <p><i>Examples of citations: [<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11579424/">Scientific Reports (NIH)</a>, 
-                      <a href="https://worldanimalfoundation.org/advocate/dog-statistics/">World Animal Foundation</a>, 
-                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9798575/">BMC Veterinary Research (NIH)</a>, 
-                        <a href="https://www.avma.org/blog/pet-populations-are-way">American Veterinary Medical Association</a>, 
-                        <a href="https://repository.up.ac.za/bitstream/handle/2263/46200/Akerele_Demographics_2015.pdf?sequence=1">University of Pretoria</a>, 
-                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7116273/">Europe PubMed (NIH)</a>
-                        <a href="https://wellbeingintl.org/dog-population-in-the-usa/">, Wellbeing International</a>, 
-                        <a href="https://www.britannica.com/animal/dog">Britannica</a>, 
-                        <a href="https://www.livescience.com/facts-about-dogs">Live Science]</a></i></p>
+                      <p><i>Examples of citations: [<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11579424/" className="text-primary hover:text-primary/90">Scientific Reports (NIH)</a>, 
+                      <a href="https://worldanimalfoundation.org/advocate/dog-statistics/" className="text-primary hover:text-primary/90">World Animal Foundation</a>, 
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9798575/" className="text-primary hover:text-primary/90">BMC Veterinary Research (NIH)</a>, 
+                        <a href="https://www.avma.org/blog/pet-populations-are-way" className="text-primary hover:text-primary/90">American Veterinary Medical Association</a>, 
+                        <a href="https://repository.up.ac.za/bitstream/handle/2263/46200/Akerele_Demographics_2015.pdf?sequence=1" className="text-primary hover:text-primary/90">University of Pretoria</a>, 
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7116273/" className="text-primary hover:text-primary/90">Europe PubMed (NIH)</a>
+                        <a href="https://wellbeingintl.org/dog-population-in-the-usa/" className="text-primary hover:text-primary/90">, Wellbeing International</a>, 
+                        <a href="https://www.britannica.com/animal/dog" className="text-primary hover:text-primary/90">Britannica</a>, 
+                        <a href="https://www.livescience.com/facts-about-dogs" className="text-primary hover:text-primary/90">Live Science]</a></i></p>
                     </div>
                   </details>
                   
                   <details className="group">
-                    <summary className="flex items-center justify-between cursor-pointer list-none text-xs font-medium">
+                    <summary className="flex items-center justify-between cursor-pointer list-none text-xs font-medium text-primary hover:text-primary/90">
                       <span>More notes on overall human population</span>
                       <span className="transition group-open:rotate-180">
                         <ChevronDown className="h-4 w-4" />
@@ -320,24 +321,24 @@ const MethodologySection = ({
                           </div>
                         <br></br>
                         <p><i>Examples of citations: 
-                        <a href="https://www.cdc.gov/nchs/data-visualization/mortality-trends/index.htm">CDC</a>, 
-                        <a href="https://www.answers.com/sociology/How_many_people_have_died_in_the_history_of_the_world">Answers</a>, 
-                        <a href="https://ourworldindata.org/population-growth-over-time">Our World in Data</a>, 
-                        <a href="https://en.wikipedia.org/wiki/List_of_countries_by_population_in_1900">Wikipedia</a>, 
-                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1664601/">PloS Medicine</a>, 
-                        <a href="https://www.pewresearch.org/short-read/2014/02/03/10-projections-for-the-global-population-in-2050/">Pew</a>, 
-                        <a href="https://www.ined.fr/en/everything_about_population/demographic-facts-sheets/faq/how-many-people-since-the-first-humans/">Institut National D'etudes Demographiques</a>, 
-                        <a href="https://www.prb.org/articles/how-many-people-have-ever-lived-on-earth/">Population Reference Bureau</a>, 
-                        <a href="https://www.statista.com/statistics/997040/world-population-by-continent-1950-2020/">Statista</a>, 
-                        <a href="https://www.weforum.org/press/2024/01/wef24-climate-crisis-health/">World Economic Forum (climate deaths)</a>, 
-                        <a href="https://worldpopulationreview.com/countries/deaths-per-day">World Population Review</a>, 
-                        <a href="https://www.weforum.org/stories/2021/12/population-boom-or-bust-global-earth-size-people/">World Economic Form (2100 pop)</a>
+                        <a href="https://www.cdc.gov/nchs/data-visualization/mortality-trends/index.htm" className="text-primary hover:text-primary/90">CDC</a>, 
+                        <a href="https://www.answers.com/sociology/How_many_people_have_died_in_the_history_of_the_world" className="text-primary hover:text-primary/90">Answers</a>, 
+                        <a href="https://ourworldindata.org/population-growth-over-time" className="text-primary hover:text-primary/90">Our World in Data</a>, 
+                        <a href="https://en.wikipedia.org/wiki/List_of_countries_by_population_in_1900" className="text-primary hover:text-primary/90">Wikipedia</a>, 
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1664601/" className="text-primary hover:text-primary/90">PloS Medicine</a>, 
+                        <a href="https://www.pewresearch.org/short-read/2014/02/03/10-projections-for-the-global-population-in-2050/" className="text-primary hover:text-primary/90">Pew</a>, 
+                        <a href="https://www.ined.fr/en/everything_about_population/demographic-facts-sheets/faq/how-many-people-since-the-first-humans/" className="text-primary hover:text-primary/90">Institut National D'etudes Demographiques</a>, 
+                        <a href="https://www.prb.org/articles/how-many-people-have-ever-lived-on-earth/" className="text-primary hover:text-primary/90">Population Reference Bureau</a>, 
+                        <a href="https://www.statista.com/statistics/997040/world-population-by-continent-1950-2020/" className="text-primary hover:text-primary/90">Statista</a>, 
+                        <a href="https://www.weforum.org/press/2024/01/wef24-climate-crisis-health/" className="text-primary hover:text-primary/90">World Economic Forum (climate deaths)</a>, 
+                        <a href="https://worldpopulationreview.com/countries/deaths-per-day" className="text-primary hover:text-primary/90">World Population Review</a>, 
+                        <a href="https://www.weforum.org/stories/2021/12/population-boom-or-bust-global-earth-size-people/" className="text-primary hover:text-primary/90">World Economic Form (2100 pop)</a>
                         </i></p>
                     </div>
                   </details>
                   
                   <details className="group">
-                    <summary className="flex items-center justify-between cursor-pointer list-none text-xs font-medium">
+                    <summary className="flex items-center justify-between cursor-pointer list-none text-xs font-medium text-primary hover:text-primary/90">
                       <span>More notes on religion-specific populations</span>
                       <span className="transition group-open:rotate-180">
                         <ChevronDown className="h-4 w-4" />
@@ -358,26 +359,26 @@ const MethodologySection = ({
                       </ul>
                       <br></br>
                       <p><i>Examples of citations: On historical figures: 
-                      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3035005/">J Sci Study Religion (NIH)</a>, 
-                      <a href="https://www.metmuseum.org/essays/religion-and-culture-in-north-america-1600-1700">Met Museum</a>, 
-                      <a href="https://www.loc.gov/exhibits/religion/rel02.html">Library of Congress</a>, 
-                      <a href="https://www.khanacademy.org/humanities/ap-art-history/introduction-cultures-religions-apah/judaism-apah/a/jewish-history1750-to-ww-ii">Khan Academy</a>, 
-                      <a href="https://en.wikipedia.org/wiki/Spread_of_Islam">Wikipedia (Islam)</a>, 
-                      <a href="https://www.britannica.com/topic/Judaism/Modern-Judaism-c-1750-to-the-present">Britannica</a>, 
-                      <a href="https://www.sikhnet.com/news/islamic-india-biggest-holocaust-world-history">Sikh Net</a>; 
+                      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3035005/" className="text-primary hover:text-primary/90">J Sci Study Religion (NIH)</a>, 
+                      <a href="https://www.metmuseum.org/essays/religion-and-culture-in-north-america-1600-1700" className="text-primary hover:text-primary/90">Met Museum</a>, 
+                      <a href="https://www.loc.gov/exhibits/religion/rel02.html" className="text-primary hover:text-primary/90">Library of Congress</a>, 
+                      <a href="https://www.khanacademy.org/humanities/ap-art-history/introduction-cultures-religions-apah/judaism-apah/a/jewish-history1750-to-ww-ii" className="text-primary hover:text-primary/90">Khan Academy</a>, 
+                      <a href="https://en.wikipedia.org/wiki/Spread_of_Islam" className="text-primary hover:text-primary/90">Wikipedia (Islam)</a>, 
+                      <a href="https://www.britannica.com/topic/Judaism/Modern-Judaism-c-1750-to-the-present" className="text-primary hover:text-primary/90">Britannica</a>, 
+                      <a href="https://www.sikhnet.com/news/islamic-india-biggest-holocaust-world-history" className="text-primary hover:text-primary/90">Sikh Net</a>; 
                       General or present-day: 
-                      <a href="https://www.pewresearch.org/religion/2009/10/07/mapping-the-global-muslim-population/">Pew (Muslim)</a>, 
-                      <a href="https://www.britannica.com/story/what-is-the-most-widely-practiced-religion-in-the-world">Britannica</a>, 
-                      <a href="https://www.pewresearch.org/religion/2021/09/21/population-growth-and-religious-composition/">Pew (India)</a>, 
-                      <a href="http://Catholic.com">Catholic.com</a>, 
-                      <a href="https://www.pewresearch.org/religion/2017/11/08/orthodox-christianity-in-the-21st-century/">Pew (Orthodox Christianity)</a>, 
-                      <a href="https://www.pewresearch.org/short-reads/2015/05/18/mainline-protestants-make-up-shrinking-number-of-u-s-adults/">Pew (Mainline Protestant)</a>, 
-                      <a href="https://www.cfr.org/article/sunni-shia-divide">Council on Foreign Relations</a>; 
+                      <a href="https://www.pewresearch.org/religion/2009/10/07/mapping-the-global-muslim-population/" className="text-primary hover:text-primary/90">Pew (Muslim)</a>, 
+                      <a href="https://www.britannica.com/story/what-is-the-most-widely-practiced-religion-in-the-world" className="text-primary hover:text-primary/90">Britannica</a>, 
+                      <a href="https://www.pewresearch.org/religion/2021/09/21/population-growth-and-religious-composition/" className="text-primary hover:text-primary/90">Pew (India)</a>, 
+                      <a href="http://Catholic.com" className="text-primary hover:text-primary/90">Catholic.com</a>, 
+                      <a href="https://www.pewresearch.org/religion/2017/11/08/orthodox-christianity-in-the-21st-century/" className="text-primary hover:text-primary/90">Pew (Orthodox Christianity)</a>, 
+                      <a href="https://www.pewresearch.org/short-reads/2015/05/18/mainline-protestants-make-up-shrinking-number-of-u-s-adults/" className="text-primary hover:text-primary/90">Pew (Mainline Protestant)</a>, 
+                      <a href="https://www.cfr.org/article/sunni-shia-divide" className="text-primary hover:text-primary/90">Council on Foreign Relations</a>; 
                       Future projections: 
-                      <a href="https://www.pewresearch.org/religion/2015/04/02/religious-projections-2010-2050/">Pew (world)</a>, 
-                      <a href="https://www.pewresearch.org/religion/2022/09/13/projecting-u-s-religious-groups-population-shares-by-2070/">Pew (US)</a>, 
-                      <a href="https://www.pewresearch.org/religion/2017/04/05/the-changing-global-religious-landscape/">Pew (world)</a>, 
-                      <a href="https://www.pewresearch.org/religion/2022/12/21/key-findings-from-the-global-religious-futures-project/">Pew (world)</a>
+                      <a href="https://www.pewresearch.org/religion/2015/04/02/religious-projections-2010-2050/" className="text-primary hover:text-primary/90">Pew (world)</a>, 
+                      <a href="https://www.pewresearch.org/religion/2022/09/13/projecting-u-s-religious-groups-population-shares-by-2070/" className="text-primary hover:text-primary/90">Pew (US)</a>, 
+                      <a href="https://www.pewresearch.org/religion/2017/04/05/the-changing-global-religious-landscape/" className="text-primary hover:text-primary/90">Pew (world)</a>, 
+                      <a href="https://www.pewresearch.org/religion/2022/12/21/key-findings-from-the-global-religious-futures-project/" className="text-primary hover:text-primary/90">Pew (world)</a>
                       </i></p>
                     </div>
                   </details>
@@ -388,6 +389,17 @@ const MethodologySection = ({
           )}
         </div>
       </div>
+      <Button
+        variant="ghost"
+        className="w-full flex items-center justify-between text-lg font-medium text-heaven-contrast hover:text-heaven-contrast/90 hover:bg-heaven-contrast/5"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <div className="flex items-center">
+          <ScrollText className="mr-2 h-5 w-5" />
+          {isExpanded ? 'Hide Methodology' : 'Show Methodology'}
+        </div>
+        <ChevronDown className={`h-5 w-5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+      </Button>
     </section>
   );
 };

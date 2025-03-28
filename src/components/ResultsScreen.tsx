@@ -90,7 +90,7 @@ const ResultsScreen = ({ results, onTryAgain }: ResultsScreenProps) => {
                 className="methodology-toggle group"
               >
                 <BookOpen className="mr-2 h-4 w-4 text-heaven-accent group-hover:text-heaven-contrast transition-colors" />
-                {showMethodology ? 'Hide' : 'Peek behind'} the Methodology
+                {showMethodology ? 'Hide' : 'Show'} Methodology
                 {!showMethodology && <Sparkles className="ml-2 h-3 w-3 text-heaven-accent animate-pulse-gentle" />}
               </Button>
             </div>

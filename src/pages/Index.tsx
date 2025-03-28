@@ -36,7 +36,7 @@ const Index = () => {
             gatesElement.style.display = 'none';
             setGatesOpen(false);
           }, 500);
-        }, 1500);
+        }, 2500);
       }, 100);
     } else {
       setShowResults(true);
@@ -62,9 +62,18 @@ const Index = () => {
         <div className="gate-left"></div>
         <div className="gate-right"></div>
         <div className="gate-clouds">
-          <div className="cloud" style={{ top: '20%', left: '10%', transform: 'scale(0.8)' }}></div>
-          <div className="cloud" style={{ top: '40%', right: '15%', transform: 'scale(1.2)' }}></div>
-          <div className="cloud" style={{ bottom: '20%', left: '20%', transform: 'scale(1)' }}></div>
+          <div className="cloud" style={{ top: '10%', left: '5%', transform: 'scale(0.8)' }}></div>
+          <div className="cloud" style={{ top: '20%', right: '10%', transform: 'scale(1.2)' }}></div>
+          <div className="cloud" style={{ top: '30%', left: '15%', transform: 'scale(0.9)' }}></div>
+          <div className="cloud" style={{ top: '40%', right: '8%', transform: 'scale(1.1)' }}></div>
+          <div className="cloud" style={{ top: '50%', left: '10%', transform: 'scale(1.0)' }}></div>
+          <div className="cloud" style={{ top: '60%', right: '15%', transform: 'scale(1.3)' }}></div>
+          <div className="cloud" style={{ top: '70%', left: '12%', transform: 'scale(0.7)' }}></div>
+          <div className="cloud" style={{ top: '80%', right: '5%', transform: 'scale(1.4)' }}></div>
+          <div className="cloud" style={{ top: '90%', left: '8%', transform: 'scale(1.2)' }}></div>
+          <div className="cloud" style={{ top: '25%', right: '20%', transform: 'scale(0.9)' }}></div>
+          <div className="cloud" style={{ top: '45%', left: '25%', transform: 'scale(1.1)' }}></div>
+          <div className="cloud" style={{ top: '65%', right: '25%', transform: 'scale(0.8)' }}></div>
         </div>
       </div>
 
