@@ -27,8 +27,8 @@ const MethodologySection = ({
   const [activeTab, setActiveTab] = useState('calculations');
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // No results yet or atheism (no methodology to show)
-  if ((results.humanSouls === 0 && results.dogSouls === 0) || selectedDoctrine.id === 'atheism') {
+  // No results yet
+  if (results.humanSouls === 0 && results.dogSouls === 0) {
     return null;
   }
 
