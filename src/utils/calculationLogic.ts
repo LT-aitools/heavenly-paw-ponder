@@ -286,27 +286,50 @@ export const formatNumberToReadable = (num: number): string => {
   }
 };
 
-export async function calculateHistoricalData(params: CalculationParams): Promise<{ year: string; humanSouls: number; dogSouls: number; }[]> {
+export async function calculateHistoricalData(params: CalculationParams): Promise<{
+  year: string;
+  humans: number;
+  dogs: number;
+  catholic: number;
+  protestant_evangelical: number;
+  protestant_mainline: number;
+  christian_orthodox: number;
+  jew_orthodox: number;
+  jew_reform: number;
+  muslim_sunni: number;
+  muslim_shia: number;
+  universalist: number;
+  atheists_polytheists: number;
+  unbaptized_infants: number;
+  never_heard: number;
+  in_purgatory: number;
+}[]> {
   const years = ['1750', '1800', '1850', '1900', '1950', '2000', '2025', '2050', '2100'];
   const historicalResults = [];
 
   for (const year of years) {
-    const yearParams = {
-      ...params,
-      currentYear: parseInt(year)
-    };
-
     try {
-      const yearResult = await calculateSoulsInHeaven(yearParams);
+      const baseFigures = await getBaseFigures(parseInt(year));
       historicalResults.push({
         year,
-        humanSouls: yearResult.humanSouls,
-        dogSouls: yearResult.dogSouls
+        humans: baseFigures.humans,
+        dogs: baseFigures.dogs,
+        catholic: baseFigures.catholic,
+        protestant_evangelical: baseFigures.protestant_evangelical,
+        protestant_mainline: baseFigures.protestant_mainline,
+        christian_orthodox: baseFigures.christian_orthodox,
+        jew_orthodox: baseFigures.jew_orthodox,
+        jew_reform: baseFigures.jew_reform,
+        muslim_sunni: baseFigures.muslim_sunni,
+        muslim_shia: baseFigures.muslim_shia,
+        universalist: baseFigures.universalist,
+        atheists_polytheists: baseFigures.atheists_polytheists,
+        unbaptized_infants: baseFigures.unbaptized_infants,
+        never_heard: baseFigures.never_heard,
+        in_purgatory: baseFigures.in_purgatory
       });
     } catch (error) {
       console.error(`Error calculating data for year ${year}:`, error);
-      // If we can't get data for a year, skip it
-      continue;
     }
   }
 
