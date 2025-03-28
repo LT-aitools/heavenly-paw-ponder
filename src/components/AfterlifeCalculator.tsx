@@ -151,6 +151,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
               const gatesElement = document.querySelector('.heaven-gates') as HTMLElement;
               if (gatesElement) {
                 gatesElement.style.display = 'block';
+                gatesElement.style.opacity = '1';
               }
 
               const params = {

@@ -31,7 +31,7 @@ const Index = () => {
         gatesElement.style.display = 'none';
         setGatesOpen(false);
       }
-    }, 2500);
+    }, 2000);
   };
 
   const handleTryAgain = () => {
