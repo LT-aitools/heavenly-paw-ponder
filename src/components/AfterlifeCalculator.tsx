@@ -77,10 +77,19 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
           calculateHistoricalData(params)
         ]);
         
-        setResults({
+        const finalResults = {
           ...newResults,
-          historicalData: historicalResults
-        });
+          historicalData: historicalResults,
+          doctrine: selectedDoctrine,
+          allDogsGoToHeaven,
+          dogGoodnessPercentage,
+          insideSavedPercentage,
+          outsideSavedPercentage,
+          edgeCases: edgeCaseValues
+        };
+        
+        setResults(finalResults);
+        onRunCensus(finalResults);
       } catch (error) {
         console.error('Error calculating results:', error);
       }
@@ -106,6 +115,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
           setAllDogsGoToHeaven={setAllDogsGoToHeaven}
           dogGoodnessPercentage={dogGoodnessPercentage}
           setDogGoodnessPercentage={setDogGoodnessPercentage}
+          hasError={false}
         />
         
         {selectedDoctrine && (
@@ -114,6 +124,7 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
               selectedDoctrine={selectedDoctrine}
               edgeCaseValues={edgeCaseValues}
               setEdgeCaseValues={setEdgeCaseValues}
+              validationErrors={{}}
             />
             
             <GoodnessSliders
@@ -129,7 +140,36 @@ const AfterlifeCalculator = ({ onRunCensus }: AfterlifeCalculatorProps) => {
         
         <div className="flex justify-center pt-6">
           <Button 
-            onClick={() => onRunCensus(results)} 
+            onClick={() => {
+              const params = {
+                doctrine: selectedDoctrine,
+                currentYear: 2025,
+                allDogsGoToHeaven,
+                dogGoodnessPercentage,
+                insideSavedPercentage,
+                outsideSavedPercentage,
+                edgeCases: edgeCaseValues
+              };
+
+              Promise.all([
+                calculateSoulsInHeaven(params),
+                calculateHistoricalData(params)
+              ]).then(([newResults, historicalResults]) => {
+                const finalResults = {
+                  ...newResults,
+                  historicalData: historicalResults,
+                  doctrine: selectedDoctrine,
+                  allDogsGoToHeaven,
+                  dogGoodnessPercentage,
+                  insideSavedPercentage,
+                  outsideSavedPercentage,
+                  edgeCases: edgeCaseValues
+                };
+                onRunCensus(finalResults);
+              }).catch(error => {
+                console.error('Error calculating results:', error);
+              });
+            }}
             className="px-8 py-6 text-lg font-medium rounded-full shadow-elevated bg-heaven-contrast text-white hover:bg-heaven-contrast/90 transition-all"
           >
             <span>Run My Heaven Census 🐶🧍</span>

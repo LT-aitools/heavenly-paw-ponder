@@ -46,32 +46,30 @@ const EdgeCasesSection = ({
         <p className="text-muted-foreground">Theology is full of edge cases: Should we include these groups? We've offered some default choices based on your doctrine, but you don't have to be so dogmatic about them.</p>
       </div>
 
-      <div className="space-y-4">
-        {applicableEdgeCases.map((edgeCase) => (
-          <Card 
-            key={edgeCase.id} 
-            className={validationErrors?.[`edge-case-${edgeCase.id}`] ? 'border-red-500' : ''}
-            id={`edge-case-${edgeCase.id}`}
-          >
-            <CardContent className="p-4">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center">
-                  <Sparkles className="h-4 w-4 mr-2 text-heaven-accent" />
-                  <span className="text-sm font-medium leading-none">{edgeCase.label}</span>
-                </div>
-                <Switch
-                  checked={edgeCaseValues[edgeCase.id] || false}
-                  onCheckedChange={(checked) => handleEdgeCaseChange(edgeCase.id, checked)}
-                  className="data-[state=checked]:bg-heaven-accent"
-                />
+      {applicableEdgeCases.map((edgeCase) => (
+        <Card 
+          key={edgeCase.id} 
+          className={validationErrors?.[`edge-case-${edgeCase.id}`] ? 'border-red-500' : ''}
+          id={`edge-case-${edgeCase.id}`}
+        >
+          <CardContent className="p-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <Sparkles className="h-4 w-4 mr-2 text-heaven-accent" />
+                <span className="text-sm font-medium leading-none">{edgeCase.label}</span>
               </div>
-              {validationErrors?.[`edge-case-${edgeCase.id}`] && (
-                <p className="text-sm text-red-500 mt-2">This field is required</p>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              <Switch
+                checked={edgeCaseValues[edgeCase.id] || false}
+                onCheckedChange={(checked) => handleEdgeCaseChange(edgeCase.id, checked)}
+                className="data-[state=checked]:bg-heaven-accent"
+              />
+            </div>
+            {validationErrors?.[`edge-case-${edgeCase.id}`] && (
+              <p className="text-sm text-red-500 mt-2">This field is required</p>
+            )}
+          </CardContent>
+        </Card>
+      ))}
 
       {/* Purgatory Section */}
       {purgatoryCase && selectedDoctrine.supportsPurgatory && (
