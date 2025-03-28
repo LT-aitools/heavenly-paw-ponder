@@ -117,7 +117,10 @@ const DoctrineSelector = ({
                     max="100"
                     value={dogGoodnessPercentage}
                     onChange={(e) => setDogGoodnessPercentage(parseInt(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                    className="w-full h-2 bg-heaven-blue/40 rounded-lg appearance-none cursor-pointer accent-heaven-accent"
+                    style={{
+                      background: `linear-gradient(to right, #42A5F5 0%, #42A5F5 ${dogGoodnessPercentage}%, #E3F2FD ${dogGoodnessPercentage}%, #E3F2FD 100%)`
+                    }}
                   />
                   <span className="text-sm font-medium w-10">{dogGoodnessPercentage}%</span>
                 </div>
