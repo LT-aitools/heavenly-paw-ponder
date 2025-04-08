@@ -102,15 +102,6 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                     <Tooltip 
                       wrapperStyle={{ zIndex: 1000 }}
                       cursor={{ strokeDasharray: '3 3' }}
-                      contentStyle={{ 
-                        backgroundColor: 'white',
-                        border: '1px solid #e5e7eb',
-                        borderRadius: '0.5rem',
-                        padding: '1rem',
-                        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-                        maxWidth: '90vw',
-                        overflow: 'auto'
-                      }}
                       content={({ active, payload, label }) => {
                         if (active && payload && payload.length) {
                           const humans = Number(payload[0].value) || 0;
@@ -123,14 +114,25 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                           const isFuture = yearNum > 2025;
                           const isPresent = yearNum === 2025;
                           
+                          // Check if we're on mobile (viewport width < 768px)
+                          const isMobile = window.innerWidth < 768;
+                          
+                          const mobileStyle = isMobile ? {
+                            position: 'absolute' as const,
+                            left: '32px',
+                            maxWidth: '280px',
+                            width: '90%',
+                            marginTop: '-60px'
+                          } : {};
+                          
                           return (
-                            <div className="text-sm">
+                            <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200" style={mobileStyle}>
                               <div className="font-medium mb-2">{label} Afterlife Audit</div>
                               <div className="space-y-1">
                                 <div>👤 Humans in heaven: {formatNumberToReadable(humans)}</div>
                                 <div>🐶 Dogs in heaven: {formatNumberToReadable(dogs)}</div>
                               </div>
-                              <div className="mt-2 text-gray-600">
+                              <div className="mt-2 text-sm text-gray-600">
                                 {isPresent 
                                   ? `Heaven is mostly (${isMostlyDogs ? dogPercentage : humanPercentage}%) ${isMostlyDogs ? 'canine' : 'human'}.`
                                   : isFuture
