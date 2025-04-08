@@ -128,18 +128,22 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                           
                           const mobileStyle = isMobile ? {
                             position: 'absolute' as const,
-                            left: '16px',
-                            right: '16px',
+                            left: 0,
+                            right: 0,
                             zIndex: 9999,
                             top: '80px',
+                            margin: '0 16px',
                             backgroundColor: 'white',
-                            width: 'calc(100% - 32px)',
-                            maxWidth: '100%',
+                            width: 'auto',
                             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
                           } : {};
                           
                           return (
-                            <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200" style={mobileStyle}>
+                            <div 
+                              className="bg-white p-4 rounded-lg shadow-lg border border-gray-200" 
+                              style={mobileStyle}
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               {isMobile && (
                                 <button 
                                   onClick={(e) => {
