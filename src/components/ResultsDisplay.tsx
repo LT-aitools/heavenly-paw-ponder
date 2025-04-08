@@ -4,6 +4,7 @@ import { Sparkles, Users, Heart, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import React from "react";
 
 interface ResultsDisplayProps {
   results: CalculationResult;
@@ -116,17 +117,31 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                           
                           // Check if we're on mobile (viewport width < 768px)
                           const isMobile = window.innerWidth < 768;
+                          const [isTooltipVisible, setIsTooltipVisible] = React.useState(true);
+                          
+                          if (!isTooltipVisible) return null;
                           
                           const mobileStyle = isMobile ? {
                             position: 'absolute' as const,
-                            left: '32px',
-                            maxWidth: '280px',
-                            width: '90%',
-                            marginTop: '-60px'
+                            left: '0',
+                            right: '0',
+                            margin: '0 16px',
+                            marginTop: '-60px',
+                            backgroundColor: 'white',
+                            width: 'auto',
+                            maxWidth: 'calc(100% - 32px)'
                           } : {};
                           
                           return (
                             <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200" style={mobileStyle}>
+                              {isMobile && (
+                                <button 
+                                  onClick={() => setIsTooltipVisible(false)}
+                                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                                >
+                                  ✕
+                                </button>
+                              )}
                               <div className="font-medium mb-2">{label} Afterlife Audit</div>
                               <div className="space-y-1">
                                 <div>👤 Humans in heaven: {formatNumberToReadable(humans)}</div>
