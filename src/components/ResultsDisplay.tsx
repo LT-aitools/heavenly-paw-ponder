@@ -13,10 +13,16 @@ interface ResultsDisplayProps {
 
 const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
   const { humanSouls, dogSouls, moreDogsOrHumans, historicalData } = results;
+  const [isTooltipVisible, setIsTooltipVisible] = React.useState(true);
   
   const handleReset = () => {
     onReset?.();
   };
+
+  // Reset tooltip visibility when clicking on a new point
+  React.useEffect(() => {
+    setIsTooltipVisible(true);
+  }, [humanSouls, dogSouls]);
 
   return (
     <div className="space-y-8 animate-scale-in">
@@ -101,7 +107,7 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                       return value.toString();
                     }} />
                     <Tooltip 
-                      wrapperStyle={{ zIndex: 1000, position: 'relative' }}
+                      wrapperStyle={{ zIndex: 1000 }}
                       cursor={{ strokeDasharray: '3 3' }}
                       content={({ active, payload, label }) => {
                         if (active && payload && payload.length) {
@@ -117,7 +123,6 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                           
                           // Check if we're on mobile (viewport width < 768px)
                           const isMobile = window.innerWidth < 768;
-                          const [isTooltipVisible, setIsTooltipVisible] = React.useState(true);
                           
                           if (!isTooltipVisible) return null;
                           
@@ -126,17 +131,21 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                             left: '16px',
                             right: '16px',
                             zIndex: 9999,
-                            top: '60px',
+                            top: '80px',
                             backgroundColor: 'white',
                             width: 'calc(100% - 32px)',
-                            maxWidth: '100%'
+                            maxWidth: '100%',
+                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
                           } : {};
                           
                           return (
                             <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200" style={mobileStyle}>
                               {isMobile && (
                                 <button 
-                                  onClick={() => setIsTooltipVisible(false)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsTooltipVisible(false);
+                                  }}
                                   className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
                                 >
                                   ✕
