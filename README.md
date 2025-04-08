@@ -19,6 +19,8 @@ This project is built with .
 - shadcn-ui
 - Tailwind CSS
 
+Hosting is on Vercel; DB is on Supabase.
+
 ## Other credits
 
 - The dogs with wings were from Vecteezy (https://www.vecteezy.com/free-png/washy-tape)
