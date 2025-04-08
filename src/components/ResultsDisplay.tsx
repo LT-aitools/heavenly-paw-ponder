@@ -101,7 +101,7 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                       return value.toString();
                     }} />
                     <Tooltip 
-                      wrapperStyle={{ zIndex: 1000 }}
+                      wrapperStyle={{ zIndex: 1000, position: 'relative' }}
                       cursor={{ strokeDasharray: '3 3' }}
                       content={({ active, payload, label }) => {
                         if (active && payload && payload.length) {
@@ -122,14 +122,14 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                           if (!isTooltipVisible) return null;
                           
                           const mobileStyle = isMobile ? {
-                            position: 'absolute' as const,
-                            left: '0',
-                            right: '0',
-                            margin: '0 16px',
-                            marginTop: '-60px',
+                            position: 'fixed' as const,
+                            left: '16px',
+                            right: '16px',
+                            zIndex: 9999,
+                            marginTop: '-120px',
                             backgroundColor: 'white',
-                            width: 'auto',
-                            maxWidth: 'calc(100% - 32px)'
+                            width: 'calc(100% - 32px)',
+                            maxWidth: '100%'
                           } : {};
                           
                           return (
