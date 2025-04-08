@@ -122,11 +122,11 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                           if (!isTooltipVisible) return null;
                           
                           const mobileStyle = isMobile ? {
-                            position: 'fixed' as const,
+                            position: 'absolute' as const,
                             left: '16px',
                             right: '16px',
                             zIndex: 9999,
-                            marginTop: '-120px',
+                            top: '60px',
                             backgroundColor: 'white',
                             width: 'calc(100% - 32px)',
                             maxWidth: '100%'
