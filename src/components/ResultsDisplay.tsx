@@ -127,15 +127,15 @@ const ResultsDisplay = ({ results, onReset }: ResultsDisplayProps) => {
                           if (!isTooltipVisible) return null;
                           
                           const mobileStyle = isMobile ? {
-                            position: 'absolute' as const,
-                            left: 0,
-                            right: 0,
-                            zIndex: 9999,
-                            top: '80px',
-                            margin: '0 16px',
+                            position: 'fixed' as const,
+                            left: '16px',
+                            right: '16px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            width: 'calc(100% - 32px)',
                             backgroundColor: 'white',
-                            width: 'auto',
-                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                            zIndex: 99999,
+                            pointerEvents: 'auto' as const
                           } : {};
                           
                           return (
