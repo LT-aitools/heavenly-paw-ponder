@@ -187,14 +187,17 @@ export async function calculateSoulsInHeaven(params: CalculationParams): Promise
     explanations.push(`People who never heard of the religion (included): ${formatNumber(baseFigures.never_heard)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(neverHeardSouls)}`);
   }
   if (edgeCases.otherMonotheists) {
-    const otherMonotheistSouls = baseFigures.monotheists * (outsideSavedPercentage / 100);
+    const monotheistsExcludingSelected = Math.max(0, baseFigures.monotheists - peopleInReligion);
+    const otherMonotheistSouls = monotheistsExcludingSelected * (outsideSavedPercentage / 100);
     outsideReligionSouls += otherMonotheistSouls;
     console.log('Other monotheists calculation:', {
-      baseNumber: baseFigures.monotheists,
+      totalMonotheists: baseFigures.monotheists,
+      peopleInSelectedReligion: peopleInReligion,
+      monotheistsExcludingSelected,
       percentage: outsideSavedPercentage,
       result: otherMonotheistSouls
     });
-    explanations.push(`Other monotheists (included): ${formatNumber(baseFigures.monotheists)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(otherMonotheistSouls)}`);
+    explanations.push(`Other monotheists (excluded): ${formatNumber(monotheistsExcludingSelected)} × ${outsideSavedPercentage}% "Good" = ${formatNumber(otherMonotheistSouls)}`);
   }
   if (edgeCases.atheistsPolytheists) {
     const atheistPolytheistSouls = baseFigures.atheists_polytheists * (outsideSavedPercentage / 100);
