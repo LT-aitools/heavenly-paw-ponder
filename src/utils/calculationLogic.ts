@@ -1,5 +1,7 @@
 import { doctrines, Doctrine, historicalData } from "@/data/doctrineData";
-import { supabase, BaseFigures } from "@/lib/supabase";
+// import { supabase, BaseFigures } from "@/lib/supabase";
+import Papa from "papaparse";
+import type { ParseResult } from "papaparse";
 
 interface CalculationParams {
   currentYear: number;
@@ -48,27 +50,44 @@ export interface CalculationResult {
   }[];
 }
 
-// Function to fetch base figures from Supabase
-export async function getBaseFigures(year: number): Promise<BaseFigures> {
+// Function to fetch base figures from CSV (was Supabase)
+export async function getBaseFigures(year: number): Promise<any> {
+  // try {
+  //   const { data, error } = await supabase
+  //     .from('base_figures')
+  //     .select('id, year, humans, dogs, unbaptized_infants, never_heard, monotheists, atheists_polytheists, in_purgatory, catholic, protestant_evangelical, protestant_mainline, christian_orthodox, jew_orthodox, jew_reform, muslim_sunni, muslim_shia, universalist')
+  //     .eq('year', year)
+  //     .single();
+
+  //   if (error) {
+  //     console.error('Error fetching base figures:', error);
+  //     throw new Error(`Failed to fetch data for year ${year}: ${error.message}`);
+  //   }
+
+  //   if (!data) {
+  //     throw new Error(`No data found for year ${year}. Please ensure the database has entries for this year.`);
+  //   }
+
+  //   return data;
+  // } catch (error) {
+  //   console.error('Error in getBaseFigures:', error);
+  //   throw error;
+  // }
   try {
-    const { data, error } = await supabase
-      .from('base_figures')
-      .select('id, year, humans, dogs, unbaptized_infants, never_heard, monotheists, atheists_polytheists, in_purgatory, catholic, protestant_evangelical, protestant_mainline, christian_orthodox, jew_orthodox, jew_reform, muslim_sunni, muslim_shia, universalist')
-      .eq('year', year)
-      .single();
-
-    if (error) {
-      console.error('Error fetching base figures:', error);
-      throw new Error(`Failed to fetch data for year ${year}: ${error.message}`);
+    // Fetch the CSV file (assume it's in the public root)
+    const response = await fetch('/Heavenpop-DB.csv');
+    const csvText = await response.text();
+    const parsed = Papa.parse(csvText, { header: true, dynamicTyping: true });
+    if (parsed.errors.length > 0) {
+      throw new Error('Error parsing CSV: ' + parsed.errors.map(e => e.message).join(', '));
     }
-
-    if (!data) {
-      throw new Error(`No data found for year ${year}. Please ensure the database has entries for this year.`);
+    const row = parsed.data.find((r: any) => r.year === year);
+    if (!row) {
+      throw new Error(`No data found for year ${year}. Please ensure the CSV has entries for this year.`);
     }
-
-    return data;
+    return row;
   } catch (error) {
-    console.error('Error in getBaseFigures:', error);
+    console.error('Error in getBaseFigures (CSV):', error);
     throw error;
   }
 }
